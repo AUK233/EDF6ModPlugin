@@ -1,16 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="HeaderFiles">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="SourceFiles">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="AsmFiles">
-      <UniqueIdentifier>{b789ef1c-52df-4855-b77f-8ab4476e684a}</UniqueIdentifier>
+    <Filter Include="HeaderFiles">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -20,15 +17,6 @@
     <ClInclude Include="pch.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
-    <ClInclude Include="utiliy.h">
-      <Filter>SourceFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="allowScriptFail.hpp">
-      <Filter>SourceFiles</Filter>
-    </ClInclude>
-    <ClInclude Include="updateMissionPack.hpp">
-      <Filter>SourceFiles</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -37,16 +25,10 @@
     <ClCompile Include="pch.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="utiliy.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="ASMhookGameSystem.asm">
-      <Filter>AsmFiles</Filter>
-    </MASM>
-    <MASM Include="updateMissionPack.asm">
-      <Filter>AsmFiles</Filter>
+    <MASM Include="ASMmainPath.asm">
+      <Filter>SourceFiles</Filter>
     </MASM>
   </ItemGroup>
 </Project>

@@ -366,5 +366,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # EDF ModLoader packages
-*.zip
-/EDF5ModPlugin/plog
+mppp/updateMissionPack.hpp
+mppp/updateMissionPack.asm
+EDF6ModPlugin/updateMissionPack.asm
+EDF6ModPlugin/updateMissionPack.hpp
