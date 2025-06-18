@@ -368,5 +368,3 @@ FodyWeavers.xsd
 # EDF ModLoader packages
 mppp/updateMissionPack.hpp
 mppp/updateMissionPack.asm
-EDF6ModPlugin/updateMissionPack.asm
-EDF6ModPlugin/updateMissionPack.hpp

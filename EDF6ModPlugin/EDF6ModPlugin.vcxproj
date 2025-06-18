@@ -140,6 +140,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -151,8 +152,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="allowScriptFail.hpp" />
+    <ClInclude Include="EDFPointerStruct.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="updateMainSystem.hpp" />
     <ClInclude Include="updateMissionPack.hpp" />
     <ClInclude Include="utiliy.h" />
   </ItemGroup>
@@ -167,8 +170,10 @@
     <ClCompile Include="utiliy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="..\mppp\updateMissionPack.asm" />
     <MASM Include="ASMhookGameSystem.asm" />
-    <MASM Include="updateMissionPack.asm" />
+    <MASM Include="updateMainSystem.asm" />
+    <MASM Include="updateMissionPack1.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

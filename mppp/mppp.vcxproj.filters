@@ -20,6 +20,12 @@
     <ClInclude Include="updateMissionPack.hpp">
       <Filter>SourceFiles</Filter>
     </ClInclude>
+    <ClInclude Include="PluginAPI.h">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="updateMissionPack1.hpp">
+      <Filter>SourceFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -31,6 +37,9 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="updateMissionPack.asm">
+      <Filter>SourceFiles</Filter>
+    </MASM>
+    <MASM Include="updateMissionPack1.asm">
       <Filter>SourceFiles</Filter>
     </MASM>
   </ItemGroup>

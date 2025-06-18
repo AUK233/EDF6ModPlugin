@@ -29,6 +29,12 @@
     <ClInclude Include="updateMissionPack.hpp">
       <Filter>SourceFiles</Filter>
     </ClInclude>
+    <ClInclude Include="updateMainSystem.hpp">
+      <Filter>SourceFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="EDFPointerStruct.hpp">
+      <Filter>HeaderFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -45,7 +51,13 @@
     <MASM Include="ASMhookGameSystem.asm">
       <Filter>AsmFiles</Filter>
     </MASM>
-    <MASM Include="updateMissionPack.asm">
+    <MASM Include="..\mppp\updateMissionPack.asm">
+      <Filter>AsmFiles</Filter>
+    </MASM>
+    <MASM Include="updateMissionPack1.asm">
+      <Filter>AsmFiles</Filter>
+    </MASM>
+    <MASM Include="updateMainSystem.asm">
       <Filter>AsmFiles</Filter>
     </MASM>
   </ItemGroup>

@@ -146,7 +146,9 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="PluginAPI.h" />
     <ClInclude Include="updateMissionPack.hpp" />
+    <ClInclude Include="updateMissionPack1.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -159,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="updateMissionPack.asm" />
+    <MASM Include="updateMissionPack1.asm" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
