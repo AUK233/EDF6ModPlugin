@@ -120,26 +120,3 @@ void __fastcall ForceCrashGame()
 	Sleep(60000);
 	*(int*)0 = 0;
 }
-
-int CheckSkipEOS() {
-	FILE* file = nullptr;
-	errno_t err = fopen_s(&file, "LaunchGame.ini", "r");
-	if (err || !file) {
-		return 0;
-	}
-
-	char line[256];
-	int value = 0;
-
-	while (fgets(line, sizeof(line), file)) {
-		line[strcspn(line, "\r\n")] = '\0';
-
-		if (!strncmp(line, "NoOperation=", 12)) {
-			value = atoi(line + 12);
-			break;
-		}
-	}
-
-	fclose(file);
-	return value;
-}

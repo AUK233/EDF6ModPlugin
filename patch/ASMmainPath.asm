@@ -3,26 +3,42 @@
 extern ProtectEDFCreateWSting : proto
 extern edfCreateWSting : qword
 
-extern wstr_GameTitle : word
+extern wstr_GameTitlePatch : word
+extern wstr_GameTitleMod : word
 extern setGameTitleRetAddr : qword
 
 extern updateOnlineRoomMissionNameRetAddr : qword
 
 .code
 
-ASMsetGameTitle proc
+ASMsetGameTitlePatch proc
 
 		call ProtectEDFCreateWSting
 		;
 		mov rax, setGameTitleRetAddr
 		mov r8d, 34
-		lea rdx, wstr_GameTitle
+		lea rdx, wstr_GameTitlePatch
 		lea rcx, [rbp-40h]
 		push rax
 		jmp edfCreateWSting
 		int 3
 
-ASMsetGameTitle ENDP
+ASMsetGameTitlePatch ENDP
+
+align 16
+
+ASMsetGameTitleMod proc
+
+		;
+		mov rax, setGameTitleRetAddr
+		mov r8d, 23
+		lea rdx, wstr_GameTitleMod
+		lea rcx, [rbp-40h]
+		push rax
+		jmp edfCreateWSting
+		int 3
+
+ASMsetGameTitleMod ENDP
 
 align 16
 

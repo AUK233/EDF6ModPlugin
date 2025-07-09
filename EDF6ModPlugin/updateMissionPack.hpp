@@ -53,4 +53,9 @@ void hook_updateMissionPack(PBYTE hmodDLL) {
 	// edf.dll+2C79D5, change max drop box count
 	int MaxDropBox = 1024;
 	WriteHookToProcess((void*)(hmodDLL + 0x2C79D5 + 4), &MaxDropBox, 4U);
+
+	// find 8B794C8BDF8BB429906E000083FF03
+	// edf.dll+70D8CC, change to inferno can complete all difficulties
+	/*char maxUnlockDifficulty = 5;
+	WriteHookToProcess((void*)(hmodDLL + 0x70D8CC + 2), &maxUnlockDifficulty, 1U);*/
 }

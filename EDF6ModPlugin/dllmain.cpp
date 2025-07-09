@@ -10,6 +10,7 @@
 #include "utiliy.h"
 #include "commonNOP.h"
 
+#include "..\patch\patchMain.hpp"
 #include "updateMissionPack.hpp"
 #include "updateMainSystem.hpp"
 
@@ -18,7 +19,34 @@ EDFImportDLL EDF_CPP_OnBoot;
 PBYTE hmodDLL;
 WCHAR iniPath[MAX_PATH];
 
+// ini content
+
 extern "C" __declspec(dllexport) void CPP_OnBoot() {
+	static int initialized = 0;
+	if (!initialized) {
+		initialized = 6;
+		if (!checkPatchGame(hmodDLL, 1)) {
+			goto RealFunction;
+		}
+
+		UINT testDLL = 0;
+		if (std::filesystem::exists("./modtest/mod/config.sgo")) {
+			//testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0, iniPath);
+			// read absolute path
+			testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0,
+				L"I:\\SteamLibrary\\steamapps\\common\\EARTH DEFENSE FORCE 6\\mod.ini");
+		}
+		hook_updateMainSystem(hmodDLL, testDLL);
+
+		//
+		hook_updateMissionPack(hmodDLL);
+		/*auto testModule = LoadLibraryW(L"mppp.dll");
+		typedef bool(__fastcall* LoadDef)(void*);
+		auto test_func = (LoadDef)GetProcAddress(testModule, "EML6_Load");
+		test_func(0);*/
+	}
+
+	RealFunction:
 	timeBeginPeriod(1);
 	EDF_CPP_OnBoot();
 	timeEndPeriod(1);
@@ -54,7 +82,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 			GetModuleFileNameW(hModule, iniPath, _countof(iniPath));
 			PathRemoveFileSpecW(iniPath);
 			wcscat_s(iniPath, L"\\mod.ini");
-			//UINT testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0, iniPath);
 
 			// find PackageName function.
 			// need fix
@@ -62,26 +89,11 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 			//hookGameBlockWithInt3((void*)(hmodDLL + 0xE2970), (uintptr_t)ASMreadMissionSavaData);
 			//readMissionSavaDataRetAddr = (uintptr_t)(hmodDLL + 0xE2980);
 
-			// need fix
-			//WriteHookToProcess(hmodDLL + 0x175F140, (void*)L"./1mod.cpk", 22U);
-			//WriteHookToProcess(hmodDLL + 0x17E5408, (void*)L"1mod.cpk", 18U);
-			WriteHookToProcess(hmodDLL + 0x1767B70, (void*)L"./test/config.sgo", 36U);
-
 
 			// find 48 8B 02 C6 80 B6 08 00 00 01 48 83 C2 08
 			/*hookGameBlockWithInt3((void*)(hmodDLL + 0x5A44E6), (uintptr_t)ASMsetPlayerWeaponFriendlyFire);
 			setPlayerWeaponFriendlyFireRetAddr = (uintptr_t)(hmodDLL + 0x5A4525);*/
 
-			
-
-			hook_updateMainSystem(hmodDLL, 0);
-
-			//
-			hook_updateMissionPack(hmodDLL);
-			/*auto testModule = LoadLibraryW(L"mppp.dll");
-			typedef bool(__fastcall* LoadDef)(void*);
-			auto test_func = (LoadDef)GetProcAddress(testModule, "EML6_Load");
-			test_func(0);*/
 		}
 		else {
 			// to crash!

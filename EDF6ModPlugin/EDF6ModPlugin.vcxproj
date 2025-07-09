@@ -171,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="..\mppp\updateMissionPack.asm" />
+    <MASM Include="..\patch\ASMmainPath.asm" />
     <MASM Include="ASMhookGameSystem.asm" />
     <MASM Include="updateMainSystem.asm" />
     <MASM Include="updateMissionPack1.asm" />

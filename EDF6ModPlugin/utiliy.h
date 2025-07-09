@@ -21,5 +21,3 @@ void __fastcall CallGameBlock(void* targetAddr, uintptr_t dataAddr);
 extern "C" void* __fastcall __newToAlignedMalloc(size_t size);
 //
 void __fastcall ForceCrashGame();
-//
-int CheckSkipEOS();

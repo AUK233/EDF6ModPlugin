@@ -12,6 +12,9 @@
     <Filter Include="AsmFiles">
       <UniqueIdentifier>{b789ef1c-52df-4855-b77f-8ab4476e684a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\ImportFiles">
+      <UniqueIdentifier>{b05d14a6-d2d1-4b5a-9c09-0873b554f9ad}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -51,14 +54,17 @@
     <MASM Include="ASMhookGameSystem.asm">
       <Filter>AsmFiles</Filter>
     </MASM>
-    <MASM Include="..\mppp\updateMissionPack.asm">
-      <Filter>AsmFiles</Filter>
-    </MASM>
     <MASM Include="updateMissionPack1.asm">
       <Filter>AsmFiles</Filter>
     </MASM>
     <MASM Include="updateMainSystem.asm">
       <Filter>AsmFiles</Filter>
+    </MASM>
+    <MASM Include="..\mppp\updateMissionPack.asm">
+      <Filter>SourceFiles\ImportFiles</Filter>
+    </MASM>
+    <MASM Include="..\patch\ASMmainPath.asm">
+      <Filter>SourceFiles\ImportFiles</Filter>
     </MASM>
   </ItemGroup>
 </Project>

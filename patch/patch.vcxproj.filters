@@ -17,6 +17,9 @@
     <ClInclude Include="pch.h">
       <Filter>HeaderFiles</Filter>
     </ClInclude>
+    <ClInclude Include="patchMain.hpp">
+      <Filter>SourceFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

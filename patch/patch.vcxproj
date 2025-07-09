@@ -149,6 +149,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
+    <ClInclude Include="patchMain.hpp" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
