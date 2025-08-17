@@ -1,41 +1,17 @@
 .data
 
-extern readMissionSavaDataRetAddr : qword
 extern setPlayerWeaponFriendlyFireRetAddr : qword
 
 extern debug_MissionLoadingFail : dword
 extern Debug_hookScriptRunRetAddr0 : qword
 extern Debug_hookScriptRunRetAddr1 : qword
 
+extern wstr_range : word
+extern LoadDSGONode : qword
+extern LoadDSGOValue : qword
+extern Weapon_Drone_LaserMarker_InitRetAddr : qword
+
 .code
-
-ASMreadMissionSavaData proc
-
-    checkOnline:
-        cmp r8d, 1
-        je toCrash
-        cmp r8d, 3
-        je toCrash
-        cmp r8d, 5
-        je toCrash ; If is offline mode, allow access to game
-    ofsE1D70:
-        mov [rsp+18h], rbx
-        push rbp
-        push rsi
-        push rdi
-        push r12
-        push r13
-        push r14
-        push r15
-        jmp readMissionSavaDataRetAddr
-    toCrash:
-        ; Otherwise crashes game
-        mov dword ptr [0], 0
-        int 3
-
-ASMreadMissionSavaData ENDP
-
-align 16
 
 ASMsetPlayerWeaponFriendlyFire proc
 
@@ -96,5 +72,34 @@ ASMdebug_hookScriptRun proc
         int 3
 
 ASMdebug_hookScriptRun ENDP
+
+align 16
+
+ASMWeapon_Drone_LaserMarker_Init proc
+
+        movss dword ptr [rbp+84h], xmm0 ; laser speed
+        ;
+        lea r8, wstr_range ; range
+        lea rdx, [rbp-58h]
+        mov rcx, r13
+        call LoadDSGONode
+        cmp dword ptr [rax+8], -1
+        je FixedLaserAlive
+        mov rcx, rax
+        call LoadDSGOValue
+        cvttsd2si rax, xmm0
+        shr rax, 1 ; /2, because speed is 2
+        mov [rbp+88h], rax
+        jmp ofs6828A0
+        ;
+    FixedLaserAlive:
+        mov qword ptr [rbp+88h], 180 ; laser alive
+    ofs6828A0:
+        mov [rbp-58h], r14
+        mov [rbp-58h+8], r14
+        jmp Weapon_Drone_LaserMarker_InitRetAddr
+        int 3
+
+ASMWeapon_Drone_LaserMarker_Init ENDP
 
 END

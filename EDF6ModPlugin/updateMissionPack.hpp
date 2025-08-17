@@ -2,13 +2,18 @@
 
 #include "utiliy.h"
 #include "commonNOP.h"
+#include "EDFPointerStruct.hpp"
 
 #include "..\mppp\updateMissionPack.hpp"
+#include "./ASFunc/ASFunc_Global.hpp"
 
 extern "C" {
+	uintptr_t ptr_edf20B2988;
+
 	void __fastcall ASMonlineBlockPublicRoom();
 	uintptr_t onlineBlockPublicRoomRetAddr;
 }
+
 
 extern "C" int __fastcall GetOnlineRoomType(int roomType, int inviteType) {
 	// find 85C9744483E901741C83E901741183F9017406B8FFFFFFFFC3B802000000C3B801000000
@@ -42,6 +47,9 @@ void hook_updateMissionPack(PBYTE hmodDLL) {
 	// this feature needs to be kept secret as it unlocks mission pack verification.
 	hook_updateMissionPackTRUE(hmodDLL);
 
+	//
+	hook_addAngelScriptFunction(hmodDLL);
+
 	// find BFFFFFFFFF80BB9409000000747F8B939C0900008B8B98090000
 	// edf.dll+902F99
 	int i_onlineBlockPublicRoom = 0x902F99;
@@ -58,4 +66,6 @@ void hook_updateMissionPack(PBYTE hmodDLL) {
 	// edf.dll+70D8CC, change to inferno can complete all difficulties
 	/*char maxUnlockDifficulty = 5;
 	WriteHookToProcess((void*)(hmodDLL + 0x70D8CC + 2), &maxUnlockDifficulty, 1U);*/
+
+	ptr_edf20B2988 = (uintptr_t)(hmodDLL + 0x20B2988);
 }

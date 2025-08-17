@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="allowScriptFail.hpp" />
+    <ClInclude Include="ASFunc\ASFunc_Definition.hpp" />
+    <ClInclude Include="ASFunc\ASFunc_Global.hpp" />
     <ClInclude Include="EDFPointerStruct.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -172,6 +174,7 @@
   <ItemGroup>
     <MASM Include="..\mppp\updateMissionPack.asm" />
     <MASM Include="..\patch\ASMmainPath.asm" />
+    <MASM Include="ASFunc\ASFunc_Global.asm" />
     <MASM Include="ASMhookGameSystem.asm" />
     <MASM Include="updateMainSystem.asm" />
     <MASM Include="updateMissionPack1.asm" />

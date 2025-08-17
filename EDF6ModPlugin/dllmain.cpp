@@ -30,7 +30,7 @@ extern "C" __declspec(dllexport) void CPP_OnBoot() {
 		}
 
 		UINT testDLL = 0;
-		if (std::filesystem::exists("./modtest/mod/config.sgo")) {
+		if (std::filesystem::exists("./modtest/exa/config.sgo")) {
 			//testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0, iniPath);
 			// read absolute path
 			testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0,
@@ -53,8 +53,6 @@ extern "C" __declspec(dllexport) void CPP_OnBoot() {
 };
 
 extern "C" {
-	void __fastcall ASMreadMissionSavaData();
-	uintptr_t readMissionSavaDataRetAddr;
 	void __fastcall ASMsetPlayerWeaponFriendlyFire();
 	uintptr_t setPlayerWeaponFriendlyFireRetAddr;
 }
@@ -82,13 +80,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 			GetModuleFileNameW(hModule, iniPath, _countof(iniPath));
 			PathRemoveFileSpecW(iniPath);
 			wcscat_s(iniPath, L"\\mod.ini");
-
-			// find PackageName function.
-			// need fix
-			// edf.dll+E2970, Determine mission savedata location, R8 is 1 when it is online.
-			//hookGameBlockWithInt3((void*)(hmodDLL + 0xE2970), (uintptr_t)ASMreadMissionSavaData);
-			//readMissionSavaDataRetAddr = (uintptr_t)(hmodDLL + 0xE2980);
-
 
 			// find 48 8B 02 C6 80 B6 08 00 00 01 48 83 C2 08
 			/*hookGameBlockWithInt3((void*)(hmodDLL + 0x5A44E6), (uintptr_t)ASMsetPlayerWeaponFriendlyFire);

@@ -15,6 +15,9 @@
     <Filter Include="SourceFiles\ImportFiles">
       <UniqueIdentifier>{b05d14a6-d2d1-4b5a-9c09-0873b554f9ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\ASFunc">
+      <UniqueIdentifier>{f79ae283-4f99-41dc-a440-ae577fa6900d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -37,6 +40,12 @@
     </ClInclude>
     <ClInclude Include="EDFPointerStruct.hpp">
       <Filter>HeaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="ASFunc\ASFunc_Global.hpp">
+      <Filter>SourceFiles\ASFunc</Filter>
+    </ClInclude>
+    <ClInclude Include="ASFunc\ASFunc_Definition.hpp">
+      <Filter>SourceFiles\ASFunc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +74,9 @@
     </MASM>
     <MASM Include="..\patch\ASMmainPath.asm">
       <Filter>SourceFiles\ImportFiles</Filter>
+    </MASM>
+    <MASM Include="ASFunc\ASFunc_Global.asm">
+      <Filter>SourceFiles\ASFunc</Filter>
     </MASM>
   </ItemGroup>
 </Project>
