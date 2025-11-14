@@ -3,6 +3,7 @@
 #include <timeapi.h>
 #pragma comment(lib, "Winmm.lib")
 
+#include "utiliy.h"
 #include "patchMain.hpp"
 
 typedef void(WINAPI* EDFImportDLL)();
@@ -32,10 +33,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 			EDF_CPP_OnBoot = (EDFImportDLL)GetProcAddress(moduleHandle, "CPP_OnBoot");
 
 			checkPatchGame((PBYTE)moduleHandle, 0);
-		}
-		else {
-			// to crash!
-			*(int*)0 = 0;
 		}
 
 		break;

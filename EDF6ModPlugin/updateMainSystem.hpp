@@ -6,6 +6,12 @@
 
 #include "allowScriptFail.hpp"
 
+#include "Base/g_system.h"
+#include "Base/SSE.hpp"
+
+// separate functional zones
+#include "Ammo/0BaseAmmo.h"
+
 extern "C" {
 	uintptr_t LoadDSGONode;
 	uintptr_t LoadDSGOValue;
@@ -17,6 +23,8 @@ extern "C" {
 }
 
 void hook_updateMainSystem_common(PBYTE hmodDLL) {
+	XGS_SystemFunction_Initialize(hmodDLL);
+
 	// main
 	// find "schinese", 1st
 	WriteHookToProcess(hmodDLL + 0x1767B70, (void*)L"app:/exa/config.sgo", 40U);
@@ -48,6 +56,8 @@ void hook_updateMainSystem_common(PBYTE hmodDLL) {
 	hookGameBlockWithInt3((void*)(hmodDLL + i_Weapon_Drone_LaserMarker_Init), (uintptr_t)ASMWeapon_Drone_LaserMarker_Init);
 	WriteHookToProcess((void*)(hmodDLL + i_Weapon_Drone_LaserMarker_Init + 15), (void*)&nop4, 4U);
 	Weapon_Drone_LaserMarker_InitRetAddr = (uintptr_t)(hmodDLL + i_Weapon_Drone_LaserMarker_Init + 19);
+
+	AmmoClass_HookFunction(hmodDLL);
 }
 
 extern "C" {

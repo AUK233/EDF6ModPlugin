@@ -20,12 +20,18 @@
     <ClInclude Include="patchMain.hpp">
       <Filter>SourceFiles</Filter>
     </ClInclude>
+    <ClInclude Include="utiliy.h">
+      <Filter>SourceFiles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
+      <Filter>SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="utiliy.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
   </ItemGroup>

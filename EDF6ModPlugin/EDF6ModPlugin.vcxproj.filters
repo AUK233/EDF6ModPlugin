@@ -18,6 +18,18 @@
     <Filter Include="SourceFiles\ASFunc">
       <UniqueIdentifier>{f79ae283-4f99-41dc-a440-ae577fa6900d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\Base">
+      <UniqueIdentifier>{d95532a2-0bc7-41a3-b3a3-bcb70bb5496e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\cmd">
+      <UniqueIdentifier>{20470e9e-5c75-4a55-8abb-75ffb797e06e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Object">
+      <UniqueIdentifier>{37dd5651-8148-4cb9-8271-caed7309c981}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Object\Ammo">
+      <UniqueIdentifier>{fc14e564-47ee-4053-ae4f-7ed048a30b0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -47,6 +59,30 @@
     <ClInclude Include="ASFunc\ASFunc_Definition.hpp">
       <Filter>SourceFiles\ASFunc</Filter>
     </ClInclude>
+    <ClInclude Include="Base\g_system.h">
+      <Filter>SourceFiles\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd\cmd_hotkey.h">
+      <Filter>SourceFiles\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\g_object.h">
+      <Filter>SourceFiles\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\SSE.hpp">
+      <Filter>SourceFiles\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\CommonStructure.hpp">
+      <Filter>SourceFiles\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Ammo\0BaseAmmo.h">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="Ammo\1CommonBullet.h">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\g_gameFunc.h">
+      <Filter>SourceFiles\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -57,6 +93,21 @@
     </ClCompile>
     <ClCompile Include="utiliy.cpp">
       <Filter>SourceFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\g_system.cpp">
+      <Filter>SourceFiles\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd\cmd_hotkey.cpp">
+      <Filter>SourceFiles\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="Ammo\0BaseAmmo.cpp">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="Ammo\1CommonBullet.cpp">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\g_gameFunc.cpp">
+      <Filter>SourceFiles\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

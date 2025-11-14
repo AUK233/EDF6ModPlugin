@@ -10,9 +10,11 @@
 #include "utiliy.h"
 #include "commonNOP.h"
 
-#include "..\patch\patchMain.hpp"
+#include "../patch/patchMain.hpp"
 #include "updateMissionPack.hpp"
 #include "updateMainSystem.hpp"
+
+#include "cmd/cmd_hotkey.h"
 
 typedef void(WINAPI* EDFImportDLL)();
 EDFImportDLL EDF_CPP_OnBoot;
@@ -25,9 +27,6 @@ extern "C" __declspec(dllexport) void CPP_OnBoot() {
 	static int initialized = 0;
 	if (!initialized) {
 		initialized = 6;
-		if (!checkPatchGame(hmodDLL, 1)) {
-			goto RealFunction;
-		}
 
 		UINT testDLL = 0;
 		if (std::filesystem::exists("./modtest/exa/config.sgo")) {
@@ -35,7 +34,30 @@ extern "C" __declspec(dllexport) void CPP_OnBoot() {
 			// read absolute path
 			testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0,
 				L"I:\\SteamLibrary\\steamapps\\common\\EARTH DEFENSE FORCE 6\\mod.ini");
+
+			if (GetPrivateProfileIntW(L"ModOption", L"cheat", 0, iniPath)) {
+				cmd_ModConsole_Initialize(hmodDLL);
+				HANDLE tempHND = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)cmd_ModConsole_MonitorKeys, NULL, NULL, NULL);
+				if (tempHND) {
+					CloseHandle(tempHND);
+				}
+			}
 		}
+
+		checkPatchGame_t ModMode;
+		if (testDLL) {
+			ModMode.TitleText = L"EDF6 is Debug Mod Mode";
+			ModMode.TitleSize = 22;
+		}
+		else {
+			ModMode.TitleText = L"EDF6 for PC in Mod Mode";
+			ModMode.TitleSize = 23;
+		}
+
+		if (!checkPatchGame(hmodDLL, &ModMode)) {
+			goto RealFunction;
+		}
+
 		hook_updateMainSystem(hmodDLL, testDLL);
 
 		//

@@ -4,8 +4,10 @@ extern ProtectEDFCreateWSting : proto
 extern edfCreateWSting : qword
 
 extern wstr_GameTitlePatch : word
-extern wstr_GameTitleMod : word
 extern setGameTitleRetAddr : qword
+
+extern SetGameTitleModText : qword
+extern SetGameTitleModSize : dword
 
 extern updateOnlineRoomMissionNameRetAddr : qword
 
@@ -31,8 +33,8 @@ ASMsetGameTitleMod proc
 
 		;
 		mov rax, setGameTitleRetAddr
-		mov r8d, 23
-		lea rdx, wstr_GameTitleMod
+		mov r8d, SetGameTitleModSize
+		mov rdx, SetGameTitleModText
 		lea rcx, [rbp-40h]
 		push rax
 		jmp edfCreateWSting

@@ -1,24 +1,9 @@
 #pragma once
 
-// Injects hook into game process
-static void __fastcall patch_WriteHookToProcess(void* addr, void* data, size_t len) {
-	DWORD oldProtect;
-	VirtualProtect(addr, len, PAGE_EXECUTE_READWRITE, &oldProtect);
-	memcpy(addr, data, len);
-	VirtualProtect(addr, len, oldProtect, &oldProtect);
-}
-
-// update game's original functions with interruption, need 15 bytes
-static void __fastcall patch_hookGameBlockWithInt3(void* targetAddr, uintptr_t dataAddr) {
-	BYTE hookFunction[] = {
-		0xFF, 0x25, 0x00, 0x00, 0x00, 0x00,				// jmp
-		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, // addr
-		0xCC											// int3
-	};
-	memcpy(&hookFunction[6], &dataAddr, sizeof(dataAddr));
-
-	patch_WriteHookToProcess(targetAddr, hookFunction, sizeof(hookFunction));
-}
+typedef struct checkPatchGame_t {
+	const wchar_t* TitleText;
+	int TitleSize;
+} *PcheckPatchGame;
 
 int CheckSkipEOS() {
 	FILE* file = nullptr;
@@ -43,14 +28,18 @@ int CheckSkipEOS() {
 	return value;
 }
 
+const wchar_t wstr_GameTitleMod[] = L"EDF6 for PC in Mod Mode";
+
 extern "C" {
 	uintptr_t edfCreateWSting;
 	//
 	wchar_t wstr_GameTitlePatch[] = L"EarthDefenceForce 6 for Patch Mode";
-	wchar_t wstr_GameTitleMod[] = L"EDF6 for PC in Mod Mode";
 	void __fastcall ASMsetGameTitlePatch();
-	void __fastcall ASMsetGameTitleMod();
 	uintptr_t setGameTitleRetAddr;
+
+	const wchar_t* SetGameTitleModText;
+	int SetGameTitleModSize;
+	void __fastcall ASMsetGameTitleMod();
 	//
 	void __fastcall ASMupdateOnlineRoomMissionName();
 	uintptr_t updateOnlineRoomMissionNameRetAddr;
@@ -79,12 +68,12 @@ extern "C" void __fastcall ProtectEDFCreateWSting() {
 		0x48, 0x89, 0x5C, 0x24, 0x18, 0x48, 0x89, 0x74, 0x24, 0x20, 0x55, 0x57, 0x41, 0x56, 0x48, 0x8B,
 		0xEC, 0x48, 0x83, 0xEC, 0x70
 	};
-	patch_WriteHookToProcess((void*)(hDllnoMod + protectAddress), originalValue, 21U);
+	WriteHookToProcess((void*)(hDllnoMod + protectAddress), originalValue, 21U);
 
 	FlushInstructionCache(hDllnoMod, NULL, 0);
 }
 
-int checkPatchGame(PBYTE hmodDLL, int isMod) {
+int checkPatchGame(PBYTE hmodDLL, PcheckPatchGame pMod) {
 	// edf.dll+3D450
 	if (wcscmp((wchar_t*)(hmodDLL + 0x17E8510), L"EarthDefenceForce 6 for PC")) {
 		return 0;
@@ -100,7 +89,7 @@ int checkPatchGame(PBYTE hmodDLL, int isMod) {
 			0xE9, 0x9C, 0x02, 0x00, 0x00,
 			0x90
 		};
-		patch_WriteHookToProcess((void*)(hmodDLL + 0x703173), skipEOS, 6U);
+		WriteHookToProcess((void*)(hmodDLL + 0x703173), skipEOS, 6U);
 	}
 
 	BYTE vp_nop2[] = { 0x66, 0x90 };
@@ -108,18 +97,20 @@ int checkPatchGame(PBYTE hmodDLL, int isMod) {
 	edfCreateWSting = (uintptr_t)(hmodDLL + 0x3D450);
 	// edf.dll+70069C
 	int titleFuncAddress = 0x70069C;
-	if (isMod) {
-		patch_hookGameBlockWithInt3((void*)(hmodDLL + titleFuncAddress), (uintptr_t)ASMsetGameTitleMod);
+	if (pMod) {
+		SetGameTitleModText = pMod->TitleText;
+		SetGameTitleModSize = pMod->TitleSize;
+		hookGameBlockWithInt3((void*)(hmodDLL + titleFuncAddress), (uintptr_t)ASMsetGameTitleMod);
 	}
 	else {
-		patch_hookGameBlockWithInt3((void*)(hmodDLL + titleFuncAddress), (uintptr_t)ASMsetGameTitlePatch);
+		hookGameBlockWithInt3((void*)(hmodDLL + titleFuncAddress), (uintptr_t)ASMsetGameTitlePatch);
 	}
-	patch_WriteHookToProcess((void*)(hmodDLL + titleFuncAddress + 15), vp_nop2, 2U);
+	WriteHookToProcess((void*)(hmodDLL + titleFuncAddress + 15), vp_nop2, 2U);
 	setGameTitleRetAddr = (uintptr_t)(hmodDLL + titleFuncAddress + 22);
 
 	// edf.dll+8EB800, find "Online_NotHaveContents"
 	int OnlineRoomAddress = 0x8EB800;
-	patch_hookGameBlockWithInt3((void*)(hmodDLL + OnlineRoomAddress), (uintptr_t)ASMupdateOnlineRoomMissionName);
+	hookGameBlockWithInt3((void*)(hmodDLL + OnlineRoomAddress), (uintptr_t)ASMupdateOnlineRoomMissionName);
 	updateOnlineRoomMissionNameRetAddr = (uintptr_t)(hmodDLL + OnlineRoomAddress + 15);
 
 	return 6;

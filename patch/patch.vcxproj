@@ -151,6 +151,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="patchMain.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="utiliy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -160,6 +161,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="utiliy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ASMmainPath.asm" />
