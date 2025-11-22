@@ -83,6 +83,9 @@
     <ClInclude Include="Base\g_gameFunc.h">
       <Filter>SourceFiles\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Ammo\2SolidBullet01.h">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -109,6 +112,9 @@
     <ClCompile Include="Base\g_gameFunc.cpp">
       <Filter>SourceFiles\Base</Filter>
     </ClCompile>
+    <ClCompile Include="Ammo\2SolidBullet01.cpp">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ASMhookGameSystem.asm">
@@ -128,6 +134,9 @@
     </MASM>
     <MASM Include="ASFunc\ASFunc_Global.asm">
       <Filter>SourceFiles\ASFunc</Filter>
+    </MASM>
+    <MASM Include="Ammo\2SolidBullet01ASM.asm">
+      <Filter>SourceFiles\Object\Ammo</Filter>
     </MASM>
   </ItemGroup>
 </Project>

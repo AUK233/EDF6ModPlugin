@@ -155,6 +155,7 @@
     <ClInclude Include="allowScriptFail.hpp" />
     <ClInclude Include="Ammo\0BaseAmmo.h" />
     <ClInclude Include="Ammo\1CommonBullet.h" />
+    <ClInclude Include="Ammo\2SolidBullet01.h" />
     <ClInclude Include="ASFunc\ASFunc_Definition.hpp" />
     <ClInclude Include="ASFunc\ASFunc_Global.hpp" />
     <ClInclude Include="Base\CommonStructure.hpp" />
@@ -173,8 +174,9 @@
   <ItemGroup>
     <ClCompile Include="Ammo\0BaseAmmo.cpp" />
     <ClCompile Include="Ammo\1CommonBullet.cpp">
-      <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AssemblyAndSourceCode</AssemblerOutput>
+      <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NoListing</AssemblerOutput>
     </ClCompile>
+    <ClCompile Include="Ammo\2SolidBullet01.cpp" />
     <ClCompile Include="Base\g_gameFunc.cpp" />
     <ClCompile Include="Base\g_system.cpp" />
     <ClCompile Include="cmd\cmd_hotkey.cpp">
@@ -192,6 +194,7 @@
   <ItemGroup>
     <MASM Include="..\mppp\updateMissionPack.asm" />
     <MASM Include="..\patch\ASMmainPath.asm" />
+    <MASM Include="Ammo\2SolidBullet01ASM.asm" />
     <MASM Include="ASFunc\ASFunc_Global.asm" />
     <MASM Include="ASMhookGameSystem.asm" />
     <MASM Include="updateMainSystem.asm" />

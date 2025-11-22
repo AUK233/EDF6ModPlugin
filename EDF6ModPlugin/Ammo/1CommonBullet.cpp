@@ -61,7 +61,7 @@ void __fastcall AmmoClass_Bullet_SetBulletMoveCoordinates(PXGS_Bullet pIn)
 	__m128 v_frameFactor = _mm_set_ps1(1.0f / 60.0f);
 	float protectF3 = v_velocity.m128_f32[3];
 	v_velocity = _mm_mul_ps(v_velocity, v_frameFactor);
-
+	
 	alignas(16) float velocity[4];
 	_mm_store_ps(velocity, v_velocity);
 	velocity[3] = protectF3;
