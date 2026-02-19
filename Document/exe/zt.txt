@@ -1,0 +1,14 @@
+edf.dll+96394D - 66 0F6F 05 EBE3EA00   - movdqa xmm0,[edf.dll+1811D40]
+简体中文字体序
+
+edf.dll+9639CB 决定使用哪个字体
+
+edf.dll+963A15 - 89 4B 40              - mov [rbx+40],ecx
+写入edf.dll+1173DE0 获取的值是
+#define GB2312_CHARSET          134    // 0x86
+
+edf.dll+1181BCB - 88 45 AE              - mov [rbp-52],al
+写入字符集
+
+edf.dll+1181B78 - F3 0F2C C6            - cvttss2si eax,xmm6
+将浮点的字体大小转换为整式

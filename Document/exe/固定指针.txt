@@ -1,0 +1,20 @@
+edf.dll+1B5DF0 - 48 8B 05 99CAEF01     - mov rax,[edf.dll+20B2890]
+获取是否是在线模式
+
+edf.dll+119401B - 48 89 4F 08           - mov [rdi+08],rcx
+写入摄像机指针
+edf.dll+1195B7C - E8 1FE4FFFF           - call edf.dll+1193FA0
+应该是从这里call的
+====================================
+edf.dll+20B2958 XGS_System
+
++4c0是载入时玩家摄像机信息的指针
++4c8是大小
+edf.dll+1195B5C - E8 AF580000           - call edf.dll+119B410
+在这里增加
+edf.dll+1195BB0 - 49 C7 46 08 00000000  - mov qword ptr [r14+08],00000000
+在这里 在任务中时被持续赋0
+edf.dll+1195B3C - 0F1F 40 00            - nop dword ptr [rax+00]
+在这里就可以获取到玩家数
+
+

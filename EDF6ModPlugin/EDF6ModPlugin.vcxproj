@@ -155,6 +155,8 @@
     <ClInclude Include="allowScriptFail.hpp" />
     <ClInclude Include="Ammo\0BaseAmmo.h" />
     <ClInclude Include="Ammo\1CommonBullet.h" />
+    <ClInclude Include="Ammo\2EfsExposureBullet.h" />
+    <ClInclude Include="Ammo\2SentryGunBullet01.h" />
     <ClInclude Include="Ammo\2SolidBullet01.h" />
     <ClInclude Include="ASFunc\ASFunc_Definition.hpp" />
     <ClInclude Include="ASFunc\ASFunc_Global.hpp" />
@@ -163,10 +165,13 @@
     <ClInclude Include="Base\g_object.h" />
     <ClInclude Include="Base\g_system.h" />
     <ClInclude Include="Base\SSE.hpp" />
+    <ClInclude Include="Base\STL\string.h" />
+    <ClInclude Include="cmd\cmd_GetINI.h" />
     <ClInclude Include="cmd\cmd_hotkey.h" />
     <ClInclude Include="EDFPointerStruct.hpp" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="System\0BaseSystem.h" />
     <ClInclude Include="updateMainSystem.hpp" />
     <ClInclude Include="updateMissionPack.hpp" />
     <ClInclude Include="utiliy.h" />
@@ -176,9 +181,13 @@
     <ClCompile Include="Ammo\1CommonBullet.cpp">
       <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NoListing</AssemblerOutput>
     </ClCompile>
+    <ClCompile Include="Ammo\2EfsExposureBullet.cpp" />
+    <ClCompile Include="Ammo\2SentryGunBullet01.cpp" />
     <ClCompile Include="Ammo\2SolidBullet01.cpp" />
     <ClCompile Include="Base\g_gameFunc.cpp" />
     <ClCompile Include="Base\g_system.cpp" />
+    <ClCompile Include="Base\STL\string.cpp" />
+    <ClCompile Include="cmd\cmd_GetINI.cpp" />
     <ClCompile Include="cmd\cmd_hotkey.cpp">
       <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AssemblyAndSourceCode</AssemblerOutput>
     </ClCompile>
@@ -189,14 +198,17 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="System\0BaseSystem.cpp" />
     <ClCompile Include="utiliy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="..\mppp\updateMissionPack.asm" />
     <MASM Include="..\patch\ASMmainPath.asm" />
+    <MASM Include="Ammo\2SentryGunBullet01ASM.asm" />
     <MASM Include="Ammo\2SolidBullet01ASM.asm" />
     <MASM Include="ASFunc\ASFunc_Global.asm" />
     <MASM Include="ASMhookGameSystem.asm" />
+    <MASM Include="System\0BaseSystemASM.asm" />
     <MASM Include="updateMainSystem.asm" />
     <MASM Include="updateMissionPack1.asm" />
   </ItemGroup>

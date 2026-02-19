@@ -2,14 +2,16 @@
 
 #include "utiliy.h"
 #include "commonNOP.h"
-#include "EDFPointerStruct.hpp"
 
 #include "allowScriptFail.hpp"
 
-#include "Base/g_system.h"
+#include "Base/CommonStructure.hpp"
 #include "Base/SSE.hpp"
+#include "Base/g_system.h"
+#include "Base/g_gameFunc.h"
 
 // separate functional zones
+#include "System/0BaseSystem.h"
 #include "Ammo/0BaseAmmo.h"
 
 extern "C" {
@@ -24,6 +26,7 @@ extern "C" {
 
 void hook_updateMainSystem_common(PBYTE hmodDLL) {
 	XGS_SystemFunction_Initialize(hmodDLL);
+	XGS_GetGameFunction_Initialize(hmodDLL);
 
 	// main
 	// find "schinese", 1st
@@ -57,6 +60,9 @@ void hook_updateMainSystem_common(PBYTE hmodDLL) {
 	WriteHookToProcess((void*)(hmodDLL + i_Weapon_Drone_LaserMarker_Init + 15), (void*)&nop4, 4U);
 	Weapon_Drone_LaserMarker_InitRetAddr = (uintptr_t)(hmodDLL + i_Weapon_Drone_LaserMarker_Init + 19);
 
+
+	// ========================================
+	GameSystem_HookFunction(hmodDLL);
 	AmmoClass_HookFunction(hmodDLL);
 }
 
@@ -72,15 +78,15 @@ void __fastcall hook_readFile735C0(void* pRCX, PEDFWString wstr, void* pR8) {
 		goto ReturnFunction;
 	}
 
-	if (*(UINT64*)wstr->text != 0x006900720063002F) {
+	if (*(UINT64*)wstr->pText != 0x006900720063002F) {
 		goto ReturnFunction;
 	}
 
-	memcpy(newPath, wstr->text, wstr->size * 2);
+	memcpy(newPath, wstr->pText, wstr->size * 2);
 	newPath[wstr->size] = 0;
 	memcpy(newPath, L"./modtest/", 20U);
 	if (std::filesystem::exists(newPath)) {
-		memcpy(wstr->text, L"./modtest/", 20U);
+		memcpy(wstr->pText, L"./modtest/", 20U);
 	}
 
 	ReturnFunction:

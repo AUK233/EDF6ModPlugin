@@ -1,6 +1,5 @@
 #pragma once
 #include <d3d11.h>
-#pragma comment(lib, "D3D11.lib")
 
 // size is 0xC20, Initialize at edf.dll+F488E
 typedef struct XGS_System_Camera_t {
@@ -14,8 +13,9 @@ static_assert(offsetof(XGS_System_Camera_t, bIsPlayerHudShow) == 0x200);
 static_assert(offsetof(XGS_System_Camera_t, pGameObject) == 0x350);
 
 typedef struct XGS_System_Player_t {
+	void* pad0;
 	PXGS_System_Camera pCamera;
-	char pad8[0x180];
+	char pad8[0x178];
 } *PXGS_System_Player;
 static_assert(sizeof(XGS_System_Player_t) == 0x188);
 
@@ -24,10 +24,12 @@ typedef struct XGS_System_t {
 	void* vf_table; // is edf.dll+1AE2278
 	char pad8[8];
 	void* ptr10;
-	char pad18[0x4C0];
+	char pad18[0x4A8];
+	void* pPlayerInfoWhenLoading;
+	size_t PlayerInfoWhenLoadingSize; // It will be reset when loading is complete.
 	XGS_System_Player_t player[4]; // really?
 } *PXGS_System;
-static_assert(offsetof(XGS_System_t, player) == 0x4d8);
+static_assert(offsetof(XGS_System_t, player) == 0x4d0);
 
 void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL);
 

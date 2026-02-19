@@ -1,0 +1,183 @@
+3_553713663
+
+
+
+edf.dll+2CA466 拾取箱子检查
+箱子难度获取比例
+EDF.dll+2C8778 - F3 0F10 0D 88C04901   - movss xmm1,[EDF.dll+1764808]
+EDF.dll+2C7CE4 - 75 21                 - jne EDF.dll+2C7D07
+
+edf.dll+7033B3 Eos_FailedCrossplay_Caption call qword ptr [<EOS_Platform_GetDesktopCrossplayStatus>]
+
+edf.dll+20B2988 箱子指针
+
+edf.dll+E3E20
+任务包名称
+
+edf.dll+8BEAF1，搜索ContentSelect_Warning
+检查是否拥有当前任务包
+edf.dll+810CE0 返回到这里
+edf.dll+810CC4 - 49 C1 E0 06           - shl r8,06
+r8是任务包序号
+
+==================================================
+edf.dll+5707B1 - 8B 83 40060000        - mov eax,[rbx+00000640]
+获取玩家指针rbx
+搜索 0FC6C0000F5ED00FC6D293F30F10D10FC6D2390F1193600D0000
++d7b 是按下dash
++d58 是前后移动
++d50 是左右移动
+
+edf.dll+550C56 - 80 BB 7B0D0000 00     - cmp byte ptr [rbx+00000D7B],00
+检查冲刺
+edf.dll+55250D - 80 BE 7B0D0000 00     - cmp byte ptr [rsi+00000D7B],00
+检查是否冲刺
+edf.dll+5521E8 - F3 0F10 81 500D0000   - movss xmm0,[rcx+00000D50]
+冲刺时方向键转弯
+
+==================================================
+
+
+
+
+edf.dll+8BDA8D，搜索EquipSel_WeaponContentWarning
+无用，但可获得下面的地址
+48 89 5D 88 48 C7 45 90 07 00 00 00 66 89 74 24 78
+EDF.dll+8BD75D - 89 43 54              - mov [rbx+54],eax
+赋值0，解除dlc限制、双持限制
+
+edf.dll+6908D6 开火时获取武器指针
+
+movss dword ptr [rsi+89C], xmm0 武器伤害
+movss dword ptr [rsi+8B0], xmm0 爆炸半径
+
+mov byte ptr [rsi+8B4], al 武器贯穿
+
+mov dword ptr [rsi+210], eax 武器装填时间
+mov dword ptr [rsi+20C], eax 武器装填时间
+
+movss dword ptr [rsi+22C], xmm0 需要电力
+mov dword ptr [rsi+E7C], eax 充电计数
+
+mov eax, dword ptr [rsi+248]
+mov dword ptr [rsi+BE8], eax 武器弹药
+
+EDF.dll+5A4233 搜索48 8B 02 C6 80 B6 08 00 00 01 48 83 C2 08
+mov byte ptr [rax+8B6], 1 设置友军伤害
+
+搜索48 89 5C 24 10 48 89 74 24 18 48 89 7C 24 20 55 41 54 41 55 41 56 41 57 48 8D AC 24 10 EC FF FF
+它的rcx就是箱子指针
+
+EDF6_GrandMother_Arm使用了下面的
+EDF.dll+6E630
+EDF.dll+37E03C
+type4
+edf.dll+52F58 - F2 0F10 00            - movsd xmm0,[rax]
+
+
+EDF.dll+20AE540 eos
+
+
+
+edf.dll+3CA7FC - 0F11 87 00110000      - movups [rdi+00001100],xmm0
+这里赋予蜘蛛巢大小
+edf.dll+E0E35C - 0F10 02               - movups xmm0,[rdx]
+这里读取过一次
+edf.dll+3C9AE1 - 41 0F10 86 00110000   - movups xmm0,[r14+00001100]
+这里读取过大小
+edf.dll+3CEE52 - 0F10 AB 00110000      - movups xmm5,[rbx+00001100]
+edf.dll+3C8E8A - F3 0F5E 9F 00110000   - divss xmm3,[rdi+00001100]
+这两处读取大小
+
+edf.dll+1160600 读四元数关键帧
+
+
+edf.dll+10449B9 InitDecrypter的hca加密
+edf.dll+FF17AF 这里读
+
+EDF5.exe+9353F0 读
+EDF5.exe+9A76D0 音频播放解码？
+
+edf.dll+1B2608 - 89 5C 24 40           - mov [rsp+40],ebx
+写入是否是npc载具
+edf.dll+5EA727 - 44 8B BD D0000000     - mov r15d,[rbp+000000D0]
+这里读取
+edf.dll+5E50DF - 8B 85 90010000        - mov eax,[rbp+00000190]
+集装箱从这里读
+
+
+edf.dll+54F283 edx是路径点索引
+edf.dll+5CFE71 起点是这里
+edf.dll+5CF95F 下一个点是这里
+
+edf.dll+1F6A33 .ac
+edf.dll+70F20B - E8 C076AEFF           - call edf.dll+1F68D0 这里读mission.ac
+edf.dll+70F25B 此处为0则返回hq，但是总是为1
+edf.dll+1292A8F 脚本编译失败，可搜索Script failed to build
+
+edf.dll+1AEE1F8 asIScriptModule虚表
+edf.dll+1233520 module->Build(); 搜索Invalid configuration. Verify the registered application interface.
+
+
+
+edf.dll+8EB81E 此处格式化在线房间任务名，可搜索Online_NotHaveContents
+
+edf.dll+2C79D5 - C7 44 24 28 80000000  - mov [rsp+28],00000080
+最大掉落箱子，+e00是掉落箱子总数
+
+edf.dll+D6697 加载config.sgo
+
+对象指针
++2f4，最大血量
++2f8，当前血量
++610，当前坐标xyzw
+
+edf.dll+1D9B2F - 48 89 47 F8           - mov [rdi-08],rax
+rax是玩家指针
+edf.dll+20B2890
+
+EDF.dll+1F779F0 武器图标颜色
+
+
+edf.dll+95232E - 48 8B D0              - mov rdx,rax
+rdx是Dialog_Message的文本的指针
+可通过48C7C7FFFFFFFF4C8BC749FFC06642833C400075F5488BD0488D4D18找到
+
+edf.dll+10502D6 - 0FB6 46 01            - movzx eax,byte ptr [rsi+01] 读acb音频参数
+005702 后面2个字节是调整音量的
+
+edf.dll+8C38A6 - 89 55 0F              - mov [rbp+0F],edx
+将任务包序号写入栈，可搜索，r9+74是任务包序号
+4C8D0C10418B517489550F498D8190000000486348084803C8498BC64183B99400000001480F4FC7448B140844895517
+
+
+edf.dll+82B93C 设置雷达单位类型-中立
+41 B8 04 00 00 00 48 8D 54 24 30 49 8B CE
+edf.dll+82B959 这里是加载中立的颜色
+
+EDF.dll+741c0 读资产路径
+rcx需要保留
+rdx是wstring，但安全起见，只读+0字符串指针和+10大小
+
+EDF.dll+95770C 房间类型名 RoomType_NameOnly
+EDF.dll+DFFE0 读房间类型
+edf.dll+92321E - 48 8B D8              - mov rbx,rax
+开设房间时返回类型名字
+edf.dll+902FB8 - 90                    - nop 
+进入房间时返回
+edf.dll+92929D - 90                    - nop 
+选择房间类型时返回
+
+edf.dll+90153B - F2 41 0F11 87 98090000  - movsd [r15+00000998],xmm0
+房间类型更改时拷贝类型
+
+edf.dll+DC496 - 41 8B 59 18           - mov ebx,[r9+18]
+读任务包时获取序号
+
+edf.dll+9216B0 变更房间设置时需要call
+
+
+
+
+
+

@@ -1,0 +1,182 @@
+edf.dll+2302C4 - 89 87 90080000        - mov [rdi+00000890],eax
+实际+9d0设置flag，9d4也是flag
+
+edf.dll+24ACBE BarugaCannonBullet设置新的flag
+
+call edf.dll+1060D0
+mov [rsi+000009D0],eax 默认是C
+call edf.dll+106150 这里是获取碰撞flag
+mov [rsi+000009D4],eax 取消了与单位的碰撞，默认值是B，是1011
+
+call edf.dll+106140 这个返回的19可以击穿安卓塔，但是无法对单位造成伤害
+比特是00011001
+
+call edf.dll+106150 返回的1d，无法对任何敌人造成伤害
+比特是00011101
+
+call edf.dll+106130 返回的12跟19类似，比特是00010010
+
++9d4的
+
+第3位是不与任何敌人的碰撞，也许
+
+edf.dll+23A0AE movss dword ptr [rsi+EF8], xmm0
+efs弹头的弹力
+
+edf.dll+2359F8 - 75 10                 - jne edf.dll+235A0A
+此处跳转到碰撞
+edf.dll+235A32 - 8B 83 90080000        - mov eax,[rbx+00000890]
+这里获取+9d0
+edf.dll+D9370A - 45 8B 48 04           - mov r9d,[r8+04]
+这里获取+9d4的值用于检查检查
+
+edf.dll+1079D0 这个函数是用于碰撞检查的
+
+edf.dll+28F3D3 穿甲弹头命中，是vft+28
+
+edf.dll+232A44 - 0F11 87 800B0000      - movups [rdi+00000B80],xmm0
+这里更新弹头坐标
+edf.dll+235A18 - 0F11 81 B0080000      - movups [rcx+000008B0],xmm0
+这里更新弹头的移动坐标
+
+edf.dll+2349E9 - 88 81 C40B0000        - mov [rcx+00000BC4],al
+它的下面负责获取弹头的新坐标
+
+edf.dll+23173D - F7 83 F40A0000 00100000 - test [rbx+00000AF4],00001000
+也是碰撞检查，但是只决定要不要和单位碰撞
+
+==============================================================
+
+edf.dll+234BAC - 48 8B CF              - mov rcx,rdi
+这里call的碰撞检查
+
+edf.dll+28AC3A - 41 83 BE 000F0000 01  - cmp dword ptr [r14+00000F00],01
+检查是不是弹射枪
+
+edf.dll+28B498 - F3 0F10 B6 18100000   - movss xmm6,[rsi+00001018]
+此处读取SolidBullet01的hit特效大小
+
+edf.dll+28B625 - E8 066A0500           - call edf.dll+2E2030
+显示SolidBullet01的贯穿特效
+
+SolidBullet01虚表+18是绘制弹头
++28是绘制命中特效，同样渲染弹头
+
+edf.dll+235D50 这个函数中有决定弹头摧毁的内容
+edf.dll+235E55 - E8 76060000           - call edf.dll+2364D0
+这里负责决定弹头会被摧毁
+
+
+edf.dll+236999 - 89 85 F40A0000        - mov [rbp+00000AF4],eax
+这里写入的弹头寿命到期
+
+edf.dll+2364E9 - 8B 81 040B0000        - mov eax,[rcx+00000B04] 
+检查弹射
+edf.dll+232DD4 - 83 BE 040B0000 03     - cmp dword ptr [rsi+00000B04],03
+edf.dll+2325C4 - 83 BF 040B0000 03     - cmp dword ptr [rdi+00000B04],03
+edf.dll+2325F3 - 8B 87 040B0000        - mov eax,[rdi+00000B04]
+edf.dll+232707 - 83 BF 040B0000 03     - cmp dword ptr [rdi+00000B04],03
+相当于弹头的+c44
+
+edf.dll+230CEA - 0F84 D7010000         - je edf.dll+230EC7
+检查弹头是否命中，改成jmp就是永远没有命中，但是有命中特效
+edf.dll+232394 - 41 B4 01              - mov r12b,01
+返回到这里
+
+edf.dll+22FF2C - 48 89 87 F0080000     - mov [rdi+000008F0],rax
+这里写入弹头碰撞虚表，但是下面又写入了一个新的
+
+====================================================
+
+edf.dll+234D20 - 83 B9 FC080000 00     - cmp dword ptr [rcx+000008FC],00
+检查是否需要写入贯穿弹头的命中flag
+edf.dll+D939CF - C7 41 0C 01000000     - mov [rcx+0C],00000001
+写入需要检查
+
+edf.dll+FDF11 - 0F11 41 10            - movups [rcx+10],xmm0
+写入最大float
+edf.dll+11A79D0 - 0F11 46 10            - movups [rsi+10],xmm0
+写入需要判断的float，用于检查edf.dll+D939CF
+
+edf.dll+DC4BD5 - FF 50 20              - call qword ptr [rax+20]
+只有断点的情况会进入这里
+edf.dll+18BDA80 虚表 hknpHitScalingCollector
+
+edf.dll+DB2EC8
+edf.dll+15AD1D6 判断弹头命中的返回地址
+这两个地方会call edf.dll+DC4BD5
+
+
+====================================================
+edf.dll+2a2292 is the function call that loads the SentryGunBullet_Open01 animation_model from sgo
+edf.dll+2a1ee0 is the SentryGunBullet01 state machine for "opening", which creates the SentryGunBullet_Open01.
+
+edf.dll+0x20b2b30 语言设置
+
+====================================================
+
+edf.dll+2353A4 这里EfsExposureBullet要复制矩阵
+edf.dll+179ED48 虚表
+
+
+edf.dll+23089C - 48 89 43 40           - mov [rbx+40],rax
+写入矩阵的指针到弹头，rbx+0是伤害倍率？
+
+edf.dll+697775 - 49 89 5C 24 70        - mov [r12+70],rbx
+写入矩阵指针到buffer？
+
+edf.dll+2A2201 - E8 CADFE5FF           - call edf.dll+1001D0
+这个rcx的+30+40是矩阵指针
+
+edf.dll+230900 - 89 43 68              - mov [rbx+68],eax
+这里写入弹头寿命
+
+edf.dll+23467A - F3 0F2A B3 080A0000   - cvtsi2ss xmm6,[rbx+00000A08]
+这里读弹头寿命
+
+edf.dll+23108F - 66 0F6E 81 080A0000   - movd xmm0,[rcx+00000A08]
+这个地方也读弹头寿命
+
+edf.dll+234A00 - 89 81 FC0A0000        - mov [rcx+00000AFC],eax
+这里写入弹头当前时长
+
+====================================================
+
+edf.dll+6979A4 - 4C 8B C0              - mov r8,rax
+武器开火返回
+传入的 rdx是矩阵指针，r8是创建弹头函数指针，r9是一个结构体指针
+矩阵大小应该是0x40
+
+edf.dll+69776D 为r9的结构体写入随机数？
+edf.dll+6976F8 为r9结构体写入一个-0，-0，-0，1向量，但可能是正零
+r9+94是弹头速度，+98是弹头寿命，+9c是弹头伤害，+a0是伤害衰减
+
+edf.dll+230B16 - 88 83 49010000        - mov [rbx+00000149],al
+得出r9结构体的大小，但是要+30
+
+edf.dll+2A4296 - 44 38 A7 380E0000     - cmp [rdi+00000E38],r12b
+ze开火返回
+返回的rax是弹头指针
+
+edf.dll+6D3322 - 4C 8B C0              - mov r8,rax
+无人机开火返回
+
+edf.dll+6D34D2 - 74 10                 - je edf.dll+6D34E4
+无人机这里直接跳过就会导致EfsExposureBullet只有一帧
+edf.dll+6D34E4 - 49 89 8D B0000000     - mov [r13+000000B0],rcx
+即这里为0的话就会只有一帧
+edf.dll+6D31C5 - 49 8B 8D B0000000     - mov rcx,[r13+000000B0]
+从这里读
+edf.dll+6D31BD - FF 50 60              - call qword ptr [rax+60]
+真正工作的地方，nop它就会只有一帧
+edf.dll+2439B0 - 66 C7 81 890F0000 0101 - mov word ptr [rcx+00000F89],0101 +60的目标
+edf.dll+697511 - FF 50 60              - call qword ptr [rax+60] 武器开火call
+edf.dll+2B99A6 - FF 50 60              - call qword ptr [rax+60] ClusterBullet01开火call
+
+edf.dll+2B9F6D - 4C 8B C0              - mov r8,rax
+ClusterBullet01开火返回
+
+
+edf.dll+1194280 应该是从对象工厂中创建对象
+
+

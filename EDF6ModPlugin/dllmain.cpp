@@ -19,7 +19,7 @@
 typedef void(WINAPI* EDFImportDLL)();
 EDFImportDLL EDF_CPP_OnBoot;
 PBYTE hmodDLL;
-WCHAR iniPath[MAX_PATH];
+LPWSTR iniPath;
 
 // ini content
 
@@ -30,11 +30,11 @@ extern "C" __declspec(dllexport) void CPP_OnBoot() {
 
 		UINT testDLL = 0;
 		if (std::filesystem::exists("./modtest/exa/config.sgo")) {
-			//testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0, iniPath);
 			// read absolute path
 			testDLL = GetPrivateProfileIntW(L"ModOption", L"testDLL", 0,
 				L"I:\\SteamLibrary\\steamapps\\common\\EARTH DEFENSE FORCE 6\\mod.ini");
 
+			// no check null pointers here now
 			if (GetPrivateProfileIntW(L"ModOption", L"cheat", 0, iniPath)) {
 				cmd_ModConsole_Initialize(hmodDLL);
 				HANDLE tempHND = CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)cmd_ModConsole_MonitorKeys, NULL, NULL, NULL);
@@ -99,9 +99,14 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
 			hmodDLL = (PBYTE)moduleHandle;
 
-			GetModuleFileNameW(hModule, iniPath, _countof(iniPath));
-			PathRemoveFileSpecW(iniPath);
-			wcscat_s(iniPath, L"\\mod.ini");
+			iniPath = (LPWSTR)_aligned_malloc((MAX_PATH + 1) * sizeof(WCHAR), 0x10);
+			if (iniPath) {
+				GetModuleFileNameW(hModule, iniPath, MAX_PATH);
+				iniPath[MAX_PATH] = L'\0';
+				PathRemoveFileSpecW(iniPath);
+				wcscat_s(iniPath, MAX_PATH + 1, L"\\mod.ini");
+			}
+
 
 			// find 48 8B 02 C6 80 B6 08 00 00 01 48 83 C2 08
 			/*hookGameBlockWithInt3((void*)(hmodDLL + 0x5A44E6), (uintptr_t)ASMsetPlayerWeaponFriendlyFire);

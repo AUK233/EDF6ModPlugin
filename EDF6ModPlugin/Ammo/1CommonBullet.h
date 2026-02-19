@@ -28,6 +28,7 @@ typedef struct XGS_Bullet_t {
 	char padBC5[0x1B];
 	float AmmoHitboxSize;
 } *PXGS_Bullet;
+#if 1
 static_assert(offsetof(XGS_Bullet_t, v_HitInfoList) == 0x6C8);
 static_assert(offsetof(XGS_Bullet_t, AmmoCurrentDamage) == 0x780);
 static_assert(offsetof(XGS_Bullet_t, HitInPenetration) == 0x8FC);
@@ -40,12 +41,36 @@ static_assert(offsetof(XGS_Bullet_t, AmmoPosBB0) == 0xBB0);
 static_assert(offsetof(XGS_Bullet_t, RequiresCollision) == 0xBC0);
 static_assert(offsetof(XGS_Bullet_t, HasCollision) == 0xBC4);
 static_assert(offsetof(XGS_Bullet_t, AmmoHitboxSize) == 0xBE0);
+#endif
 
 void __fastcall AmmoClass_HookFunction_CommonBullet(PBYTE hmodDLL);
 
 typedef void* (__fastcall* CallFunc_CheckAmmoCollision)(void* pBullet, float* pStartPos, float* pEndPos, bool CheckWithMap);
 void __fastcall AmmoClass_Bullet_SetBulletMoveCoordinates(PXGS_Bullet pIn);
 
+// ===================================================================================================
+typedef void(__fastcall* CallFunc_AmmoClassFunc28)(char* pThis, char* pRDX);
+typedef void(__fastcall* CallFunc_AmmoClassFunc60)(char* pThis);
+
+typedef struct XGS_AmmoClass_VFT_t {
+	char pad0[0x28];
+	CallFunc_AmmoClassFunc28 Func28; // update
+	char pad30[0x30];
+	CallFunc_AmmoClassFunc60 Func60;
+	void* Func68;
+} *PXGS_AmmoClass_VFT;
+#if 1
+static_assert(offsetof(XGS_AmmoClass_VFT_t, Func28) == 0x28);
+static_assert(offsetof(XGS_AmmoClass_VFT_t, Func60) == 0x60);
+static_assert(sizeof(XGS_AmmoClass_VFT_t) == 0x70);
+#endif
+
+typedef struct XGS_AmmoClass_FullVFT_t {
+	uintptr_t base;
+	XGS_AmmoClass_VFT_t fn;
+} *PXGS_AmmoClass_FullVFT;
+
+// ===================================================================================================
 namespace Ammo::Bullet::Flag {
 	enum AmmoState
 	{

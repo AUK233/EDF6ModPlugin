@@ -1,4 +1,5 @@
 #pragma once
+#include "stl/string.h"
 
 typedef void(__fastcall* void_fastcallNoParameter)();
 

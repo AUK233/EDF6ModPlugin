@@ -106,8 +106,7 @@ void __fastcall AmmoClass_Bullet_SetBulletMoveCoordinates(PXGS_Bullet pIn)
 
 	auto pSys = XGS_GetXGSSystemPointer();
 
-	auto fn_DetectionPathCollisionObject = Get_DetectionPathCollisionObject();
-	fn_DetectionPathCollisionObject(&pIn->pad800, &pSys->ptr10, pIn->AmmoPosBB0, tempPos, hitbox);
+	Game_DetectionPathCollisionObject(&pIn->pad800, &pSys->ptr10, pIn->AmmoPosBB0, tempPos, hitbox);
 	//
 	fn_CheckAmmoCollision(pIn, pIn->AmmoPosBB0, tempPos, true);
 }

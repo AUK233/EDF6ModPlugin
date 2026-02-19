@@ -30,6 +30,12 @@
     <Filter Include="SourceFiles\Object\Ammo">
       <UniqueIdentifier>{fc14e564-47ee-4053-ae4f-7ed048a30b0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\Base\STL">
+      <UniqueIdentifier>{bd823853-8295-409c-8f38-117ea8536c30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\System">
+      <UniqueIdentifier>{a50abd40-df0a-4cc0-a459-8039ea36220f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -86,6 +92,21 @@
     <ClInclude Include="Ammo\2SolidBullet01.h">
       <Filter>SourceFiles\Object\Ammo</Filter>
     </ClInclude>
+    <ClInclude Include="Ammo\2SentryGunBullet01.h">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="Ammo\2EfsExposureBullet.h">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\STL\string.h">
+      <Filter>SourceFiles\Base\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="System\0BaseSystem.h">
+      <Filter>SourceFiles\System</Filter>
+    </ClInclude>
+    <ClInclude Include="cmd\cmd_GetINI.h">
+      <Filter>SourceFiles\cmd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -115,6 +136,21 @@
     <ClCompile Include="Ammo\2SolidBullet01.cpp">
       <Filter>SourceFiles\Object\Ammo</Filter>
     </ClCompile>
+    <ClCompile Include="Ammo\2SentryGunBullet01.cpp">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="Ammo\2EfsExposureBullet.cpp">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\STL\string.cpp">
+      <Filter>SourceFiles\Base\STL</Filter>
+    </ClCompile>
+    <ClCompile Include="System\0BaseSystem.cpp">
+      <Filter>SourceFiles\System</Filter>
+    </ClCompile>
+    <ClCompile Include="cmd\cmd_GetINI.cpp">
+      <Filter>SourceFiles\cmd</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ASMhookGameSystem.asm">
@@ -137,6 +173,12 @@
     </MASM>
     <MASM Include="Ammo\2SolidBullet01ASM.asm">
       <Filter>SourceFiles\Object\Ammo</Filter>
+    </MASM>
+    <MASM Include="Ammo\2SentryGunBullet01ASM.asm">
+      <Filter>SourceFiles\Object\Ammo</Filter>
+    </MASM>
+    <MASM Include="System\0BaseSystemASM.asm">
+      <Filter>SourceFiles\System</Filter>
     </MASM>
   </ItemGroup>
 </Project>
