@@ -3,11 +3,13 @@
 #include "../commonNOP.h"
 
 #include "../cmd/cmd_GetINI.h"
+#include "1GameFunc_Model.h"
+
 #include "0BaseSystem.h"
 
-void __fastcall GameSystem_HookFunction(PBYTE hmodDLL)
-{
+void __fastcall GameSystem_HookFunction(PBYTE hmodDLL) {
 	GameSystem_HookFunction_Common(hmodDLL);
+	GetGameFunction_Model(hmodDLL);
 }
 
 extern "C" {

@@ -86,12 +86,20 @@ edf.dll+232394 - 41 B4 01              - mov r12b,01
 edf.dll+22FF2C - 48 89 87 F0080000     - mov [rdi+000008F0],rax
 这里写入弹头碰撞虚表，但是下面又写入了一个新的
 
+
+
 ====================================================
+
+edf.dll+235A18 - 0F11 81 B0080000      - movups [rcx+000008B0],xmm0
+碰撞时写入弹头坐标
 
 edf.dll+234D20 - 83 B9 FC080000 00     - cmp dword ptr [rcx+000008FC],00
 检查是否需要写入贯穿弹头的命中flag
 edf.dll+D939CF - C7 41 0C 01000000     - mov [rcx+0C],00000001
 写入需要检查
+
+edf.dll+23251C - 83 BF FC080000 00     - cmp dword ptr [rdi+000008FC],00
+这里同样要检查弹头是否命中
 
 edf.dll+FDF11 - 0F11 41 10            - movups [rcx+10],xmm0
 写入最大float
@@ -178,5 +186,11 @@ ClusterBullet01开火返回
 
 
 edf.dll+1194280 应该是从对象工厂中创建对象
+
+=====================================
+
+edf.dll+1197956 - FF 50 18              - call qword ptr [rax+18]
+更新模型显示
+
 
 

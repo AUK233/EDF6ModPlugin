@@ -36,6 +36,12 @@
     <Filter Include="SourceFiles\System">
       <UniqueIdentifier>{a50abd40-df0a-4cc0-a459-8039ea36220f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\Object\EDF">
+      <UniqueIdentifier>{933f9285-f904-4d63-919a-ee29aa23c194}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Object\EDF\Class">
+      <UniqueIdentifier>{f9104c99-53c2-4981-9797-4d72328f53c5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -107,6 +113,18 @@
     <ClInclude Include="cmd\cmd_GetINI.h">
       <Filter>SourceFiles\cmd</Filter>
     </ClInclude>
+    <ClInclude Include="EDF\0BaseEDF.h">
+      <Filter>SourceFiles\Object\EDF</Filter>
+    </ClInclude>
+    <ClInclude Include="EDF\Class\EDFSoldierHeavyArmor.h">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="EDF\Class\EDFSoldierClass.hpp">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
+    </ClInclude>
+    <ClInclude Include="System\1GameFunc_Model.h">
+      <Filter>SourceFiles\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -151,6 +169,15 @@
     <ClCompile Include="cmd\cmd_GetINI.cpp">
       <Filter>SourceFiles\cmd</Filter>
     </ClCompile>
+    <ClCompile Include="EDF\0BaseEDF.cpp">
+      <Filter>SourceFiles\Object\EDF</Filter>
+    </ClCompile>
+    <ClCompile Include="EDF\Class\EDFSoldierHeavyArmor.cpp">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
+    </ClCompile>
+    <ClCompile Include="System\1GameFunc_Model.cpp">
+      <Filter>SourceFiles\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ASMhookGameSystem.asm">
@@ -179,6 +206,12 @@
     </MASM>
     <MASM Include="System\0BaseSystemASM.asm">
       <Filter>SourceFiles\System</Filter>
+    </MASM>
+    <MASM Include="EDF\EDFCommonFunctionASM.asm">
+      <Filter>SourceFiles\Object\EDF</Filter>
+    </MASM>
+    <MASM Include="EDF\Class\EDFSoldierHeavyArmorASM.asm">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
     </MASM>
   </ItemGroup>
 </Project>

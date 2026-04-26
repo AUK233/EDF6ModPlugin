@@ -105,8 +105,34 @@ void __fastcall AmmoClass_Bullet_SetBulletMoveCoordinates(PXGS_Bullet pIn)
 	hitbox[3] = 1.0f;
 
 	auto pSys = XGS_GetXGSSystemPointer();
-
 	Game_DetectionPathCollisionObject(&pIn->pad800, &pSys->ptr10, pIn->AmmoPosBB0, tempPos, hitbox);
 	//
+
+	//v_pos = _mm_loadu_ps(tempPos);
+	//__m128 currentPos = _mm_loadu_ps(pIn->BulletCurrentPos);
+	//currentPos = _mm_sub_ps(currentPos, v_pos);
+	//float distanceSq = _mm_dp_ps(currentPos, currentPos, 0b01111111).m128_f32[0];
+	//if (distanceSq < 0.001f) {
+	//	//pIn->HitInPenetration = 1;
+	//	pIn->AmmoStateBit |= (1 << Ammo::Bullet::Flag::IsHit);
+	//	return;
+	//}
+	//auto v_result = _mm_cmpeq_ps(currentPos, v_pos);
+	//int mask = _mm_movemask_ps(v_result);
+	//if (mask == 0b1111) {
+	//	pIn->HitInPenetration = 1;
+	//	pIn->AmmoStateBit |= (1 << Ammo::Bullet::Flag::IsHit);
+	//	return;
+	//}
+
 	fn_CheckAmmoCollision(pIn, pIn->AmmoPosBB0, tempPos, true);
+
+	// forced projectile penetration debris
+	UINT32 bit_Penetration = 1 << Ammo::Bullet::Flag::IsPenetration;
+	if (pIn->AmmoStateBit & bit_Penetration) {
+		_mm_storeu_ps(pIn->AmmoCurrentPos, v_pos);
+		pIn->AmmoCurrentPos[3] = 1.0f;
+		return;
+	}
+
 }

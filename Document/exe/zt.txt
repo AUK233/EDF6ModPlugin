@@ -12,3 +12,58 @@ edf.dll+1181BCB - 88 45 AE              - mov [rbp-52],al
 
 edf.dll+1181B78 - F3 0F2C C6            - cvttss2si eax,xmm6
 将浮点的字体大小转换为整式
+
+====================================================
+edf.dll+7D89E5 - 80 3D CCEC7901 00     - cmp byte ptr [edf.dll+1F776B8],00
+检查是否显示字幕
+
+edf.dll+17F4298 字幕的虚表
+
+edf.dll+5DE79F - E8 3CECFFFF           - call edf.dll+5DD3E0
+播放语音时call它来获取字幕
+
+edf.dll+5DE6CA - F3 0F10 05 FEA91D01   - movss xmm0,[edf.dll+17B90D0]
+播放语音时会读它，TalkBegin也会读这个浮点
+
+edf.dll+5DB6F0 - 0F2F 05 D9D91D01      - comiss xmm0,[edf.dll+17B90D0]
+播放时会读一次
+
+edf.dll+5DE75A - 80 7F 40 00           - cmp byte ptr [rdi+40],00
+检查有没有字幕初始化，为0则跳过初始化
+并且rdi+20是语音的名字
+edf.dll+5DD412 - C6 41 30 00           - mov byte ptr [rcx+30],00
+这里写入0
+
+====================================================
+edf.dll+5DD580 
+初始化需要显示的字幕，rcx是语音名，edx是是否是无线电
+
+edf.dll+5DD6FC - 48 8D 15 31991F01     - lea rdx,[edf.dll+17D7034]
+检查字幕格式化时写入的是」还是』
+
+edf.dll+5DD9DA - E8 41A21F00           - call edf.dll+7D7C20
+执行字幕的初始化，r14是文本指针
+输入的rdx
++48是要显示的wstring
++68是一个浮点 edf.dll+7D7D80 - F3 0F10 47 68         - movss xmm0,[rdi+68]
+
+edf.dll+5DD5C5 - E8 26421D00           - call edf.dll+7B17F0
+读字幕
+rbp+60是说话的人的wstring，+80是说话的内容
+如果没找到字幕的话，+60是输入的语音名字
+
+edf.dll+5DD5F8 - 48 8D 05 119A1F01     - lea rax,[edf.dll+17D7010]
+无字幕检查，因为是英文和日文比较，所以总是不通过
+
+edf.dll+7B1FB3 - 41 C7 45 40 0000A040  - mov [r13+40],40A00000
+这个r13就是lea rdx, [rbp+60]
+edf.dll+7B1E6D - F3 41 0F11 75 40      - movss [r13+40],xmm6
+写入时长？
+
+edf.dll+7B1F7F - 48 8D 15 CAEB0301     - lea rdx,[edf.dll+17F0B50]
+没有找到字幕时的默认字幕
+edf.dll+7B1AFF - 0F84 30040000         - je edf.dll+7B1F35
+检查找没找到字幕
+
+edf.dll+7B1E20 - 49 8B D6              - mov rdx,r14
+这个r14就是语音名的string，但是看起来是搜索awb里有没有

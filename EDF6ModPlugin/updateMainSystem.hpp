@@ -13,6 +13,7 @@
 // separate functional zones
 #include "System/0BaseSystem.h"
 #include "Ammo/0BaseAmmo.h"
+#include "EDF/0BaseEDF.h"
 
 extern "C" {
 	uintptr_t LoadDSGONode;
@@ -60,10 +61,22 @@ void hook_updateMainSystem_common(PBYTE hmodDLL) {
 	WriteHookToProcess((void*)(hmodDLL + i_Weapon_Drone_LaserMarker_Init + 15), (void*)&nop4, 4U);
 	Weapon_Drone_LaserMarker_InitRetAddr = (uintptr_t)(hmodDLL + i_Weapon_Drone_LaserMarker_Init + 19);
 
+	// edf.dll+5DD5EF, L"***no_subtitle***"
+	BYTE NoSubtitleCheck[]= {
+		0x48, 0x83, 0xFE, 0x0B,
+		0x75, 0x43,
+		0x48, 0x8B, 0xD6,
+		0x48, 0x8D, 0x05, 0x51, 0x35, 0x21, 0x01,
+		0x41, 0x0F, 0xB7, 0x09,
+		0x41, 0xB8, 0x0A, 0xFF, 0x00, 0x00
+	};
+	WriteHookToProcess((void*)(hmodDLL + 0x5DD5EF), NoSubtitleCheck, 26U);
+
 
 	// ========================================
 	GameSystem_HookFunction(hmodDLL);
 	AmmoClass_HookFunction(hmodDLL);
+	HookFunction_EDFseries(hmodDLL);
 }
 
 extern "C" {

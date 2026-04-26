@@ -1,0 +1,66 @@
+对象指针
++2f4，最大血量
++2f8，当前血量
++610，当前坐标xyzw
++640，士兵类型，1是fencer
++d76，按下跳跃，+d77是按住
++1950 是武器指针数组
++1a00 是辅助装备槽指针
+
+edf.dll+5708BE - 88 83 760D0000        - mov [rbx+00000D76],al
+使用键盘时普通士兵写入跳跃按键
+
+edf.dll+57B2B3 - 80 B9 760D0000 00     - cmp byte ptr [rcx+00000D76],00
+站立检查跳跃
+edf.dll+57A8F6 - 80 BB 760D0000 00     - cmp byte ptr [rbx+00000D76],00
+edf.dll+57BD30 - 80 B9 760D0000 00     - cmp byte ptr [rcx+00000D76],00
+移动检查跳跃
+
+vft+220是跳跃
+vft+210是默认动作
+
+====================================================
+edf.dll+54FE73 ranger初始化
+
+edf.dll+564FD3 - E8 58010000           - call edf.dll+565130
+fencer初始化
+
+edf.dll+572DF0 - 48 8B C4              - mov rax,rsp
+fencer更新，是vft+20
+
+检查按键应该是vft+28，edf.dll+567780
+
+====================================================
+
+edf.dll+82E580 - 33 D2                 - xor edx,edx
+这里的rax是武器指针，r13是士兵指针
+edf.dll+82E5B3 - 89 7D 38              - mov [rbp+38],edi
+这个edi是子武器槽序号
+
+====================================================
+
+edf.dll+68AED6 - E8 D5550300           - call edf.dll+6C04B0
+武器初始化时隐藏模型
+
+edf.dll+695D80 - 89 87 E80B0000        - mov [rdi+00000BE8],eax
++be8 是当前弹药，这里是装填完成
++248 是总弹药
+edf.dll+695C8D - C7 81 E80B0000 00000000 - mov [rcx+00000BE8],00000000
+装填时将当前弹药置0
+
+edf.dll+59ADFB - C6 81 39010000 01     - mov byte ptr [rcx+00000139],01
++139 发射武器
+
+edf.dll+59ADB0 - FF 90 98000000        - call qword ptr [rax+00000098]
+装填武器？
+
+edf.dll+696180 - E8 2BA30200           - call edf.dll+6C04B0
+切换武器时显示和隐藏模型
++78c 武器前台？
++13b0 是显示的模型？
+
+edf.dll+5A2858 - FF 50 68              - call qword ptr [rax+68]
+这个地方call的edf.dll+6819E0，可能是用于获取aim
+
+edf.dll+59AF82 - 8B 81 20020000        - mov eax,[rcx+00000220]
+AngleAdjust，只能调整角色的角度

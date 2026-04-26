@@ -1,0 +1,10 @@
+edf.dll+79D333 - E8 A82BF1FF           - call edf.dll+6AFEE0
+看起来是Weapon_Throw的初始化
+
+edf.dll+F839C - F3 41 0F10 BF 94080000  - movss xmm7,[r15+00000894]
+投掷指示线显示时读武器的弹速
+
+edf.dll+F82E2 - 8B B0 1C020000        - mov esi,[rax+0000021C]
+检查投掷指示线显示的段数
+
+edf.dll+6C3893 AreaRender

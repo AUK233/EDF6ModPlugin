@@ -127,10 +127,7 @@ edf.dll+2C79D5 - C7 44 24 28 80000000  - mov [rsp+28],00000080
 
 edf.dll+D6697 加载config.sgo
 
-对象指针
-+2f4，最大血量
-+2f8，当前血量
-+610，当前坐标xyzw
+
 
 edf.dll+1D9B2F - 48 89 47 F8           - mov [rdi-08],rax
 rax是玩家指针

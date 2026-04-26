@@ -8,7 +8,9 @@ typedef struct XGS_Bullet_t {
 	char pad6E0[0xA0];
 	float AmmoCurrentDamage;
 	char pad784[0x7C];
-	char pad800[0xF0]; // Its address is required
+	char pad800[0xA0]; // Its address is required
+	float BulletTargetPos[4], BulletCurrentPos[4];
+	char pad8C0[0x30];
 	void* vf_8f0;
 	int pad8f8, HitInPenetration;
 	char pad900[0x108];
@@ -31,6 +33,7 @@ typedef struct XGS_Bullet_t {
 #if 1
 static_assert(offsetof(XGS_Bullet_t, v_HitInfoList) == 0x6C8);
 static_assert(offsetof(XGS_Bullet_t, AmmoCurrentDamage) == 0x780);
+static_assert(offsetof(XGS_Bullet_t, BulletCurrentPos) == 0x8B0);
 static_assert(offsetof(XGS_Bullet_t, HitInPenetration) == 0x8FC);
 static_assert(offsetof(XGS_Bullet_t, AmmoLifetime) == 0xA08);
 static_assert(offsetof(XGS_Bullet_t, AmmoStateBit) == 0xAF4);
