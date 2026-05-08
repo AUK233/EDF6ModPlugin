@@ -1,0 +1,31 @@
+edf.dll+2139A78
+edf.dll+15BE13 - E8 F81C0001           - call edf.dll+115DB10
+获取g_xgl_draw_utility_color_textrure
+
+edf.dll+1154F48 - E8 53A813FF           - call edf.dll+28F7A0
+绘制武器图标
+
+edf.dll+115201D - E8 7ED713FF           - call edf.dll+28F7A0
+将渲染的buffer转换到输出屏幕的buffer
+
+edf.dll+1154F48 - E8 53A813FF           - call edf.dll+28F7A0
+绘制任务截图
+edf.dll+1155E00 - E8 ABD1F6FE           - call edf.dll+C2FB0
+绘制任务列表
+
+======================================
+
+
+edf.dll+573690 - 84 C0                 - test al,al
+检查能不能按暂停
+
+edf.dll+9370BF - E8 8CF78BFF           - call edf.dll+1F6850
+检查按下暂停时切不切换回去
+
+edf.dll+936910 检查按下暂停时是不是在线模式
+
+
+edf.dll+54BE7D - F3 0F58 81 10030000   - addss xmm0,[rcx+00000310]
+增加角色的时间
+
+

@@ -1,3 +1,4 @@
 #pragma once
 
-UINT __fastcall GetProfile_ReadFontSize();
+void __fastcall INIConfig_Initialize();
+UINT __fastcall INIConfig_ReadFontSize();

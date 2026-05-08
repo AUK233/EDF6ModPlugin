@@ -3,11 +3,13 @@
 #include "../commonNOP.h"
 
 #include "../cmd/cmd_GetINI.h"
+#include "screen/0D3D11.h"
 #include "1GameFunc_Model.h"
 
 #include "0BaseSystem.h"
 
 void __fastcall GameSystem_HookFunction(PBYTE hmodDLL) {
+	HookFunction_D3D11(hmodDLL);
 	GameSystem_HookFunction_Common(hmodDLL);
 	GetGameFunction_Model(hmodDLL);
 }
@@ -30,7 +32,7 @@ void __fastcall GameSystem_HookFunction_Common(PBYTE hmodDLL)
 float __fastcall GameSetFont_GetNewFontSize(int* pOldSize, UINT32 charset)
 {
 	float fontSize = 32;
-	auto iniFontSize = GetProfile_ReadFontSize();
+	auto iniFontSize = INIConfig_ReadFontSize();
 	if (charset == GB2312_CHARSET || charset == CHINESEBIG5_CHARSET) // 0x86 and 0x88
 	{
 		// 32 and 36 will cause Planet Sniper Cannon's damage to start a new line

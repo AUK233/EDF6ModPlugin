@@ -74,10 +74,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetName>mod</TargetName>
+    <IncludePath>$(MSBuildProjectDirectory);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetName>mod</TargetName>
+    <IncludePath>$(MSBuildProjectDirectory);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -160,7 +162,9 @@
     <ClInclude Include="Ammo\2SolidBullet01.h" />
     <ClInclude Include="ASFunc\ASFunc_Definition.hpp" />
     <ClInclude Include="ASFunc\ASFunc_Global.hpp" />
+    <ClInclude Include="ASFunc\ASFunc_HookMap.h" />
     <ClInclude Include="Base\CommonStructure.hpp" />
+    <ClInclude Include="Base\g_DXresource.h" />
     <ClInclude Include="Base\g_gameFunc.h" />
     <ClInclude Include="Base\g_object.h" />
     <ClInclude Include="Base\g_system.h" />
@@ -176,6 +180,12 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="System\0BaseSystem.h" />
     <ClInclude Include="System\1GameFunc_Model.h" />
+    <ClInclude Include="System\screen\0D3D11.h" />
+    <ClInclude Include="System\screen\DLSS\0SetDLSS.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_params.h" />
     <ClInclude Include="updateMainSystem.hpp" />
     <ClInclude Include="updateMissionPack.hpp" />
     <ClInclude Include="utiliy.h" />
@@ -188,6 +198,8 @@
     <ClCompile Include="Ammo\2EfsExposureBullet.cpp" />
     <ClCompile Include="Ammo\2SentryGunBullet01.cpp" />
     <ClCompile Include="Ammo\2SolidBullet01.cpp" />
+    <ClCompile Include="ASFunc\ASFunc_HookMap.cpp" />
+    <ClCompile Include="Base\g_DXresource.cpp" />
     <ClCompile Include="Base\g_gameFunc.cpp" />
     <ClCompile Include="Base\g_system.cpp" />
     <ClCompile Include="Base\STL\string.cpp" />
@@ -206,6 +218,8 @@
     </ClCompile>
     <ClCompile Include="System\0BaseSystem.cpp" />
     <ClCompile Include="System\1GameFunc_Model.cpp" />
+    <ClCompile Include="System\screen\0D3D11.cpp" />
+    <ClCompile Include="System\screen\DLSS\0SetDLSS.cpp" />
     <ClCompile Include="utiliy.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -214,12 +228,18 @@
     <MASM Include="Ammo\2SentryGunBullet01ASM.asm" />
     <MASM Include="Ammo\2SolidBullet01ASM.asm" />
     <MASM Include="ASFunc\ASFunc_Global.asm" />
+    <MASM Include="ASFunc\ASFunc_HookMapASM.asm" />
     <MASM Include="ASMhookGameSystem.asm" />
+    <MASM Include="Base\g_DXresourceASM.asm" />
     <MASM Include="EDF\Class\EDFSoldierHeavyArmorASM.asm" />
     <MASM Include="EDF\EDFCommonFunctionASM.asm" />
     <MASM Include="System\0BaseSystemASM.asm" />
+    <MASM Include="System\screen\0D3D11ASM.asm" />
     <MASM Include="updateMainSystem.asm" />
     <MASM Include="updateMissionPack1.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="System\screen\DLSS\lib\nvsdk_ngx_d.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

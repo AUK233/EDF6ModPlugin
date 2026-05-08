@@ -1,6 +1,7 @@
 #include "../pch.h"
 #include "../utiliy.h"
 
+#include "g_DXresource.h"
 #include "g_system.h"
 
 extern "C" {
@@ -16,6 +17,8 @@ void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL)
 	// yeah
 	auto tempP = hmodDLL + 0x2136FF0 + 0xA8;
 	pDXGISwapChainDesc = (DXGI_SWAP_CHAIN_DESC*)tempP;
+
+	XGS_DXresource_Initialize(hmodDLL);
 }
 
 PXGS_System __fastcall XGS_GetXGSSystemPointer()

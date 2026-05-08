@@ -3,6 +3,7 @@
 //#include "..\utiliy.h"
 //#include "..\commonNOP.h"
 #include "ASFunc_Definition.hpp"
+#include "ASFunc_HookMap.h"
 
 extern "C" {
 	void __fastcall ASMaddAngelScriptFunction();
@@ -18,6 +19,8 @@ void hook_addAngelScriptFunction(PBYTE hmodDLL) {
 	hookGameBlockWithInt3((void*)(hmodDLL + i_addAngelScriptFunction), (uintptr_t)ASMaddAngelScriptFunction);
 	WriteHookToProcess((void*)(hmodDLL + i_addAngelScriptFunction + 15), (void*)&nop10, 10U);
 	WriteHookToProcess((void*)(hmodDLL + i_addAngelScriptFunction + 25), (void*)&nop9, 9U);
+
+	ASFunc_HookMapSeries_Initialize(hmodDLL);
 }
 
 

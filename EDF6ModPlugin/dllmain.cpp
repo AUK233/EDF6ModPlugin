@@ -15,6 +15,7 @@
 #include "updateMainSystem.hpp"
 
 #include "cmd/cmd_hotkey.h"
+#include "cmd/cmd_GetINI.h"
 
 typedef void(WINAPI* EDFImportDLL)();
 EDFImportDLL EDF_CPP_OnBoot;
@@ -58,6 +59,7 @@ extern "C" __declspec(dllexport) void CPP_OnBoot() {
 			goto RealFunction;
 		}
 
+		INIConfig_Initialize();
 		hook_updateMainSystem(hmodDLL, testDLL);
 
 		//

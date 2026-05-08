@@ -42,6 +42,15 @@
     <Filter Include="SourceFiles\Object\EDF\Class">
       <UniqueIdentifier>{f9104c99-53c2-4981-9797-4d72328f53c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\System\screen">
+      <UniqueIdentifier>{db87c6ca-c1fc-484b-814f-646e438e6348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\System\screen\DLSS">
+      <UniqueIdentifier>{a5ddd9aa-3d99-4c26-be07-e61a470d6637}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\System\screen\DLSS\lib">
+      <UniqueIdentifier>{5359665b-a117-4887-a743-f8195c5358c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -125,12 +134,33 @@
     <ClInclude Include="System\1GameFunc_Model.h">
       <Filter>SourceFiles\System</Filter>
     </ClInclude>
+    <ClInclude Include="System\screen\0D3D11.h">
+      <Filter>SourceFiles\System\screen</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\0SetDLSS.h">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_params.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="Base\g_DXresource.h">
+      <Filter>SourceFiles\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="ASFunc\ASFunc_HookMap.h">
+      <Filter>SourceFiles\ASFunc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
       <Filter>SourceFiles</Filter>
     </ClCompile>
     <ClCompile Include="utiliy.cpp">
@@ -178,6 +208,21 @@
     <ClCompile Include="System\1GameFunc_Model.cpp">
       <Filter>SourceFiles\System</Filter>
     </ClCompile>
+    <ClCompile Include="System\screen\0D3D11.cpp">
+      <Filter>SourceFiles\System\screen</Filter>
+    </ClCompile>
+    <ClCompile Include="System\screen\DLSS\0SetDLSS.cpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\g_DXresource.cpp">
+      <Filter>SourceFiles\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>HeaderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="ASFunc\ASFunc_HookMap.cpp">
+      <Filter>SourceFiles\ASFunc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ASMhookGameSystem.asm">
@@ -213,5 +258,19 @@
     <MASM Include="EDF\Class\EDFSoldierHeavyArmorASM.asm">
       <Filter>SourceFiles\Object\EDF\Class</Filter>
     </MASM>
+    <MASM Include="System\screen\0D3D11ASM.asm">
+      <Filter>SourceFiles\System\screen</Filter>
+    </MASM>
+    <MASM Include="Base\g_DXresourceASM.asm">
+      <Filter>SourceFiles\Base</Filter>
+    </MASM>
+    <MASM Include="ASFunc\ASFunc_HookMapASM.asm">
+      <Filter>SourceFiles\ASFunc</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="System\screen\DLSS\lib\nvsdk_ngx_d.lib">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
+    </Library>
   </ItemGroup>
 </Project>
