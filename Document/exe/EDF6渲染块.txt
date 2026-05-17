@@ -15,6 +15,18 @@ edf.dll+1155E00 - E8 ABD1F6FE           - call edf.dll+C2FB0
 
 ======================================
 
+edf.dll+1198C6A - 0F11 41 34            - movups [rcx+34],xmm0
+写入当前玩家窗口大小
+edf.dll+1DC6C6 - E8 75C5FB00           - call edf.dll+1198C40
+从这里call的
+
+edf.dll+8836DD - 41 83 FC 01           - cmp r12d,01
+进入hq时这个r12d就是当前玩家数
+edf.dll+88349D - 44 8B A0 F44F0100     - mov r12d,[rax+00014FF4]
+这里读的
+
+======================================
+
 
 edf.dll+573690 - 84 C0                 - test al,al
 检查能不能按暂停
@@ -27,5 +39,8 @@ edf.dll+936910 检查按下暂停时是不是在线模式
 
 edf.dll+54BE7D - F3 0F58 81 10030000   - addss xmm0,[rcx+00000310]
 增加角色的时间
+
+
+
 
 

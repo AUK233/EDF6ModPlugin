@@ -158,6 +158,9 @@
     <ClInclude Include="ASFunc\ASFunc_HookMap.h">
       <Filter>SourceFiles\ASFunc</Filter>
     </ClInclude>
+    <ClInclude Include="System\screen\DLSS\1SetPostProcess.h">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -222,6 +225,9 @@
     </ClCompile>
     <ClCompile Include="ASFunc\ASFunc_HookMap.cpp">
       <Filter>SourceFiles\ASFunc</Filter>
+    </ClCompile>
+    <ClCompile Include="System\screen\DLSS\1SetPostProcess.cpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

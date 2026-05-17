@@ -5,13 +5,15 @@
 #include "g_system.h"
 
 extern "C" {
+	uintptr_t vedf20B2890; // edf.dll+20B2890
 	uintptr_t _F_XGS_System_Pointer_; // edf.dll+20B2958
 }
 
 DXGI_SWAP_CHAIN_DESC* pDXGISwapChainDesc;
 
-void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL)
-{
+void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL) {
+	vedf20B2890 = (uintptr_t)(hmodDLL + 0x20B2890);
+
 	_F_XGS_System_Pointer_ = (uintptr_t)(hmodDLL + 0x20B2958);
 
 	// yeah

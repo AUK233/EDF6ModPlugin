@@ -15,8 +15,17 @@ static_assert(offsetof(XGS_System_Camera_t, pGameObject) == 0x350);
 typedef struct XGS_System_Player_t {
 	void* pad0;
 	PXGS_System_Camera pCamera;
-	char pad8[0x178];
+	char pad10[0x50];
+	char pad60[0xA0];
+	void* pDrawColorInfo; void* pDrawColorResource;
+	char pad110[0x10];
+	void* pDSVInfo; void* pDSVResource;
+	char pad130[0x10];
+	void* pDSV140Info; void* pDSV140Resource;
+	char pad140[0x38];
 } *PXGS_System_Player;
+static_assert(offsetof(XGS_System_Player_t, pDrawColorInfo) == 0x100);
+static_assert(offsetof(XGS_System_Player_t, pDSVInfo) == 0x120);
 static_assert(sizeof(XGS_System_Player_t) == 0x188);
 
 // xgs::sysmte::functional in edf.dll+20B2958

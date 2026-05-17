@@ -182,6 +182,7 @@
     <ClInclude Include="System\1GameFunc_Model.h" />
     <ClInclude Include="System\screen\0D3D11.h" />
     <ClInclude Include="System\screen\DLSS\0SetDLSS.h" />
+    <ClInclude Include="System\screen\DLSS\1SetPostProcess.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="System\1GameFunc_Model.cpp" />
     <ClCompile Include="System\screen\0D3D11.cpp" />
     <ClCompile Include="System\screen\DLSS\0SetDLSS.cpp" />
+    <ClCompile Include="System\screen\DLSS\1SetPostProcess.cpp" />
     <ClCompile Include="utiliy.cpp" />
   </ItemGroup>
   <ItemGroup>
