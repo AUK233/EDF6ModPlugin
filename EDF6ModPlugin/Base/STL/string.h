@@ -9,4 +9,5 @@ typedef struct EDFWString_t {
 	size_t capacity;
 
 	wchar_t* c_str();
+	void clear();
 } *PEDFWString;

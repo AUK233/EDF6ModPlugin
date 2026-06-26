@@ -17,6 +17,9 @@ void __fastcall GameSystem_HookFunction(PBYTE hmodDLL) {
 extern "C" {
 	void __fastcall ASMGameSetFont();
 	uintptr_t GameSetFont_RetAddr;
+
+	void __fastcall ASMGameLoadVoiceFiles();
+	uintptr_t _Call_GameLoadVoiceFile;
 }
 
 void __fastcall GameSystem_HookFunction_Common(PBYTE hmodDLL)
@@ -27,6 +30,16 @@ void __fastcall GameSystem_HookFunction_Common(PBYTE hmodDLL)
 	hookGameBlockWithInt3((void*)(hmodDLL + i_GameSetFont), (uintptr_t)ASMGameSetFont);
 	WriteHookToProcess((void*)(hmodDLL + i_GameSetFont + 15), (void*)&nop1, 1U);
 	GameSetFont_RetAddr = (uintptr_t)(hmodDLL + i_GameSetFont + 16);
+
+	// edf.dll+7B2D50
+	// find 483BBEE000000075AB488B5C2430488B6C2438488B7424404883C4205FC3
+	int i_GameLoadVoiceFiles = 0x7B2D50;
+	hookGameBlockWithInt3((void*)(hmodDLL + i_GameLoadVoiceFiles), (uintptr_t)ASMGameLoadVoiceFiles);
+	WriteHookToProcess((void*)(hmodDLL + i_GameLoadVoiceFiles + 15), (void*)&nop1, 1U);
+	// edf.dll+7B2500
+	// tikyuu6_voice_vtuber.awb 's call
+	_Call_GameLoadVoiceFile = (uintptr_t)(hmodDLL + 0x7B2500);
+
 }
 
 float __fastcall GameSetFont_GetNewFontSize(int* pOldSize, UINT32 charset)
@@ -84,4 +97,18 @@ float __fastcall GameSetFont_GetNewFontSize(int* pOldSize, UINT32 charset)
 	*pOldSize = fontSize;
 	return fontSize;
 	// LOGFONTW
+}
+
+void __fastcall LoadNewVoiceFilesCPP(void* pAudio) {
+	typedef void(__fastcall* CallFunc)(void* pAudio, LPCWSTR FileName, int r8d);
+	auto Call_GameLoadVoiceFile = (CallFunc)_Call_GameLoadVoiceFile;
+
+	if (std::filesystem::exists(L"./sound/pc/add_audio41_main.awb")) {
+		Call_GameLoadVoiceFile(pAudio, L"app:/sound/adx/add_audio41_main.awb", 0);
+	}
+
+	if (std::filesystem::exists(L"./sound/pc/add_audio6_dlc1.awb")) {
+		Call_GameLoadVoiceFile(pAudio, L"app:/sound/adx/add_audio6_dlc1.awb", 0);
+	}
+	// end
 }

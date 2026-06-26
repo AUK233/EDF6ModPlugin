@@ -4,6 +4,8 @@
 #include "../Base/SSE.hpp"
 #include "../Base/CommonStructure.hpp"
 #include "../utiliy.h"
+#include "System/screen/DLSS/0SetDLSS.h"
+
 #include "cmd_hotkey.h"
 
 cmd_KeyState_t cmd_keyState;
@@ -66,6 +68,11 @@ void cmd_ModConsole_MonitorKeys()
 					cmdFunc__unlock_stage();
 					state_cheatonce = false;
 				}
+
+				if (cmd_keyState.S == 1) {
+					DLSS_Reload();
+					state_cheatonce = false;
+				}
 			}
 		}
 
@@ -100,6 +107,12 @@ void cmd_ModConsole_SetKeyState() {
 		cmd_keyState.O += 1;
 	} else {
 		cmd_keyState.O = 0;
+	}
+
+	if (GetAsyncKeyState('S') & 0x8000) {
+		cmd_keyState.S += 1;
+	} else {
+		cmd_keyState.S = 0;
 	}
 
 	if (GetAsyncKeyState('M') & 0x8000) {

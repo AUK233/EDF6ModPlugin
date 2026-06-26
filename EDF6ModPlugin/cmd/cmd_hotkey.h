@@ -3,6 +3,7 @@
 typedef struct cmd_KeyState_t {
 	int ctrl, alt;
 	int U, O;
+	int S;
 	int M;
 	int Add, Subtract;
 	int F1, F2;

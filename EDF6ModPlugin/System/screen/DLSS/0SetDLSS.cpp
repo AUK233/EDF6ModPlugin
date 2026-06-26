@@ -90,6 +90,10 @@ void* __fastcall DLSS_Draw(ID3D11DeviceContext* pContext, int* saveRAX){
 	if (!pColorRes) return saveRAX;
 	if (!pColorRes->pUAV) return saveRAX;
 
+	auto pDSVInfo = (Pg_D3D_ResourceInfo)pPlayer->pDSVInfo;
+	if (!pDSVInfo) return saveRAX;
+	if (!pDSVInfo->pSRV) return saveRAX;
+
 
 	D3D11_TEXTURE2D_DESC inDesc;
 	auto pTexture = pColorRes->pTexture;
@@ -98,6 +102,7 @@ void* __fastcall DLSS_Draw(ID3D11DeviceContext* pContext, int* saveRAX){
 
 	if (Config_PostProcess) {
 		pContext->CSSetShaderResources(0, 1, &pColorRes->pSRV);
+		pContext->CSSetShaderResources(1, 1, &pDSVInfo->pSRV);
 		pContext->CSSetShader(pD3DPostProcess->PostProcessCS, nullptr, 0);
 		pContext->CSSetUnorderedAccessViews(0, 1, &pD3DPostProcess->OutUAV[playerIndex], nullptr);
 		pContext->Dispatch((pColorRes->width + 15) / 16, (pColorRes->height + 15) / 16, 1);
@@ -115,13 +120,7 @@ void* __fastcall DLSS_Draw(ID3D11DeviceContext* pContext, int* saveRAX){
 		pNGX_dlss->resolution[0] = pColorRes->width;
 		pNGX_dlss->resolution[1] = pColorRes->height;
 
-		/**/
-		ID3D11Texture2D* depthBuffer = 0;
-		auto pDSVInfo = (Pg_D3D_ResourceInfo)pPlayer->pDSVInfo;
-		if (pDSVInfo) {
-			depthBuffer = pDSVInfo->pTexture;
-		}
-		pNGX_dlss->DepthBuffer = depthBuffer;
+		pNGX_dlss->DepthBuffer = pDSVInfo->pTexture;
 
 		DLSS_Evaluate();
 	} else {
@@ -307,6 +306,7 @@ float __fastcall DLSS_Halton(int index, int base){
 		i = i / base;
 		f = f / base;
 	}
+	result -= 0.5f;
 	return result;
 }
 
@@ -325,39 +325,37 @@ void __fastcall DLSS_GetJitter(float* out){
 }
 
 void __fastcall DLSS_Evaluate(){
-	if (!pD3DPostProcess) return;
-	if (!pNGX_dlss) return;
 
-	auto ColorBuffer = pNGX_dlss->ColorBuffer;
-	auto OutColor = pNGX_dlss->OutColor;
-	auto DepthBuffer = pNGX_dlss->DepthBuffer;
-	if (OutColor && DepthBuffer) {
-		float jitter[2];
-		DLSS_GetJitter(jitter);
-		NVSDK_NGX_D3D11_DLSS_Eval_Params D3D11DlssEvalParams;
-		memset(&D3D11DlssEvalParams, 0, sizeof(D3D11DlssEvalParams));
+	float jitter[2];
+	DLSS_GetJitter(jitter);
+	NVSDK_NGX_D3D11_DLSS_Eval_Params D3D11DlssEvalParams;
+	memset(&D3D11DlssEvalParams, 0, sizeof(D3D11DlssEvalParams));
 
-		D3D11DlssEvalParams.Feature.pInColor = ColorBuffer;
-		D3D11DlssEvalParams.Feature.pInOutput = OutColor;
-		D3D11DlssEvalParams.Feature.InSharpness = 1;
+	D3D11DlssEvalParams.Feature.pInColor = pNGX_dlss->ColorBuffer;
+	D3D11DlssEvalParams.Feature.pInOutput = pNGX_dlss->OutColor;
+	D3D11DlssEvalParams.Feature.InSharpness = 1;
 
-		D3D11DlssEvalParams.pInDepth = DepthBuffer;
-		D3D11DlssEvalParams.pInMotionVectors = pD3DPostProcess->BlackMV;
+	D3D11DlssEvalParams.pInDepth = pNGX_dlss->DepthBuffer;
+	D3D11DlssEvalParams.pInMotionVectors = pD3DPostProcess->BlackMV;
 
-		D3D11DlssEvalParams.InJitterOffsetX = jitter[0];
-		D3D11DlssEvalParams.InJitterOffsetY = jitter[1];
-		D3D11DlssEvalParams.InRenderSubrectDimensions.Width = pNGX_dlss->resolution[0];
-		D3D11DlssEvalParams.InRenderSubrectDimensions.Height = pNGX_dlss->resolution[1];
+	D3D11DlssEvalParams.InJitterOffsetX = jitter[0];
+	D3D11DlssEvalParams.InJitterOffsetY = jitter[1];
+	D3D11DlssEvalParams.InRenderSubrectDimensions.Width = pNGX_dlss->resolution[0];
+	D3D11DlssEvalParams.InRenderSubrectDimensions.Height = pNGX_dlss->resolution[1];
 
-		D3D11DlssEvalParams.InReset = pNGX_dlss->IsReset;
-		D3D11DlssEvalParams.InMVScaleX = 1.0;
-		D3D11DlssEvalParams.InMVScaleY = 1.0;
+	D3D11DlssEvalParams.InReset = pNGX_dlss->IsReset;
+	D3D11DlssEvalParams.InMVScaleX = 1.0;
+	D3D11DlssEvalParams.InMVScaleY = 1.0;
 
-		NVSDK_NGX_Parameter_SetF(pNGX_dlss->m_ngxParameters, NVSDK_NGX_Parameter_Denoise, 1.0);
-		auto result = NGX_D3D11_EVALUATE_DLSS_EXT(pD3DPostProcess->Context, pNGX_dlss->m_dlssFeature, pNGX_dlss->m_ngxParameters, &D3D11DlssEvalParams);
+	NVSDK_NGX_Parameter_SetF(pNGX_dlss->m_ngxParameters, NVSDK_NGX_Parameter_Denoise, 1.0);
+	auto result = NGX_D3D11_EVALUATE_DLSS_EXT(pD3DPostProcess->Context, pNGX_dlss->m_dlssFeature, pNGX_dlss->m_ngxParameters, &D3D11DlssEvalParams);
 
-		pNGX_dlss->IsReset = 0;
-	}
+	pNGX_dlss->IsReset = 0;
 
 	DLSS_ClearBuffer();
+}
+
+void __fastcall DLSS_Reload() {
+	if (!pD3DPostProcess) return;
+	pD3DPostProcess->LoadComputeShader();
 }

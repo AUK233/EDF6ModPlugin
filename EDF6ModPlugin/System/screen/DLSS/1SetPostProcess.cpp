@@ -39,6 +39,11 @@ namespace D3D {
 
 		auto hr = D3DCompileFromFile(L"./subtitle/test.hlsl", nullptr, nullptr, "CS_main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &cs_blob, &error_blob);
 		if (hr == S_OK) {
+			if (PostProcessCS) {
+				PostProcessCS->Release();
+				PostProcessCS = nullptr;
+			}
+
 			Device->CreateComputeShader(cs_blob->GetBufferPointer(), cs_blob->GetBufferSize(), nullptr, &PostProcessCS);
 		}
 	}
