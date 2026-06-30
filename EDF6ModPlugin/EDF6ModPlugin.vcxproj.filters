@@ -161,6 +161,12 @@
     <ClInclude Include="System\screen\DLSS\1SetPostProcess.h">
       <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClInclude>
+    <ClInclude Include="System\screen\1FullAO.h">
+      <Filter>SourceFiles\System\screen</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\1FullAOData.hpp">
+      <Filter>SourceFiles\System\screen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -228,6 +234,9 @@
     </ClCompile>
     <ClCompile Include="System\screen\DLSS\1SetPostProcess.cpp">
       <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClCompile>
+    <ClCompile Include="System\screen\1FullAO.cpp">
+      <Filter>SourceFiles\System\screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
