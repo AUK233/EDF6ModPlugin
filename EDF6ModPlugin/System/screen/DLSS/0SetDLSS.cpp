@@ -180,7 +180,7 @@ void __fastcall DLSS_Initialization(ID3D11Device** ppDevice, ID3D11DeviceContext
 	featureCommonInfo.LoggingInfo.DisableOtherLoggingSinks = false;
 	featureCommonInfo.LoggingInfo.MinimumLoggingLevel = NVSDK_NGX_LOGGING_LEVEL_VERBOSE;
 	
-	NVSDK_NGX_D3D11_Init(231313132, L"Z:\\TEMP", device, &featureCommonInfo);
+	auto slresult =  NVSDK_NGX_D3D11_Init(231313132, L"Z:\\TEMP", device, &featureCommonInfo);
 	0x3AC09EF
 	*/
 
@@ -231,7 +231,7 @@ void __fastcall DLSS_SetFeature(ID3D11DeviceContext* pContext, UINT Width, UINT 
 	DlssCreateParams.Feature.InTargetWidth = Width;
 	DlssCreateParams.Feature.InTargetHeight = Height;
 	DlssCreateParams.Feature.InPerfQualityValue = NVSDK_NGX_PerfQuality_Value_DLAA;
-	DlssCreateParams.InFeatureCreateFlags = NVSDK_NGX_DLSS_Feature_Flags_None | NVSDK_NGX_DLSS_Feature_Flags_AutoExposure;
+	DlssCreateParams.InFeatureCreateFlags = NVSDK_NGX_DLSS_Feature_Flags_None | NVSDK_NGX_DLSS_Feature_Flags_IsHDR | NVSDK_NGX_DLSS_Feature_Flags_AutoExposure;
 	DlssCreateParams.InEnableOutputSubrects = false;
 
 

@@ -4,7 +4,9 @@
 #include "../Base/SSE.hpp"
 #include "../Base/CommonStructure.hpp"
 #include "../utiliy.h"
+
 #include "System/screen/DLSS/0SetDLSS.h"
+#include "System/screen/1FullAO.h"
 
 #include "cmd_hotkey.h"
 
@@ -71,6 +73,7 @@ void cmd_ModConsole_MonitorKeys()
 
 				if (cmd_keyState.S == 1) {
 					DLSS_Reload();
+					D3D11_FullAO_ReloadComputeShader();
 					state_cheatonce = false;
 				}
 			}

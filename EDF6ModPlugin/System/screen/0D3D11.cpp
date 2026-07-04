@@ -57,7 +57,7 @@ HRESULT WINAPI module_InitializeD3D11(DXGI_SWAP_CHAIN_DESC* pChainDesc, D3D_DRIV
 	auto result = D3D11CreateDevice(0, DriverType, Software, Flags, pFeatureLevels, FeatureLevels, SDKVersion, ppDevice, pFeatureLevel, ppImmediateContext);
 	if (result < 0) return result;
 
-	// Since g_color_out is calculated based on 2x its resolution, upscaling it won't help.
+	// now process the check in the function.
 	HookFunction_D3D11_FullAO_Install(*ppDevice);
 
 	if (Config_DLAA || Config_PostProcess) {
