@@ -231,8 +231,12 @@ void __fastcall DLSS_SetFeature(ID3D11DeviceContext* pContext, UINT Width, UINT 
 	DlssCreateParams.Feature.InTargetWidth = Width;
 	DlssCreateParams.Feature.InTargetHeight = Height;
 	DlssCreateParams.Feature.InPerfQualityValue = NVSDK_NGX_PerfQuality_Value_DLAA;
-	DlssCreateParams.InFeatureCreateFlags = NVSDK_NGX_DLSS_Feature_Flags_None | NVSDK_NGX_DLSS_Feature_Flags_IsHDR | NVSDK_NGX_DLSS_Feature_Flags_AutoExposure;
+	DlssCreateParams.InFeatureCreateFlags = NVSDK_NGX_DLSS_Feature_Flags_None | NVSDK_NGX_DLSS_Feature_Flags_IsHDR;
 	DlssCreateParams.InEnableOutputSubrects = false;
+
+	if(Config_DLAA == 2){
+		DlssCreateParams.InFeatureCreateFlags |= NVSDK_NGX_DLSS_Feature_Flags_AutoExposure;
+	}
 
 
 	auto ResultDLSS = NGX_D3D11_CREATE_DLSS_EXT(pContext, &p->m_dlssFeature, p->m_ngxParameters, &DlssCreateParams);

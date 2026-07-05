@@ -162,6 +162,7 @@
     <ClInclude Include="Ammo\2SolidBullet01.h" />
     <ClInclude Include="ASFunc\ASFunc_Definition.hpp" />
     <ClInclude Include="ASFunc\ASFunc_Global.hpp" />
+    <ClInclude Include="ASFunc\ASFunc_Graphic.h" />
     <ClInclude Include="ASFunc\ASFunc_HookMap.h" />
     <ClInclude Include="Base\CommonStructure.hpp" />
     <ClInclude Include="Base\g_DXresource.h" />
@@ -201,6 +202,7 @@
     <ClCompile Include="Ammo\2EfsExposureBullet.cpp" />
     <ClCompile Include="Ammo\2SentryGunBullet01.cpp" />
     <ClCompile Include="Ammo\2SolidBullet01.cpp" />
+    <ClCompile Include="ASFunc\ASFunc_Graphic.cpp" />
     <ClCompile Include="ASFunc\ASFunc_HookMap.cpp" />
     <ClCompile Include="Base\g_DXresource.cpp" />
     <ClCompile Include="Base\g_gameFunc.cpp" />

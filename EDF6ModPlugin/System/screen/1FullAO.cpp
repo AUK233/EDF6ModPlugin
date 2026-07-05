@@ -41,7 +41,7 @@ void HookFunction_D3D11_FullAO_Install(ID3D11Device* pDevice) {
 	ID3DBlob* cs_blob = nullptr;
 	ID3DBlob* error_blob = nullptr;
 	auto macros = D3D11_FullAO_GetShaderMacro(Config_FullAO);
-	D3DCompileFromFile(L"D:\\9SourceCode\\cpp\\EDF6ModPlugin\\Document\\backup\\1.hlsl", macros, nullptr, "CS_main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &cs_blob, &error_blob);
+	D3DCompile(FullAOMainColorShader, sizeof(FullAOMainColorShader) - 1, "MainColorCS.hlsl", macros, nullptr, "CS_main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &cs_blob, &error_blob);
 	pDevice->CreateComputeShader(cs_blob->GetBufferPointer(), cs_blob->GetBufferSize(), nullptr, &pMainCSshader);
 	cs_blob->Release();
 	if (error_blob) error_blob->Release();
@@ -75,6 +75,12 @@ void HookFunction_D3D11_FullAO_Install(ID3D11Device* pDevice) {
 	i_setCSshader = 0x1131138;
 	WriteHookToProcess((void*)(hmodDLL + i_setCSshader), setCSshader, 12);
 	WriteHookToProcess((void*)(hmodDLL + i_setCSshader + 12), &pMainCSshader, 8);
+
+	// edf.dll+11B541E
+	BYTE noUndergroundCS[] = {
+		0x31, 0xC0
+	};
+	WriteHookToProcess((void*)(hmodDLL + 0x11B541E), noUndergroundCS, 2);
 
 }
 

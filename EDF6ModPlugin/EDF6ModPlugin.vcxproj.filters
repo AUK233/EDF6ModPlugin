@@ -167,6 +167,9 @@
     <ClInclude Include="System\screen\1FullAOData.hpp">
       <Filter>SourceFiles\System\screen</Filter>
     </ClInclude>
+    <ClInclude Include="ASFunc\ASFunc_Graphic.h">
+      <Filter>SourceFiles\ASFunc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -237,6 +240,9 @@
     </ClCompile>
     <ClCompile Include="System\screen\1FullAO.cpp">
       <Filter>SourceFiles\System\screen</Filter>
+    </ClCompile>
+    <ClCompile Include="ASFunc\ASFunc_Graphic.cpp">
+      <Filter>SourceFiles\ASFunc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

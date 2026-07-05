@@ -5,6 +5,7 @@
 #include "System/screen/DLSS/0SetDLSS.h"
 
 #include "ASFunc_HookMap.h"
+#include "ASFunc_Graphic.h"
 
 extern "C" {
 	void __fastcall ASMasFunc_Hook_Map();
@@ -19,4 +20,7 @@ void __fastcall ASFunc_HookMapSeries_Initialize(PBYTE hmodDLL) {
 
 void __fastcall ASFunc_ToNew_Map() {
 	DLSS_Reset();
+
+	auto pRenderer2139A98 = DXGI_GetRenderer2139A98();
+	pRenderer2139A98->xgl_additional_light_setting.g_shadow_intensity = 1.0f;
 }

@@ -49,6 +49,12 @@ edf.dll+1177701 这里是设置计算线性深度的cs
 edf.dll+1131138 - 48 8B 97 E00A0000     - mov rdx,[rdi+00000AE0]
 这里设置主cs的着色器
 
+edf.dll+11B541E - 8B 02                 - mov eax,[rdx]
+这里决定使用哪个cs，1是无阴影的？
+
+edf.dll+113109B - 48 8B 97 000B0000     - mov rdx,[rdi+00000B00]
+1所执行的cs
+
 ======================================
 
 
@@ -64,6 +70,21 @@ edf.dll+936910 检查按下暂停时是不是在线模式
 edf.dll+54BE7D - F3 0F58 81 10030000   - addss xmm0,[rcx+00000310]
 增加角色的时间
 
+
+======================================
+
+edf.dll+5C0A20 EnvFadeAnimation
+
+edf.dll+5C0C81 - 48 8B 0D D01CAF01     - mov rcx,[edf.dll+20B2958]
+更新EVENT_LIGHT_ENV_FADE_FOG_DISTANCE
+
+edf.dll+5C0D68 - 48 8B 05 E91BAF01     - mov rax,[edf.dll+20B2958]
+更新EVENT_LIGHT_ENV_FADE_SHADOW_VECTOR
+
+
+edf.dll+112DAB6 - F3 0F11 86 D0040000   - movss [rsi+000004D0],xmm0
+g_shadow_far_fade实际是这里写入的
+rsi是edf.dll+2139A98
 
 
 
