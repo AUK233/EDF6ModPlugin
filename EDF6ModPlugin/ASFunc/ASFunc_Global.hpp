@@ -6,6 +6,7 @@
 
 #include "ASFunc_HookMap.h"
 #include "ASFunc_Graphic.h"
+#include "ASFunc_HookIsPs5.h"
 
 extern "C" {
 	void __fastcall ASMaddAngelScriptFunction();
@@ -23,6 +24,8 @@ void hook_addAngelScriptFunction(PBYTE hmodDLL) {
 	WriteHookToProcess((void*)(hmodDLL + i_addAngelScriptFunction + 25), (void*)&nop9, 9U);
 
 	ASFunc_HookMapSeries_Initialize(hmodDLL);
+
+	ASFunc_HookIsPs5_Initialize();
 }
 
 namespace angelscriptFunc {
@@ -49,6 +52,9 @@ extern "C" void __fastcall AngelScript_RegisterGlobalFunction(void* asCScriptEng
 	funcPtr.ptr.f.func = (asFUNCTION_t)GivePlayerBox;
 	callc(asCScriptEngine, "void GivePlayerBox(int, int)", funcPtr, asCALL_CDECL, 0);
 
-	funcPtr.ptr.f.func = (asFUNCTION_t)SetShadowIntensity;
-	callc(asCScriptEngine, "void SetShadowIntensity(float)", funcPtr, asCALL_CDECL, 0);
+	funcPtr.ptr.f.func = (asFUNCTION_t)SetEnvAdditionalLightIntensity;
+	callc(asCScriptEngine, "void SetEnvAdditionalLightIntensity(int, float)", funcPtr, asCALL_CDECL, 0);
+
+	funcPtr.ptr.f.func = (asFUNCTION_t)SetEnvLookupTableBlend;
+	callc(asCScriptEngine, "void SetEnvLookupTableBlend(int, float, float)", funcPtr, asCALL_CDECL, 0);
 }

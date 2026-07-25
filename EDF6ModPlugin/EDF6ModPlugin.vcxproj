@@ -163,8 +163,10 @@
     <ClInclude Include="ASFunc\ASFunc_Definition.hpp" />
     <ClInclude Include="ASFunc\ASFunc_Global.hpp" />
     <ClInclude Include="ASFunc\ASFunc_Graphic.h" />
+    <ClInclude Include="ASFunc\ASFunc_HookIsPs5.h" />
     <ClInclude Include="ASFunc\ASFunc_HookMap.h" />
     <ClInclude Include="Base\CommonStructure.hpp" />
+    <ClInclude Include="Base\g_criFS.h" />
     <ClInclude Include="Base\g_DXresource.h" />
     <ClInclude Include="Base\g_gameFunc.h" />
     <ClInclude Include="Base\g_object.h" />
@@ -184,6 +186,33 @@
     <ClInclude Include="System\screen\0D3D11.h" />
     <ClInclude Include="System\screen\1FullAO.h" />
     <ClInclude Include="System\screen\1FullAOData.hpp" />
+    <ClInclude Include="System\screen\DirectXTK\AlignedNew.h" />
+    <ClInclude Include="System\screen\DirectXTK\Audio.h" />
+    <ClInclude Include="System\screen\DirectXTK\Bezier.h" />
+    <ClInclude Include="System\screen\DirectXTK\BinaryReader.h" />
+    <ClInclude Include="System\screen\DirectXTK\BufferHelpers.h" />
+    <ClInclude Include="System\screen\DirectXTK\CMO.h" />
+    <ClInclude Include="System\screen\DirectXTK\CommonStates.h" />
+    <ClInclude Include="System\screen\DirectXTK\DDS.h" />
+    <ClInclude Include="System\screen\DirectXTK\DDSTextureLoader.h" />
+    <ClInclude Include="System\screen\DirectXTK\DemandCreate.h" />
+    <ClInclude Include="System\screen\DirectXTK\DirectXHelpers.h" />
+    <ClInclude Include="System\screen\DirectXTK\EffectCommon.h" />
+    <ClInclude Include="System\screen\DirectXTK\Effects.h" />
+    <ClInclude Include="System\screen\DirectXTK\GamePad.h" />
+    <ClInclude Include="System\screen\DirectXTK\Geometry.h" />
+    <ClInclude Include="System\screen\DirectXTK\GraphicsMemory.h" />
+    <ClInclude Include="System\screen\DirectXTK\Keyboard.h" />
+    <ClInclude Include="System\screen\DirectXTK\LoaderHelpers.h" />
+    <ClInclude Include="System\screen\DirectXTK\Mouse.h" />
+    <ClInclude Include="System\screen\DirectXTK\PlatformHelpers.h" />
+    <ClInclude Include="System\screen\DirectXTK\PostProcess.h" />
+    <ClInclude Include="System\screen\DirectXTK\PrimitiveBatch.h" />
+    <ClInclude Include="System\screen\DirectXTK\SDKMesh.h" />
+    <ClInclude Include="System\screen\DirectXTK\SharedResourcePool.h" />
+    <ClInclude Include="System\screen\DirectXTK\SimpleMath.h" />
+    <ClInclude Include="System\screen\DirectXTK\vbo.h" />
+    <ClInclude Include="System\screen\DirectXTK\VertexTypes.h" />
     <ClInclude Include="System\screen\DLSS\0SetDLSS.h" />
     <ClInclude Include="System\screen\DLSS\1SetPostProcess.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx.h" />
@@ -203,7 +232,9 @@
     <ClCompile Include="Ammo\2SentryGunBullet01.cpp" />
     <ClCompile Include="Ammo\2SolidBullet01.cpp" />
     <ClCompile Include="ASFunc\ASFunc_Graphic.cpp" />
+    <ClCompile Include="ASFunc\ASFunc_HookIsPs5.cpp" />
     <ClCompile Include="ASFunc\ASFunc_HookMap.cpp" />
+    <ClCompile Include="Base\g_criFS.cpp" />
     <ClCompile Include="Base\g_DXresource.cpp" />
     <ClCompile Include="Base\g_gameFunc.cpp" />
     <ClCompile Include="Base\g_system.cpp" />
@@ -224,7 +255,23 @@
     <ClCompile Include="System\0BaseSystem.cpp" />
     <ClCompile Include="System\1GameFunc_Model.cpp" />
     <ClCompile Include="System\screen\0D3D11.cpp" />
-    <ClCompile Include="System\screen\1FullAO.cpp" />
+    <ClCompile Include="System\screen\1FullAO.cpp">
+      <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NoListing</AssemblerOutput>
+    </ClCompile>
+    <ClCompile Include="System\screen\DirectXTK\BinaryReader.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\BufferHelpers.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\CommonStates.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\DDSTextureLoader.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\DirectXHelpers.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\EffectCommon.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\GamePad.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\Geometry.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\GraphicsMemory.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\Keyboard.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\Mouse.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\PrimitiveBatch.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\SimpleMath.cpp" />
+    <ClCompile Include="System\screen\DirectXTK\VertexTypes.cpp" />
     <ClCompile Include="System\screen\DLSS\0SetDLSS.cpp" />
     <ClCompile Include="System\screen\DLSS\1SetPostProcess.cpp" />
     <ClCompile Include="utiliy.cpp" />
@@ -247,6 +294,10 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="System\screen\DLSS\lib\nvsdk_ngx_d.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="System\screen\DirectXTK\SimpleMath.inl" />
+    <None Include="System\screen\DirectXTK\TeapotData.inc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

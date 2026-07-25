@@ -3,10 +3,12 @@
 #include "../commonNOP.h"
 
 #include "System/screen/DLSS/0SetDLSS.h"
+#include "System/screen/DLSS/1SetPostProcess.h"
 
 #include "ASFunc_HookMap.h"
 #include "ASFunc_Graphic.h"
 
+extern D3D::PD3DPostProcess pD3DPostProcess;
 extern "C" {
 	void __fastcall ASMasFunc_Hook_Map();
 }
@@ -22,5 +24,10 @@ void __fastcall ASFunc_ToNew_Map() {
 	DLSS_Reset();
 
 	auto pRenderer2139A98 = DXGI_GetRenderer2139A98();
-	pRenderer2139A98->xgl_additional_light_setting.g_shadow_intensity = 1.0f;
+	pRenderer2139A98->xgl_additional_light_setting.g_shadow_intensity = 1;
+	pRenderer2139A98->xgl_additional_light_setting.g_outline_color = 0;
+
+	if (pD3DPostProcess) {
+		pD3DPostProcess->SetPostProcessInfo();
+	}
 }

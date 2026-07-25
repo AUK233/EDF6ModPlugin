@@ -22,4 +22,8 @@ void __fastcall HookFunction_EDFCommonFunction(PBYTE hmodDLL) {
 	hookGameBlockWithInt3((void*)(hmodDLL + i_hudShowSupportSlot), (uintptr_t)ASMhudShowSupportSlot);
 	WriteHookToProcess((void*)(hmodDLL + i_hudShowSupportSlot + 15), (void*)&nop3, 3U);
 	hudShowSupportSlotRetAddr = (uintptr_t)(hmodDLL + i_hudShowSupportSlot + 18);
+
+	// edf.dll+826AA5
+	int MaxHPdisplay = 9999999;
+	WriteHookToProcess((void*)(hmodDLL + 0x826AA5 + 1), &MaxHPdisplay, 4U);
 }

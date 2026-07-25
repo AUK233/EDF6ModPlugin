@@ -43,7 +43,9 @@ void HookFunction_D3D11(PBYTE hmodEXE){
 	}
 
 	//MessageBoxW(NULL, L"just test", L"debug", MB_OK);
-	HookFunction_D3D11_FullAO(hmodEXE);
+
+	// It must be executed when game starts, otherwise buffer size will be only half.
+	HookFunction_D3D11_FullAO();
 }
 
 typedef void(__stdcall* ID3D11DeviceContext_OMSetRenderTargets)(ID3D11DeviceContext* pContext, UINT NumViews, ID3D11RenderTargetView** ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView);
@@ -56,9 +58,6 @@ HRESULT WINAPI module_InitializeD3D11(DXGI_SWAP_CHAIN_DESC* pChainDesc, D3D_DRIV
 
 	auto result = D3D11CreateDevice(0, DriverType, Software, Flags, pFeatureLevels, FeatureLevels, SDKVersion, ppDevice, pFeatureLevel, ppImmediateContext);
 	if (result < 0) return result;
-
-	// now process the check in the function.
-	HookFunction_D3D11_FullAO_Install(*ppDevice);
 
 	if (Config_DLAA || Config_PostProcess) {
 		pChainDesc->SampleDesc.Count = 1; // old is 8

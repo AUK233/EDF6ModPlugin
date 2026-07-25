@@ -3,6 +3,7 @@
 
 #include "g_DXresource.h"
 #include "g_system.h"
+#include "g_criFS.h"
 
 extern "C" {
 	uintptr_t vedf20B2890; // edf.dll+20B2890
@@ -21,6 +22,7 @@ void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL) {
 	pDXGISwapChainDesc = (DXGI_SWAP_CHAIN_DESC*)tempP;
 
 	XGS_DXresource_Initialize(hmodDLL);
+	CriFileSystem_Initialize(hmodDLL);
 }
 
 PXGS_System __fastcall XGS_GetXGSSystemPointer()

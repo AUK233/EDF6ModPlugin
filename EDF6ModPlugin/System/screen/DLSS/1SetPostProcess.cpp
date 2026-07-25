@@ -16,6 +16,9 @@
 #pragma comment(lib, "D3DCompiler.lib")
 #include <wrl.h>
 
+#include "../DirectXTK/DDSTextureLoader.h"
+#include "Base/g_criFS.h"
+
 #include "1SetPostProcess.h"
 
 namespace D3D {
@@ -27,8 +30,14 @@ namespace D3D {
 		CurrentTime[0] = -1;
 		CurrentTime[1] = -1;
 
+		LUTSamplerLinear = 0;
+		LookupTable_SRV = 0;
+		LookupTable_SRV_Backup = 0;
+		xgl_user_param = 0;
+
 		//SetBuffer(pChainDesc->BufferDesc.Width, pChainDesc->BufferDesc.Height);
 		LoadComputeShader();
+
 	}
 
 	void D3DPostProcess_t::LoadComputeShader() {
@@ -120,6 +129,90 @@ namespace D3D {
 		initData.SysMemPitch = pixelSize;
 		initData.SysMemSlicePitch = dataSize;
 		Device->CreateTexture2D(&outDesc, &initData, &BlackMV);
+	}
+
+	void D3DPostProcess_t::Execute(Pg_D3D11DeviceInfo pD3D, int playerIndex) {
+		ID3D11DeviceContext* pContext = pD3D->context;
+
+		pD3D->pCurrentCSShaderResourceView[9] = &LookupTable_SRV;
+		pContext->CSSetShaderResources(9, 1, &LookupTable_SRV);
+		pD3D->pCurrentCSSamplerState[11] = &LUTSamplerLinear;
+		pContext->CSSetSamplers(11, 1, &LUTSamplerLinear);
+
+		pD3D->pCurrentCSBuffer[2] = &xgl_user_param;
+		pContext->CSSetConstantBuffers(2, 1, &xgl_user_param);
+
+		pD3D->pCurrentCSShader = PostProcessCS;
+		pContext->CSSetShader(PostProcessCS, nullptr, 0);
+
+		pD3D->pCurrentCSUnorderedAccessViews[0] = &OutUAV[playerIndex];
+		pContext->CSSetUnorderedAccessViews(0, 1, &OutUAV[playerIndex], nullptr);
+	}
+
+	void D3DPostProcess_t::LoadLUTBuffer() {
+		// create linear sampler
+		D3D11_SAMPLER_DESC samp_desc = {};
+		samp_desc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+		samp_desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
+		samp_desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
+		samp_desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
+		samp_desc.MaxAnisotropy = 1;
+		samp_desc.ComparisonFunc = D3D11_COMPARISON_NEVER;
+		samp_desc.MinLOD = 0;
+		samp_desc.MaxLOD = D3D11_FLOAT32_MAX;
+
+		HRESULT hr = Device->CreateSamplerState(&samp_desc, &LUTSamplerLinear);
+
+
+		D3D11_BUFFER_DESC cb_desc2 = {};
+		cb_desc2.Usage = D3D11_USAGE_DEFAULT;
+		cb_desc2.ByteWidth = sizeof(PostProcessConstants_t);
+		cb_desc2.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+		cb_desc2.CPUAccessFlags = 0;
+		Device->CreateBuffer(&cb_desc2, nullptr, &xgl_user_param);
+
+		LookupTable_SRV = CreateLUTBuffer(0);
+	}
+
+	ID3D11ShaderResourceView* D3DPostProcess_t::CreateLUTBuffer(int index) {
+		CriFileSystemGet_t getFile;
+		auto pFile = getFile.Open(GetLUTFilePath(index));
+
+		ID3D11ShaderResourceView* out;
+		DirectX::CreateDDSTextureFromMemory(Device, pFile->fs->data, pFile->fs->data_size, nullptr, &out);
+
+		return out;
+	}
+
+	void D3DPostProcess_t::SetPostProcessInfo(int lutindex, float blendFactor, float brightness){
+		CB2.pp_brightness = brightness;
+		CB2.pp_blendFactor = blendFactor;
+
+		Context->UpdateSubresource(xgl_user_param, 0, nullptr, &CB2, 0, 0);
+
+		if (LookupTable_SRV_Backup) {
+			LookupTable_SRV_Backup->Release();
+			LookupTable_SRV_Backup = nullptr;
+		}
+
+		if (LUTindex == lutindex) return;
+
+		LUTindex = lutindex;
+		LookupTable_SRV_Backup = LookupTable_SRV;
+		LookupTable_SRV = CreateLUTBuffer(lutindex);
+	}
+
+	std::wstring D3DPostProcess_t::GetLUTFilePath(int index){
+		
+		switch (index) {
+		case EnvLookupTableTexture_NightVisionLowLight:
+			return L"app:/mod/system/LUT_NightVisionLowLight.dds";
+		case EnvLookupTableTexture_NightVisionInfrared:
+			return L"app:/mod/system/LUT_NightVisionInfrared.dds";
+		default:
+			return L"app:/mod/system/LUT_DefaultEnhance.dds";
+		}
+		// end
 	}
 
 // end

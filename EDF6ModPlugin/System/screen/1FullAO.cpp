@@ -1,8 +1,10 @@
+#include <d3dcompiler.h>
+
 #include "../../pch.h"
 #include "../../utiliy.h"
 #include "../../commonNOP.h"
-
-#include <d3dcompiler.h>
+#include "Base/g_criFS.h"
+#include "Base/g_DXresource.h"
 
 #include "cmd/cmd_GetINI.h"
 #include "1FullAOData.hpp"
@@ -11,21 +13,14 @@
 extern "C" {
 	extern int Config_FullAO;
 }
+extern PBYTE hmodDLL;
 
 ID3D11ComputeShader* pFullAOCSshader;
 ID3D11ComputeShader* pMainCSshader;
 static uintptr_t ao_HmodDLL;
 static ID3D11Device* ao_Device;
 
-void HookFunction_D3D11_FullAO(PBYTE hmodDLL) {
-	ao_HmodDLL = (uintptr_t)hmodDLL;
-}
-
-void HookFunction_D3D11_FullAO_Install(ID3D11Device* pDevice) {
-	uintptr_t hmodDLL = ao_HmodDLL;
-	ao_Device = pDevice;
-	pMainCSshader = 0;
-
+void HookFunction_D3D11_FullAO() {
 	if (!Config_FullAO) return;
 
 	//WriteHookToProcess((void*)(hmodDLL + 0x1129B01), (void*)&nop2, 2U);
@@ -34,18 +29,47 @@ void HookFunction_D3D11_FullAO_Install(ID3D11Device* pDevice) {
 	WriteHookToProcess((void*)(hmodDLL + 0x117750F), (void*)&nop2, 2U);
 	WriteHookToProcess((void*)(hmodDLL + 0x117752A), (void*)&nop2, 2U);
 	WriteHookToProcess((void*)(hmodDLL + 0x117765A), (void*)&nop6, 6U);
+}
+
+void HookFunction_D3D11_FullAO_Install() {
+	if (!Config_FullAO) return;
+
+	auto pD3D = DXGI_D3D11Device2137130();
+	auto device = pD3D->device;
 
 	pFullAOCSshader = 0;
-	pDevice->CreateComputeShader(FullAOShaderBin, sizeof(FullAOShaderBin), nullptr, &pFullAOCSshader);
+	device->CreateComputeShader(FullAOShaderBin, sizeof(FullAOShaderBin), nullptr, &pFullAOCSshader);
+
+	// ================================================
+
+	CriFileSystemGet_t getFile;
+	auto pFile = getFile.Open(L"app:/mod/system/MainColorCS.hlsl");
 
 	ID3DBlob* cs_blob = nullptr;
 	ID3DBlob* error_blob = nullptr;
 	auto macros = D3D11_FullAO_GetShaderMacro(Config_FullAO);
-	D3DCompile(FullAOMainColorShader, sizeof(FullAOMainColorShader) - 1, "MainColorCS.hlsl", macros, nullptr, "CS_main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &cs_blob, &error_blob);
-	pDevice->CreateComputeShader(cs_blob->GetBufferPointer(), cs_blob->GetBufferSize(), nullptr, &pMainCSshader);
+	D3DCompile(pFile->fs->data, pFile->fs->data_size, "MainColorCS.hlsl", macros, nullptr, "CS_main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &cs_blob, &error_blob);
+	device->CreateComputeShader(cs_blob->GetBufferPointer(), cs_blob->GetBufferSize(), nullptr, &pMainCSshader);
 	cs_blob->Release();
 	if (error_blob) error_blob->Release();
 
+	// ================================================
+
+	int i_setCSshader = 0x11776D0;
+	BYTE setCSshader[] = {
+		0x66, 0x66, 0x0F, 0x1F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00,
+		0x48, 0xBA // mov rdx
+	};
+	WriteHookToProcess((void*)(hmodDLL + i_setCSshader), setCSshader, 12);
+	WriteHookToProcess((void*)(hmodDLL + i_setCSshader + 12), &pFullAOCSshader, 8);
+
+	// edf.dll+1131138
+	i_setCSshader = 0x1131138;
+	WriteHookToProcess((void*)(hmodDLL + i_setCSshader), setCSshader, 12);
+	WriteHookToProcess((void*)(hmodDLL + i_setCSshader + 12), &pMainCSshader, 8);
+
+
+	// other
 
 	// Calculate Linear Depth
 	// edf.dll+1177701 set cs shader
@@ -63,25 +87,11 @@ void HookFunction_D3D11_FullAO_Install(ID3D11Device* pDevice) {
 	};
 	WriteHookToProcess((void*)(hmodDLL + 0x11777EC), dispatchY, 7);
 
-	int i_setCSshader = 0x11776D0;
-	BYTE setCSshader[] = {
-		0x66, 0x66, 0x0F, 0x1F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00,
-		0x48, 0xBA // mov rdx
-	};
-	WriteHookToProcess((void*)(hmodDLL + i_setCSshader), setCSshader, 12);
-	WriteHookToProcess((void*)(hmodDLL + i_setCSshader + 12), &pFullAOCSshader, 8);
-
-	// edf.dll+1131138
-	i_setCSshader = 0x1131138;
-	WriteHookToProcess((void*)(hmodDLL + i_setCSshader), setCSshader, 12);
-	WriteHookToProcess((void*)(hmodDLL + i_setCSshader + 12), &pMainCSshader, 8);
-
 	// edf.dll+11B541E
 	BYTE noUndergroundCS[] = {
 		0x31, 0xC0
 	};
 	WriteHookToProcess((void*)(hmodDLL + 0x11B541E), noUndergroundCS, 2);
-
 }
 
 const D3D_SHADER_MACRO* D3D11_FullAO_GetShaderMacro(UINT index) {
@@ -108,6 +118,11 @@ const D3D_SHADER_MACRO* D3D11_FullAO_GetShaderMacro(UINT index) {
 }
 
 void __fastcall D3D11_FullAO_ReloadComputeShader() {
+	if (std::filesystem::exists(L"./modtest/mod/system/MainColorCS.hlsl") == false) return;
+
+	auto pD3D = DXGI_D3D11Device2137130();
+	auto device = pD3D->device;
+
 	if (pMainCSshader) {
 		pMainCSshader->Release();
 		pMainCSshader = 0;
@@ -116,8 +131,8 @@ void __fastcall D3D11_FullAO_ReloadComputeShader() {
 	ID3DBlob* cs_blob = nullptr;
 	ID3DBlob* error_blob = nullptr;
 	auto macros = D3D11_FullAO_GetShaderMacro(INIConfig_ReadFullAO());
-	D3DCompileFromFile(L"D:\\9SourceCode\\cpp\\EDF6ModPlugin\\Document\\backup\\1.hlsl", macros, nullptr, "CS_main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &cs_blob, &error_blob);
-	ao_Device->CreateComputeShader(cs_blob->GetBufferPointer(), cs_blob->GetBufferSize(), nullptr, &pMainCSshader);
+	D3DCompileFromFile(L"./modtest/mod/system/MainColorCS.hlsl", macros, nullptr, "CS_main", "cs_5_0", D3DCOMPILE_ENABLE_STRICTNESS, 0, &cs_blob, &error_blob);
+	device->CreateComputeShader(cs_blob->GetBufferPointer(), cs_blob->GetBufferSize(), nullptr, &pMainCSshader);
 	cs_blob->Release();
 	if (error_blob) error_blob->Release();
 
@@ -127,6 +142,6 @@ void __fastcall D3D11_FullAO_ReloadComputeShader() {
 		0x66, 0x66, 0x0F, 0x1F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00,
 		0x48, 0xBA // mov rdx
 	};
-	WriteHookToProcess((void*)(ao_HmodDLL + i_setCSshader), setCSshader, 12);
-	WriteHookToProcess((void*)(ao_HmodDLL + i_setCSshader + 12), &pMainCSshader, 8);
+	WriteHookToProcess((void*)(hmodDLL + i_setCSshader), setCSshader, 12);
+	WriteHookToProcess((void*)(hmodDLL + i_setCSshader + 12), &pMainCSshader, 8);
 }

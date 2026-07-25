@@ -67,3 +67,56 @@ edf.dll+7B1AFF - 0F84 30040000         - je edf.dll+7B1F35
 
 edf.dll+7B1E20 - 49 8B D6              - mov rdx,r14
 这个r14就是语音名的string，但是看起来是搜索awb里有没有
+
+====================================================
+
+edf.dll+3BC7B - 4C 8B C2              - mov r8,rdx
+这个rdx是输入文件的原始路径，下面的函数将其改为cri路径
+
+edf.dll+3D3C0 
+string释放？
+
+edf.dll+1189C9A - 4C 89 67 50           - mov [rdi+50],r12
+初始指针结构
+
+edf.dll+53F91 - 48 89 7B 50           - mov [rbx+50],rdi
+这个rdi是数据指针，是武器的+f8，是武器初始化输入rdx的+18
+
+edf.dll+1194861 - 49 89 47 18           - mov [r15+18],rax
+这个rax是数据
+
+edf.dll+119465B - 48 8B D0              - mov rdx,rax
+这个rax是原始路径的wchar指针
+
+
+edf.dll+11946DF - E8 9C07EFFE           - call edf.dll+84E80
+这个函数输入的rdx是返回的指针，大小最少0x10
+r8是路径字符串
+
+edf.dll+11946E4 - 48 8B D8              - mov rbx,rax
+这里拿到读文件的指针？
+
+edf.dll+119480E - 48 8B 50 50           - mov rdx,[rax+50]
+获得数据指针
+
+edf.dll+3FA69 释放原始数据
+
+edf.dll+118A100 - 48 8B 43 08           - mov rax,[rbx+08]
+减少计数
+
+edf.dll+119C794 - FF 40 70              - inc [rax+70]
+但是需要注意的是，需要线程锁来增加和减少计数
+
+
+edf.dll+129A4B0
+INCLUDECALLBACK_t  includeCallback;
+
+edf.dll+1292520 自定义的include
+
+edf.dll+1292857 - E8 24420000           - call edf.dll+1296A80
+AddSectionFromMemory 从内存中加载include文件
+edf.dll+1292900 - 48 8B 4D D0           - mov rcx,[rbp-30]
+这里释放内存
+
+
+edf.dll+71E79C

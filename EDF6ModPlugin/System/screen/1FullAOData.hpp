@@ -152,9 +152,8 @@ cbuffer xgl_additional_light_setting : register(b2) {
 	ShadowSetting g_shadow_setting[2];
 	float g_shadow_far_fade;
 	float g_shadow_far_fade_mul;
-	float g_shadow_intensity; // new
-	float g_light_setting_pad;
-	//float2 g_light_setting_pad;
+	float g_shadow_intensity;
+	float g_outline_color;
 	uint g_light_count;
 	uint g_point_light_count;
 	float2 g_pad;
@@ -338,8 +337,18 @@ float3 AddBlackBorder(float3 color, uint2 id, float EdgeSensitivity, float EdgeS
 	
 	float combinedEdge = max(edgeConfidence, normalEdge);
 	float edgeStrength = combinedEdge * EdgeStrength;
+
+	float3 edgeColor;
+    if (g_outline_color > 0.075) {
+        edgeColor = 2;
+		edgeStrength *= g_outline_color;
+		originalColor *= 1.5;
+    } else {
+        edgeColor = 0;
+		originalColor *= 1.25;
+    }
 	
-	return lerp(originalColor, float3(0, 0, 0), edgeStrength);
+	return lerp(originalColor, edgeColor, edgeStrength);
 }
 
 //===========================================================
@@ -727,7 +736,7 @@ void CS_main(uint3 threadID : SV_DispatchThreadID) {
 		color = finalColor + specAccum;
 
 #ifdef _AddBlackBorder
-		color = AddBlackBorder(color * 1.25, pixel, 5, 4, 0.5);
+		color = AddBlackBorder(color, pixel, 5, 4, 0.5);
 #endif
 	} else {
 		// line 358-361

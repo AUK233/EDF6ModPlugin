@@ -63,13 +63,12 @@ void __fastcall DLSS_CreateFeature(int playerCount) {
 	// end
 }
 
-void* __fastcall DLSS_Draw(ID3D11DeviceContext* pContext, int* saveRAX){
+void* __fastcall DLSS_Draw(Pg_D3D11DeviceInfo pD3D, int* saveRAX){
 	if (!pD3DPostProcess) return saveRAX;
 
 	int playerIndex = 0;
 	// yeah, use this check is p1 or p2
 	if (saveRAX[0x60 / 4]) playerIndex = 1;
-
 
 	auto pPlayer = XGS_GetSystemPlayerPointer(XGS_GetXGSSystemPointer(), playerIndex);
 	auto pCamera = pPlayer->pCamera;
@@ -84,7 +83,6 @@ void* __fastcall DLSS_Draw(ID3D11DeviceContext* pContext, int* saveRAX){
 		// end
 	}else{ return saveRAX; }
 
-
 	//auto pColorRes = Get_g_xgl_draw_utility_color_textrure();
 	auto pColorRes = (Pg_D3D_ResourceInfo)pPlayer->pDrawColorInfo;
 	if (!pColorRes) return saveRAX;
@@ -94,6 +92,9 @@ void* __fastcall DLSS_Draw(ID3D11DeviceContext* pContext, int* saveRAX){
 	if (!pDSVInfo) return saveRAX;
 	if (!pDSVInfo->pSRV) return saveRAX;
 
+	// =================================================
+
+	ID3D11DeviceContext* pContext = pD3D->context;
 
 	D3D11_TEXTURE2D_DESC inDesc;
 	auto pTexture = pColorRes->pTexture;
@@ -101,11 +102,15 @@ void* __fastcall DLSS_Draw(ID3D11DeviceContext* pContext, int* saveRAX){
 	if (inDesc.Format != DXGI_FORMAT_R16G16B16A16_FLOAT) return saveRAX;
 
 	if (Config_PostProcess) {
+		pD3D->pCurrentCSShaderResourceView[0] = &pColorRes->pSRV;
 		pContext->CSSetShaderResources(0, 1, &pColorRes->pSRV);
+		pD3D->pCurrentCSShaderResourceView[1] = &pDSVInfo->pSRV;
 		pContext->CSSetShaderResources(1, 1, &pDSVInfo->pSRV);
-		pContext->CSSetShader(pD3DPostProcess->PostProcessCS, nullptr, 0);
-		pContext->CSSetUnorderedAccessViews(0, 1, &pD3DPostProcess->OutUAV[playerIndex], nullptr);
+
+		pD3DPostProcess->Execute(pD3D, playerIndex);
+
 		pContext->Dispatch((pColorRes->width + 15) / 16, (pColorRes->height + 15) / 16, 1);
+		// end
 	} else if (pNGX_dlss) {
 		//pContext->CopyResource(pD3DPostProcess->OutColor[playerIndex], Pg_D3D_ResourceInfo(pPlayer->pDSV140Info)->pTexture);
 		pContext->CopyResource(pD3DPostProcess->OutColor[playerIndex], pColorRes->pTexture);

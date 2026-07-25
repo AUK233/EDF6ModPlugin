@@ -70,7 +70,7 @@ align 16
 ASMRenderBufferToScreenBuffer proc
 
 	mov rdx, rax
-	mov rcx, [rbx+8]
+	mov rcx, rbx
 	call DLSS_Draw
 	lea rcx, [rsp+40h]
 	mov dword ptr [rsp+30h], 4

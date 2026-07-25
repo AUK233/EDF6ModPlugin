@@ -1,5 +1,6 @@
 #pragma once
 
 namespace angelscriptFunc{
-	void SetShadowIntensity(float intensity);
+	void SetEnvAdditionalLightIntensity(int type, float intensity);
+	void SetEnvLookupTableBlend(int lutindex, float blendFactor, float brightness);
 }
