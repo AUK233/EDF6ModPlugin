@@ -30,7 +30,7 @@ D3D::PD3DPostProcess pD3DPostProcess = nullptr;
 
 extern "C" {
 	extern int Config_PostProcess;
-	extern int Config_DLAA;
+	extern int Config_DLSS;
 }
 
 void __fastcall DLSS_CreateFeature(int playerCount) {
@@ -171,7 +171,7 @@ void __fastcall DLSS_Initialization(ID3D11Device** ppDevice, ID3D11DeviceContext
 		// end
 	}
 
-	if (!Config_DLAA || pNGX_dlss) return;
+	if (!Config_DLSS || pNGX_dlss) return;
 
 	auto p = (PNGX_DLSS)_aligned_malloc(sizeof(NGX_DLSS_t), 16U);
 	if (!p) return;
@@ -239,7 +239,7 @@ void __fastcall DLSS_SetFeature(ID3D11DeviceContext* pContext, UINT Width, UINT 
 	DlssCreateParams.InFeatureCreateFlags = NVSDK_NGX_DLSS_Feature_Flags_None | NVSDK_NGX_DLSS_Feature_Flags_IsHDR;
 	DlssCreateParams.InEnableOutputSubrects = false;
 
-	if(Config_DLAA == 2){
+	if(Config_DLSS == 2){
 		DlssCreateParams.InFeatureCreateFlags |= NVSDK_NGX_DLSS_Feature_Flags_AutoExposure;
 	}
 

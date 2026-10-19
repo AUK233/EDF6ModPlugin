@@ -10,6 +10,7 @@
 
 void __fastcall GameSystem_HookFunction(PBYTE hmodDLL) {
 	HookFunction_D3D11(hmodDLL);
+	DXGI_Initialize(hmodDLL);
 	GameSystem_HookFunction_Common(hmodDLL);
 	GetGameFunction_Model(hmodDLL);
 }
@@ -22,8 +23,7 @@ extern "C" {
 	uintptr_t _Call_GameLoadVoiceFile;
 }
 
-void __fastcall GameSystem_HookFunction_Common(PBYTE hmodDLL)
-{
+void __fastcall GameSystem_HookFunction_Common(PBYTE hmodDLL) {
 	// edf.dll+1181AAE
 	// find <AddFontMemResourceEx>, from mov eax, dword ptr [rbx]
 	int i_GameSetFont = 0x1181AAE;

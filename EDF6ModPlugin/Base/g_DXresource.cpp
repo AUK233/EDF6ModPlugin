@@ -7,6 +7,7 @@ extern "C" {
 	PG_TextureBackBuffer* pTextureBackBuffer2137090; // edf.dll+2137090
 	PG_Renderer2139A98* pRenderer2139A98; // edf.dll+2139A98
 	Pg_D3D11DeviceInfo pD3D2137130; // edf.dll+2137130
+
 }
 
 void __fastcall XGS_DXresource_Initialize(PBYTE hmodDLL) {

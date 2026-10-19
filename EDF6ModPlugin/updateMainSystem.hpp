@@ -8,7 +8,6 @@
 #include "Base/CommonStructure.hpp"
 #include "Base/SSE.hpp"
 #include "Base/g_system.h"
-#include "Base/g_gameFunc.h"
 
 // separate functional zones
 #include "System/0BaseSystem.h"
@@ -27,7 +26,6 @@ extern "C" {
 
 void hook_updateMainSystem_common(PBYTE hmodDLL) {
 	XGS_SystemFunction_Initialize(hmodDLL);
-	XGS_GetGameFunction_Initialize(hmodDLL);
 
 	// main
 	// find "schinese", 1st
@@ -130,4 +128,9 @@ void hook_updateMainSystem(PBYTE hmodDLL, int IsTest) {
 	hookGameBlockWithInt3((void*)(hmodDLL + i_readFile), (uintptr_t)hook_readFile735C0);
 	WriteHookToProcess((void*)(hmodDLL + i_readFile + 15), (void*)&nop2, 2U);
 	readFile735C0RetAddr = (uintptr_t)(hmodDLL + i_readFile + 17);
+
+	// EDF.dll+70D8CC, ApplyResult
+	// change to inferno can complete all difficulties
+	char maxUnlockDifficulty = 5;
+	WriteHookToProcess((void*)(hmodDLL + 0x70D8CC + 2), &maxUnlockDifficulty, 1U);
 }

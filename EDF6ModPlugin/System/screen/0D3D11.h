@@ -1,6 +1,5 @@
 #pragma once
-#include <d3d11.h>
-#pragma comment(lib, "D3D11.lib")
+#include "System/0GDXGI.h"
 
 void HookFunction_D3D11(PBYTE hmodEXE);
 

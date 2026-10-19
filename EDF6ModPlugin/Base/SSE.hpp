@@ -6,9 +6,28 @@
 // unused xmm register location
 #define my_unused_xmm 0
 
+// old
 struct Matrix3D_t {
 	float m0[4];
 	float m1[4];
 	float m2[4];
 	float pos[4];
+};
+
+// new
+struct G_Vector4_t {
+	float x, y, z, w;
+};
+
+struct G_Matrix3D_t {
+	G_Vector4_t m0;
+	G_Vector4_t m1;
+	G_Vector4_t m2;
+	G_Vector4_t pos;
+};
+
+// 2 xyz to determine direction
+struct G_MatrixCamera_t {
+	G_Vector4_t m0;
+	G_Vector4_t m1;
 };

@@ -165,60 +165,89 @@
     <ClInclude Include="ASFunc\ASFunc_Graphic.h" />
     <ClInclude Include="ASFunc\ASFunc_HookIsPs5.h" />
     <ClInclude Include="ASFunc\ASFunc_HookMap.h" />
+    <ClInclude Include="ASFunc\ASFunc_MissionLink.h" />
+    <ClInclude Include="ASFunc\ASFunc_OriginalFunctions.h" />
+    <ClInclude Include="Base\base_baseObject.h" />
+    <ClInclude Include="Base\mod_inlineData.hpp" />
+    <ClInclude Include="Base\base_LinkedList.h" />
     <ClInclude Include="Base\CommonStructure.hpp" />
     <ClInclude Include="Base\g_criFS.h" />
     <ClInclude Include="Base\g_DXresource.h" />
     <ClInclude Include="Base\g_gameFunc.h" />
     <ClInclude Include="Base\g_object.h" />
+    <ClInclude Include="Base\g_sgoData.h" />
     <ClInclude Include="Base\g_system.h" />
+    <ClInclude Include="Base\g_velocityCommon.h" />
     <ClInclude Include="Base\SSE.hpp" />
     <ClInclude Include="Base\STL\string.h" />
     <ClInclude Include="cmd\cmd_GetINI.h" />
     <ClInclude Include="cmd\cmd_hotkey.h" />
+    <ClInclude Include="DirectXTK\AlignedNew.h" />
+    <ClInclude Include="DirectXTK\Audio.h" />
+    <ClInclude Include="DirectXTK\Bezier.h" />
+    <ClInclude Include="DirectXTK\BinaryReader.h" />
+    <ClInclude Include="DirectXTK\BufferHelpers.h" />
+    <ClInclude Include="DirectXTK\CMO.h" />
+    <ClInclude Include="DirectXTK\CommonStates.h" />
+    <ClInclude Include="DirectXTK\DDS.h" />
+    <ClInclude Include="DirectXTK\DDSTextureLoader.h" />
+    <ClInclude Include="DirectXTK\DemandCreate.h" />
+    <ClInclude Include="DirectXTK\DirectXHelpers.h" />
+    <ClInclude Include="DirectXTK\EffectCommon.h" />
+    <ClInclude Include="DirectXTK\Effects.h" />
+    <ClInclude Include="DirectXTK\GamePad.h" />
+    <ClInclude Include="DirectXTK\Geometry.h" />
+    <ClInclude Include="DirectXTK\GraphicsMemory.h" />
+    <ClInclude Include="DirectXTK\Keyboard.h" />
+    <ClInclude Include="DirectXTK\LoaderHelpers.h" />
+    <ClInclude Include="DirectXTK\Mouse.h" />
+    <ClInclude Include="DirectXTK\pch.h" />
+    <ClInclude Include="DirectXTK\PlatformHelpers.h" />
+    <ClInclude Include="DirectXTK\PostProcess.h" />
+    <ClInclude Include="DirectXTK\PrimitiveBatch.h" />
+    <ClInclude Include="DirectXTK\SDKMesh.h" />
+    <ClInclude Include="DirectXTK\SharedResourcePool.h" />
+    <ClInclude Include="DirectXTK\SimpleMath.h" />
+    <ClInclude Include="DirectXTK\vbo.h" />
+    <ClInclude Include="DirectXTK\VertexTypes.h" />
     <ClInclude Include="EDFPointerStruct.hpp" />
     <ClInclude Include="EDF\0BaseEDF.h" />
+    <ClInclude Include="EDF\Class\EDFSoldierAccessoryIndex.hpp" />
+    <ClInclude Include="EDF\Class\EDFSoldierAssultSoldier.h" />
     <ClInclude Include="EDF\Class\EDFSoldierClass.hpp" />
+    <ClInclude Include="EDF\Class\EDFSoldierCommon.h" />
     <ClInclude Include="EDF\Class\EDFSoldierHeavyArmor.h" />
+    <ClInclude Include="EDF\EDFSoldierClass.h" />
+    <ClInclude Include="EDF\Vehicle\EDFVehicle403_Tank.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="System\0BaseSystem.h" />
+    <ClInclude Include="System\0GDXGI.h" />
     <ClInclude Include="System\1GameFunc_Model.h" />
     <ClInclude Include="System\screen\0D3D11.h" />
     <ClInclude Include="System\screen\1FullAO.h" />
     <ClInclude Include="System\screen\1FullAOData.hpp" />
-    <ClInclude Include="System\screen\DirectXTK\AlignedNew.h" />
-    <ClInclude Include="System\screen\DirectXTK\Audio.h" />
-    <ClInclude Include="System\screen\DirectXTK\Bezier.h" />
-    <ClInclude Include="System\screen\DirectXTK\BinaryReader.h" />
-    <ClInclude Include="System\screen\DirectXTK\BufferHelpers.h" />
-    <ClInclude Include="System\screen\DirectXTK\CMO.h" />
-    <ClInclude Include="System\screen\DirectXTK\CommonStates.h" />
-    <ClInclude Include="System\screen\DirectXTK\DDS.h" />
-    <ClInclude Include="System\screen\DirectXTK\DDSTextureLoader.h" />
-    <ClInclude Include="System\screen\DirectXTK\DemandCreate.h" />
-    <ClInclude Include="System\screen\DirectXTK\DirectXHelpers.h" />
-    <ClInclude Include="System\screen\DirectXTK\EffectCommon.h" />
-    <ClInclude Include="System\screen\DirectXTK\Effects.h" />
-    <ClInclude Include="System\screen\DirectXTK\GamePad.h" />
-    <ClInclude Include="System\screen\DirectXTK\Geometry.h" />
-    <ClInclude Include="System\screen\DirectXTK\GraphicsMemory.h" />
-    <ClInclude Include="System\screen\DirectXTK\Keyboard.h" />
-    <ClInclude Include="System\screen\DirectXTK\LoaderHelpers.h" />
-    <ClInclude Include="System\screen\DirectXTK\Mouse.h" />
-    <ClInclude Include="System\screen\DirectXTK\PlatformHelpers.h" />
-    <ClInclude Include="System\screen\DirectXTK\PostProcess.h" />
-    <ClInclude Include="System\screen\DirectXTK\PrimitiveBatch.h" />
-    <ClInclude Include="System\screen\DirectXTK\SDKMesh.h" />
-    <ClInclude Include="System\screen\DirectXTK\SharedResourcePool.h" />
-    <ClInclude Include="System\screen\DirectXTK\SimpleMath.h" />
-    <ClInclude Include="System\screen\DirectXTK\vbo.h" />
-    <ClInclude Include="System\screen\DirectXTK\VertexTypes.h" />
     <ClInclude Include="System\screen\DLSS\0SetDLSS.h" />
+    <ClInclude Include="System\screen\DLSS\0SL_common.h" />
+    <ClInclude Include="System\screen\DLSS\0SL_executor.h" />
+    <ClInclude Include="System\screen\DLSS\0SL_PostProcess.h" />
+    <ClInclude Include="System\screen\DLSS\0SL_vulkanAPI.hpp" />
+    <ClInclude Include="System\screen\DLSS\0SL_wapper.h" />
+    <ClInclude Include="System\screen\DLSS\1SetBufferSize.h" />
     <ClInclude Include="System\screen\DLSS\1SetPostProcess.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs_dlssg.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs_vk.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_cuda.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_d3d.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_dlssg_d3d.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_dlssg_vk.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_vk.h" />
     <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_params.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_params_dlssg.h" />
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_vk.h" />
     <ClInclude Include="updateMainSystem.hpp" />
     <ClInclude Include="updateMissionPack.hpp" />
     <ClInclude Include="utiliy.h" />
@@ -234,18 +263,50 @@
     <ClCompile Include="ASFunc\ASFunc_Graphic.cpp" />
     <ClCompile Include="ASFunc\ASFunc_HookIsPs5.cpp" />
     <ClCompile Include="ASFunc\ASFunc_HookMap.cpp" />
+    <ClCompile Include="ASFunc\ASFunc_MissionLink.cpp" />
+    <ClCompile Include="ASFunc\ASFunc_OriginalFunctions.cpp" />
+    <ClCompile Include="Base\base_baseObject.cpp" />
     <ClCompile Include="Base\g_criFS.cpp" />
     <ClCompile Include="Base\g_DXresource.cpp" />
     <ClCompile Include="Base\g_gameFunc.cpp" />
+    <ClCompile Include="Base\g_sgoData.cpp" />
     <ClCompile Include="Base\g_system.cpp" />
+    <ClCompile Include="Base\g_velocityCommon.cpp" />
     <ClCompile Include="Base\STL\string.cpp" />
     <ClCompile Include="cmd\cmd_GetINI.cpp" />
     <ClCompile Include="cmd\cmd_hotkey.cpp">
       <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AssemblyAndSourceCode</AssemblerOutput>
     </ClCompile>
+    <ClCompile Include="DirectXTK\BinaryReader.cpp" />
+    <ClCompile Include="DirectXTK\BufferHelpers.cpp" />
+    <ClCompile Include="DirectXTK\CommonStates.cpp" />
+    <ClCompile Include="DirectXTK\DDSTextureLoader.cpp" />
+    <ClCompile Include="DirectXTK\DirectXHelpers.cpp" />
+    <ClCompile Include="DirectXTK\EffectCommon.cpp" />
+    <ClCompile Include="DirectXTK\GamePad.cpp" />
+    <ClCompile Include="DirectXTK\Geometry.cpp" />
+    <ClCompile Include="DirectXTK\GraphicsMemory.cpp" />
+    <ClCompile Include="DirectXTK\Keyboard.cpp" />
+    <ClCompile Include="DirectXTK\Mouse.cpp" />
+    <ClCompile Include="DirectXTK\pch.cpp">
+      <AssemblerListingLocation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(RelativeDir)</AssemblerListingLocation>
+      <ModuleOutputFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(RelativeDir)</ModuleOutputFile>
+      <ModuleDependenciesFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(RelativeDir)</ModuleDependenciesFile>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)%(RelativeDir)</ObjectFileName>
+      <AssemblerListingLocation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(RelativeDir)</AssemblerListingLocation>
+      <ModuleOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(RelativeDir)</ModuleOutputFile>
+      <ModuleDependenciesFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(RelativeDir)</ModuleDependenciesFile>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\PrimitiveBatch.cpp" />
+    <ClCompile Include="DirectXTK\SimpleMath.cpp" />
+    <ClCompile Include="DirectXTK\VertexTypes.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="EDF\0BaseEDF.cpp" />
+    <ClCompile Include="EDF\Class\EDFSoldierAssultSoldier.cpp" />
+    <ClCompile Include="EDF\Class\EDFSoldierCommon.cpp" />
     <ClCompile Include="EDF\Class\EDFSoldierHeavyArmor.cpp" />
+    <ClCompile Include="EDF\Vehicle\EDFVehicle403_Tank.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -253,26 +314,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="System\0BaseSystem.cpp" />
+    <ClCompile Include="System\0GDXGI.cpp" />
     <ClCompile Include="System\1GameFunc_Model.cpp" />
     <ClCompile Include="System\screen\0D3D11.cpp" />
     <ClCompile Include="System\screen\1FullAO.cpp">
       <AssemblerOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NoListing</AssemblerOutput>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\BinaryReader.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\BufferHelpers.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\CommonStates.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\DDSTextureLoader.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\DirectXHelpers.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\EffectCommon.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\GamePad.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\Geometry.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\GraphicsMemory.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\Keyboard.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\Mouse.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\PrimitiveBatch.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\SimpleMath.cpp" />
-    <ClCompile Include="System\screen\DirectXTK\VertexTypes.cpp" />
     <ClCompile Include="System\screen\DLSS\0SetDLSS.cpp" />
+    <ClCompile Include="System\screen\DLSS\0SL_common.cpp" />
+    <ClCompile Include="System\screen\DLSS\0SL_executor.cpp" />
+    <ClCompile Include="System\screen\DLSS\0SL_PostProcess.cpp" />
+    <ClCompile Include="System\screen\DLSS\0SL_wapper.cpp" />
+    <ClCompile Include="System\screen\DLSS\1SetBufferSize.cpp" />
     <ClCompile Include="System\screen\DLSS\1SetPostProcess.cpp" />
     <ClCompile Include="utiliy.cpp" />
   </ItemGroup>
@@ -285,19 +338,21 @@
     <MASM Include="ASFunc\ASFunc_HookMapASM.asm" />
     <MASM Include="ASMhookGameSystem.asm" />
     <MASM Include="Base\g_DXresourceASM.asm" />
+    <MASM Include="EDF\Class\EDFSoldierAssultSoldierASM.asm" />
     <MASM Include="EDF\Class\EDFSoldierHeavyArmorASM.asm" />
     <MASM Include="EDF\EDFCommonFunctionASM.asm" />
     <MASM Include="System\0BaseSystemASM.asm" />
     <MASM Include="System\screen\0D3D11ASM.asm" />
+    <MASM Include="System\screen\DLSS\1SetBufferSizeASM.asm" />
     <MASM Include="updateMainSystem.asm" />
     <MASM Include="updateMissionPack1.asm" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="System\screen\DLSS\lib\nvsdk_ngx_d.lib" />
+    <None Include="DirectXTK\SimpleMath.inl" />
+    <None Include="DirectXTK\TeapotData.inc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="System\screen\DirectXTK\SimpleMath.inl" />
-    <None Include="System\screen\DirectXTK\TeapotData.inc" />
+    <Library Include="System\screen\DLSS\lib\nvsdk_ngx_d.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

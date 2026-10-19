@@ -4,9 +4,11 @@
 //#include "..\commonNOP.h"
 #include "ASFunc_Definition.hpp"
 
+#include "ASFunc_OriginalFunctions.h"
 #include "ASFunc_HookMap.h"
 #include "ASFunc_Graphic.h"
 #include "ASFunc_HookIsPs5.h"
+#include "ASFunc_MissionLink.h"
 
 extern "C" {
 	void __fastcall ASMaddAngelScriptFunction();
@@ -23,9 +25,11 @@ void hook_addAngelScriptFunction(PBYTE hmodDLL) {
 	WriteHookToProcess((void*)(hmodDLL + i_addAngelScriptFunction + 15), (void*)&nop10, 10U);
 	WriteHookToProcess((void*)(hmodDLL + i_addAngelScriptFunction + 25), (void*)&nop9, 9U);
 
+	ASFunc_OriginalFunctions_Initialize(hmodDLL);
 	ASFunc_HookMapSeries_Initialize(hmodDLL);
 
 	ASFunc_HookIsPs5_Initialize();
+	ASFunc_MissionLink_Initialize();
 }
 
 namespace angelscriptFunc {
@@ -57,4 +61,7 @@ extern "C" void __fastcall AngelScript_RegisterGlobalFunction(void* asCScriptEng
 
 	funcPtr.ptr.f.func = (asFUNCTION_t)SetEnvLookupTableBlend;
 	callc(asCScriptEngine, "void SetEnvLookupTableBlend(int, float, float)", funcPtr, asCALL_CDECL, 0);
+
+	funcPtr.ptr.f.func = (asFUNCTION_t)MissionLinkDataInfo;
+	callc(asCScriptEngine, "bool MissionLinkDataInfo(int, int)", funcPtr, asCALL_CDECL, 0);
 }

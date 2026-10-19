@@ -1,0 +1,55 @@
+edf.dll+835C0 - 48 89 5C 24 08        - mov [rsp+08],rbx
+创建载具的驾驶位
+edf.dll+633169 
+这里调用
+
+edf.dll+6331F4 - E8 170A0000           - call edf.dll+633C10
+设置驾驶位ai，r8d是索引，rcx是载具指针
+rbx是DummyVehicleRider，相同的话会影响装弹
+
+edf.dll+1B051E - FF 90 90010000        - call qword ptr [rax+00000190]
+是这里call的，是vft+190
+
+
+edf.dll+118A4E9 - FF 50 30              - call qword ptr [rax+30]
+这里是载具设置ai
+
+edf.dll+63AC40 - 40 53                 - push rbx
+这里准备设置nix的目标，输入的edx是座位索引，看起来看起来除了bmx以外都是0
+
+edf.dll+645465 - E8 966BFEFF           - call edf.dll+62C000
+nix设置武器开火
+
+edf.dll+642970 - 48 89 5C 24 10        - mov [rsp+10],rbx
+nix设置ai
+
+edf.dll+5FEBE0 - 48 89 5C 24 20        - mov [rsp+20],rbx
+电磁炮ai更新
+
+edf.dll+5FEC93 这是电磁炮设置武器开火
+edf.dll+5FEC80 - 74 16                 - je edf.dll+5FEC98
+这里检查是否开火
+
+edf.dll+65FF3C - 41 C7 84 1C E4020000 0000803F - mov [r12+rbx+000002E4],3F800000
+这里写入允许开火的检查
+edf.dll+6617DB - FF 90 30020000        - call qword ptr [rax+00000230]
+是这里call的，edx是驾驶位
+
+edf.dll+5FE223
+电磁炮初始化
+
+edf.dll+6731C0 - 40 53                 - push rbx
+设置电磁炮ai
+
+
+edf.dll+638313 - FF A0 B8010000        - jmp qword ptr [rax+000001B8]
+这里应该是call载具的ai更新
+
+
+edf.dll+F73AC - 0F89 E5000000         - jns edf.dll+F7497
+nop掉以后会显示进驻框，但是不能进
+edf.dll+62DD1B - 0F89 9E000000         - jns edf.dll+62DDBF
+nop掉以后会显示进驻提示，但同样不能进
+
+
+

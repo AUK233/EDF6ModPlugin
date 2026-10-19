@@ -51,8 +51,11 @@
     <Filter Include="SourceFiles\System\screen\DLSS\lib">
       <UniqueIdentifier>{5359665b-a117-4887-a743-f8195c5358c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SourceFiles\System\screen\DirectXTK">
-      <UniqueIdentifier>{e15d53da-56b4-4015-8524-ae3ca67eb572}</UniqueIdentifier>
+    <Filter Include="SourceFiles\Object\EDF\Vehicle">
+      <UniqueIdentifier>{526ffe60-5064-4a4e-a9d2-32ee69fd6d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HeaderFiles\DirectXTK">
+      <UniqueIdentifier>{e39998cc-c2b2-4c0d-b642-77453f5dc718}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -143,18 +146,6 @@
     <ClInclude Include="System\screen\DLSS\0SetDLSS.h">
       <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_params.h">
-      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx.h">
-      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs.h">
-      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
-    </ClInclude>
-    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers.h">
-      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
-    </ClInclude>
     <ClInclude Include="Base\g_DXresource.h">
       <Filter>SourceFiles\Base</Filter>
     </ClInclude>
@@ -179,86 +170,185 @@
     <ClInclude Include="ASFunc\ASFunc_HookIsPs5.h">
       <Filter>SourceFiles\ASFunc</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\AlignedNew.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="ASFunc\ASFunc_MissionLink.h">
+      <Filter>SourceFiles\ASFunc</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\Audio.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="ASFunc\ASFunc_OriginalFunctions.h">
+      <Filter>SourceFiles\ASFunc</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\Bezier.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="EDF\Vehicle\EDFVehicle403_Tank.h">
+      <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\BinaryReader.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="Base\g_velocityCommon.h">
+      <Filter>SourceFiles\Base</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\BufferHelpers.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="EDF\Class\EDFSoldierAssultSoldier.h">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\CMO.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="Base\base_baseObject.h">
+      <Filter>SourceFiles\Base</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\CommonStates.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="Base\base_LinkedList.h">
+      <Filter>SourceFiles\Base</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\DDS.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="EDF\EDFSoldierClass.h">
+      <Filter>SourceFiles\Object\EDF</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\DDSTextureLoader.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="Base\g_sgoData.h">
+      <Filter>SourceFiles\Base</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\DemandCreate.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="Base\mod_inlineData.hpp">
+      <Filter>SourceFiles\Base</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\DirectXHelpers.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="EDF\Class\EDFSoldierCommon.h">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\EffectCommon.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="EDF\Class\EDFSoldierAccessoryIndex.hpp">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\Effects.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\0GDXGI.h">
+      <Filter>SourceFiles\System</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\GamePad.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\Geometry.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\GraphicsMemory.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs_dlssg.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\Keyboard.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_defs_vk.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\LoaderHelpers.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\Mouse.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_cuda.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\PlatformHelpers.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_d3d.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\PostProcess.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_dlssg_d3d.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\PrimitiveBatch.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_dlssg_vk.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\SDKMesh.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_helpers_vk.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\SharedResourcePool.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_params.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\SimpleMath.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_params_dlssg.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\vbo.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\lib\nvsdk_ngx_vk.h">
+      <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </ClInclude>
-    <ClInclude Include="System\screen\DirectXTK\VertexTypes.h">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClInclude Include="System\screen\DLSS\0SL_common.h">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\0SL_executor.h">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\0SL_PostProcess.h">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\0SL_vulkanAPI.hpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\0SL_wapper.h">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\AlignedNew.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\Audio.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\Bezier.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\BinaryReader.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\BufferHelpers.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\CMO.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\CommonStates.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\DDS.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\DDSTextureLoader.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\DemandCreate.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\DirectXHelpers.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\EffectCommon.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\Effects.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\GamePad.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\Geometry.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\GraphicsMemory.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\Keyboard.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\LoaderHelpers.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\Mouse.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\pch.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\PlatformHelpers.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\PostProcess.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\PrimitiveBatch.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\SDKMesh.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\SharedResourcePool.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\SimpleMath.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\vbo.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXTK\VertexTypes.h">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="System\screen\DLSS\1SetBufferSize.h">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -340,47 +430,92 @@
     <ClCompile Include="ASFunc\ASFunc_HookIsPs5.cpp">
       <Filter>SourceFiles\ASFunc</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\BinaryReader.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="ASFunc\ASFunc_MissionLink.cpp">
+      <Filter>SourceFiles\ASFunc</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\BufferHelpers.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="ASFunc\ASFunc_OriginalFunctions.cpp">
+      <Filter>SourceFiles\ASFunc</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\CommonStates.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="EDF\Vehicle\EDFVehicle403_Tank.cpp">
+      <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\DDSTextureLoader.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="Base\g_velocityCommon.cpp">
+      <Filter>SourceFiles\Base</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\DirectXHelpers.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="EDF\Class\EDFSoldierAssultSoldier.cpp">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\EffectCommon.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="Base\base_baseObject.cpp">
+      <Filter>SourceFiles</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\GamePad.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="Base\g_sgoData.cpp">
+      <Filter>SourceFiles\Base</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\Geometry.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="EDF\Class\EDFSoldierCommon.cpp">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\GraphicsMemory.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="System\0GDXGI.cpp">
+      <Filter>SourceFiles\System</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\Keyboard.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="System\screen\DLSS\0SL_executor.cpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\Mouse.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="System\screen\DLSS\0SL_PostProcess.cpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\PrimitiveBatch.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="System\screen\DLSS\0SL_wapper.cpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\SimpleMath.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="System\screen\DLSS\0SL_common.cpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClCompile>
-    <ClCompile Include="System\screen\DirectXTK\VertexTypes.cpp">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
+    <ClCompile Include="DirectXTK\BinaryReader.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\BufferHelpers.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\CommonStates.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\DDSTextureLoader.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\DirectXHelpers.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\EffectCommon.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\GamePad.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\Geometry.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\GraphicsMemory.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\Keyboard.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\Mouse.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\pch.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\PrimitiveBatch.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\SimpleMath.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXTK\VertexTypes.cpp">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="System\screen\DLSS\1SetBufferSize.cpp">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -426,18 +561,24 @@
     <MASM Include="ASFunc\ASFunc_HookMapASM.asm">
       <Filter>SourceFiles\ASFunc</Filter>
     </MASM>
+    <MASM Include="EDF\Class\EDFSoldierAssultSoldierASM.asm">
+      <Filter>SourceFiles\Object\EDF\Class</Filter>
+    </MASM>
+    <MASM Include="System\screen\DLSS\1SetBufferSizeASM.asm">
+      <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </MASM>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DirectXTK\SimpleMath.inl">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </None>
+    <None Include="DirectXTK\TeapotData.inc">
+      <Filter>HeaderFiles\DirectXTK</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="System\screen\DLSS\lib\nvsdk_ngx_d.lib">
       <Filter>SourceFiles\System\screen\DLSS\lib</Filter>
     </Library>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="System\screen\DirectXTK\SimpleMath.inl">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
-    </None>
-    <None Include="System\screen\DirectXTK\TeapotData.inc">
-      <Filter>SourceFiles\System\screen\DirectXTK</Filter>
-    </None>
   </ItemGroup>
 </Project>

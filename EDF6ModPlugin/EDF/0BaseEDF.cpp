@@ -2,12 +2,21 @@
 #include "../utiliy.h"
 #include "../commonNOP.h"
 
-#include "0BaseEDF.h"
+#include "Class/EDFSoldierCommon.h"
+#include "Class/EDFSoldierAssultSoldier.h"
 #include "Class/EDFSoldierHeavyArmor.h"
+
+#include "Vehicle/EDFVehicle403_Tank.h"
+
+#include "0BaseEDF.h"
 
 void __fastcall HookFunction_EDFseries(PBYTE hmodDLL) {
 	HookFunction_EDFCommonFunction(hmodDLL);
+	EDF_HookFunction_ClassCommon(hmodDLL);
+	EDF_HookFunction_AssultSoldier(hmodDLL);
 	EDF_HookFunction_HeavyArmor(hmodDLL);
+
+	EDF_HookFunction_Vehicle403_Tank(hmodDLL);
 }
 
 extern "C" {

@@ -1,5 +1,5 @@
 #pragma once
-#include <d3d11.h>
+#include "g_DXresource.h"
 
 // size is 0xC20, Initialize at edf.dll+F488E
 typedef struct XGS_System_Camera_t {
@@ -15,17 +15,27 @@ static_assert(offsetof(XGS_System_Camera_t, pGameObject) == 0x350);
 typedef struct XGS_System_Player_t {
 	void* pad0;
 	PXGS_System_Camera pCamera;
-	char pad10[0x50];
-	char pad60[0xA0];
+	char pad10[0x10];
+	INT64 int64_20;
+	char pad28[0xC];
+	UINT m_resolution[4]; // 0, 1 is offset, 2, 3 is width and height
+	UINT resolutionBackup1[4];
+	UINT resolutionBackup2[4];
+	char pad68[0x98];
 	void* pDrawColorInfo; void* pDrawColorResource;
 	char pad110[0x10];
 	void* pDSVInfo; void* pDSVResource;
 	char pad130[0x10];
 	void* pDSV140Info; void* pDSV140Resource;
-	char pad140[0x38];
+	char pad140[0x28];
+	Pg_DeferredRenderSystem_GBufferData pRTV;
+	Pg_DeferredRenderSystem_GBuffer pGBuffer;
 } *PXGS_System_Player;
+static_assert(offsetof(XGS_System_Player_t, int64_20) == 0x20);
+static_assert(offsetof(XGS_System_Player_t, m_resolution) == 0x34);
 static_assert(offsetof(XGS_System_Player_t, pDrawColorInfo) == 0x100);
 static_assert(offsetof(XGS_System_Player_t, pDSVInfo) == 0x120);
+static_assert(offsetof(XGS_System_Player_t, pRTV) == 0x178);
 static_assert(sizeof(XGS_System_Player_t) == 0x188);
 
 // xgs::sysmte::functional in edf.dll+20B2958

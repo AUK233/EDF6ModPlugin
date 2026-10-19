@@ -7,6 +7,9 @@ namespace D3D {
 		EnvLookupTableTexture_DefaultEnhance = 0,
 		EnvLookupTableTexture_NightVisionLowLight = 1,
 		EnvLookupTableTexture_NightVisionInfrared = 2,
+		EnvLookupTableTexture_HistoricalReproduction = 3,
+		EnvLookupTableTexture_LowSaturationHighContrast = 4,
+		EnvLookupTableTexture_CoolNeutralTones = 5,
 	};
 
 	// constant buffer data structure
@@ -45,7 +48,7 @@ namespace D3D {
 
 		void LoadLUTBuffer();
 		ID3D11ShaderResourceView* CreateLUTBuffer(int index);
-		void SetPostProcessInfo(int lutindex = 0, float blendFactor = 0.985, float brightness = 0.8);
+		void SetPostProcessInfo(int lutindex = 0, float blendFactor = 0.985, float brightness = 1);
 		std::wstring GetLUTFilePath(int index);
 	};
 

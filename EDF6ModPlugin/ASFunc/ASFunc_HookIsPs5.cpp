@@ -2,13 +2,13 @@
 #include "../utiliy.h"
 #include "../commonNOP.h"
 
+#include "System/0GDXGI.h"
 #include "System/screen/1FullAO.h"
-#include "System/screen/DLSS/1SetPostProcess.h"
+#include "System/screen/DLSS/0SL_PostProcess.h"
 
 #include "ASFunc_HookIsPs5.h"
 
 extern PBYTE hmodDLL;
-extern D3D::PD3DPostProcess pD3DPostProcess;
 
 void __fastcall ASFunc_HookIsPs5_Initialize() {
 	// edf.dll+70EEA0
@@ -21,9 +21,13 @@ bool ASFunc_HookIsPs5_IsPs5() {
 
 	initialized = 0x55;
 
-	HookFunction_D3D11_FullAO_Install();
+	auto pDXGI = DXGI_GetGameDXGIRender();
+	auto device = pDXGI->pD3D11Device;
 
-	if (pD3DPostProcess) pD3DPostProcess->LoadLUTBuffer();
+	HookFunction_D3D11_FullAO_Install(device);
+
+	auto pPP = D3D::GetAddPostProcessPointer();
+	if (pPP) pPP->LUTBuffer_Load(device);
 
 	return false;
 }

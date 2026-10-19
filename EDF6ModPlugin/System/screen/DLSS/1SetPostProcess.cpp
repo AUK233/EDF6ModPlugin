@@ -16,7 +16,7 @@
 #pragma comment(lib, "D3DCompiler.lib")
 #include <wrl.h>
 
-#include "../DirectXTK/DDSTextureLoader.h"
+#include "DirectXTK/DDSTextureLoader.h"
 #include "Base/g_criFS.h"
 
 #include "1SetPostProcess.h"
@@ -209,6 +209,12 @@ namespace D3D {
 			return L"app:/mod/system/LUT_NightVisionLowLight.dds";
 		case EnvLookupTableTexture_NightVisionInfrared:
 			return L"app:/mod/system/LUT_NightVisionInfrared.dds";
+		case EnvLookupTableTexture_HistoricalReproduction:
+			return L"app:/mod/system/LUT_HistoricalReproduction.dds";
+		case EnvLookupTableTexture_LowSaturationHighContrast:
+			return L"app:/mod/system/LUT_LowSaturationHighContrast.dds";
+		case EnvLookupTableTexture_CoolNeutralTones:
+			return L"app:/mod/system/LUT_CoolNeutralTones.dds";
 		default:
 			return L"app:/mod/system/LUT_DefaultEnhance.dds";
 		}

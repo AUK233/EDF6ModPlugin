@@ -71,6 +71,11 @@ edf.dll+936910 检查按下暂停时是不是在线模式
 edf.dll+54BE7D - F3 0F58 81 10030000   - addss xmm0,[rcx+00000310]
 增加角色的时间
 
+edf.dll+11A2F56 - 85 C0                 - test eax,eax
+这里检查游戏需要sleep多长时间
+edf.dll+11DAE9D - 49 C1 E9 0C           - shr r9,0C
+这里控制的，r9作为被除数，D就约120帧，B就30帧
+
 
 ======================================
 
@@ -87,6 +92,40 @@ edf.dll+112DAB6 - F3 0F11 86 D0040000   - movss [rsi+000004D0],xmm0
 g_shadow_far_fade实际是这里写入的
 rsi是edf.dll+2139A98
 
+======================================
+
+edf.dll+111B362 - 48 89 9F 90000000     - mov [rdi+00000090],rbx
+这里写入交换链
+
+edf.dll+111B14D - 48 8B 95 90000000     - mov rdx,[rbp+00000090]
+这里获取交换链图像，但是实际应该是edf.dll+1120F1A
+
+edf.dll+1120DE5 这里是GetDesc
+edf.dll+111C0D7 这里是退出时释放交换链
+
+edf.dll+111BE1B - 48 8B 8B 90000000     - mov rcx,[rbx+00000090]
+这里是ResizeBuffers
+
+edf.dll+1118B45 - FF 50 40              - call qword ptr [rax+40]
+dxgi.dll+34700 IDXGISwapChain::Present返回
+
+edf.dll+1198C6A - 0F11 41 34            - movups [rcx+34],xmm0
+这里写入的玩家buffer大小
+edf.dll+1DC6C6 - E8 75C5FB00           - call edf.dll+1198C40
+从这里call的
+
+edf.dll+82BA5 - 0F10 84 39 04050000   - movups xmm0,[rcx+rdi+00000504]
+edf.dll+118E05C - 0F11 81 90010000      - movups [rcx+00000190],xmm0
+两个复制
+
+edf.dll+1195E3D - 41 0F10 81 04050000   - movups xmm0,[r9+00000504]
+这里管快捷聊天
+
+edf.dll+1199B81 - 0F10 46 34            - movups xmm0,[rsi+34]
+这个复制可能没有用
+
+edf.dll+1142440 玩家的pRTV的结构的清零
+edf.dll+1199AD3 写入玩家的pRTV 大小0x118因为edf.dll+11999C8的还要+10
 
 
 
