@@ -7,10 +7,13 @@ typedef struct XGS_SceneObject_t {
 	void* vf_table;
 	char pad8[0x58];
 	G_Matrix3D_t m_transform;
-	char padA0[0x80];
+	char padA0[0x60];
+	char SGOData[0x10];
+	UINT16 SGOData_fnIndex, pad112[7];
 } *P_XGS_SceneObject;
 #if 1
 static_assert(offsetof(XGS_SceneObject_t, m_transform) == 0x60);
+static_assert(offsetof(XGS_SceneObject_t, SGOData) == 0x100);
 static_assert(sizeof(XGS_SceneObject_t) == 0x120);
 #endif
 

@@ -350,6 +350,9 @@
     <ClInclude Include="System\screen\DLSS\1SetBufferSize.h">
       <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClInclude>
+    <ClInclude Include="EDF\Vehicle\EDFVehicleClass.h">
+      <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -517,6 +520,9 @@
     <ClCompile Include="System\screen\DLSS\1SetBufferSize.cpp">
       <Filter>SourceFiles\System\screen\DLSS</Filter>
     </ClCompile>
+    <ClCompile Include="EDF\Vehicle\EDFVehicleClass.cpp">
+      <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ASMhookGameSystem.asm">
@@ -566,6 +572,9 @@
     </MASM>
     <MASM Include="System\screen\DLSS\1SetBufferSizeASM.asm">
       <Filter>SourceFiles\System\screen\DLSS</Filter>
+    </MASM>
+    <MASM Include="EDF\Vehicle\EDFVehicle403_TankASM.asm">
+      <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
     </MASM>
   </ItemGroup>
   <ItemGroup>

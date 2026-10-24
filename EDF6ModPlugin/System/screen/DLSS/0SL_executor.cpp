@@ -632,7 +632,7 @@ namespace D3D {
 		if (!pSys) return 0;
 		auto pCamera = pSys->player[index].pCamera;
 		if (!pCamera) return 0;
-		auto pPlayer = pCamera->pGameObject;
+		auto pPlayer = (pCamera->pGameObject);
 		if (!pPlayer) return 0;
 
 		return pPlayer;
@@ -643,7 +643,12 @@ namespace D3D {
 		if (m_bIsSplitScreen) return 0;
 		if (!m_multiFrameCount) return 0;
 
-		if (!GetPlayer(0)) return 0;
+		auto pPlayer = (int*)GetPlayer(0);
+		if (!pPlayer) return 0;
+
+		int currentTime = pPlayer[0x310 / 4]; // it's a float second, but we use int to check if it has changed.
+		if (currentTime == m_FGTime) return 0;
+		m_FGTime = currentTime;
 
 		return GetAddPostProcessPointer();
 	}

@@ -59,6 +59,7 @@ namespace D3D {
 
 		ID3D12Resource* v_d3d12BackBuffers[D3D12WrappedBackBuffersCount];
 		// D3D12 End ===================================================
+		int m_FGTime;
 
 
 

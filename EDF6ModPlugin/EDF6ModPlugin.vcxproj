@@ -219,6 +219,7 @@
     <ClInclude Include="EDF\Class\EDFSoldierHeavyArmor.h" />
     <ClInclude Include="EDF\EDFSoldierClass.h" />
     <ClInclude Include="EDF\Vehicle\EDFVehicle403_Tank.h" />
+    <ClInclude Include="EDF\Vehicle\EDFVehicleClass.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="System\0BaseSystem.h" />
@@ -307,6 +308,7 @@
     <ClCompile Include="EDF\Class\EDFSoldierCommon.cpp" />
     <ClCompile Include="EDF\Class\EDFSoldierHeavyArmor.cpp" />
     <ClCompile Include="EDF\Vehicle\EDFVehicle403_Tank.cpp" />
+    <ClCompile Include="EDF\Vehicle\EDFVehicleClass.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -341,6 +343,7 @@
     <MASM Include="EDF\Class\EDFSoldierAssultSoldierASM.asm" />
     <MASM Include="EDF\Class\EDFSoldierHeavyArmorASM.asm" />
     <MASM Include="EDF\EDFCommonFunctionASM.asm" />
+    <MASM Include="EDF\Vehicle\EDFVehicle403_TankASM.asm" />
     <MASM Include="System\0BaseSystemASM.asm" />
     <MASM Include="System\screen\0D3D11ASM.asm" />
     <MASM Include="System\screen\DLSS\1SetBufferSizeASM.asm" />

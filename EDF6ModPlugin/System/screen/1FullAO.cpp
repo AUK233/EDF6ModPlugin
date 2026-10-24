@@ -159,7 +159,7 @@ namespace D3D {
 			return;
 		}
 
-		UINT level = in;
+		UINT level = in - 1;
 		if (level >= MAXFullAOLevel) level = MAXFullAOLevel - 1;
 
 		m_level = level;

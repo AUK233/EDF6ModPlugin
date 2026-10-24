@@ -4,6 +4,7 @@
 #include "g_DXresource.h"
 #include "g_criFS.h"
 #include "g_gameFunc.h"
+#include "g_sgoData.h"
 #include "base_baseObject.h"
 
 #include "g_system.h"
@@ -26,6 +27,7 @@ void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL) {
 
 	XGS_DXresource_Initialize(hmodDLL);
 	CriFileSystem_Initialize(hmodDLL);
+	XGS_SGOData_Initialize(hmodDLL);
 	XGS_GetGameFunction_Initialize(hmodDLL);
 	XGS_GameObjectBase_Initialize(hmodDLL);
 }

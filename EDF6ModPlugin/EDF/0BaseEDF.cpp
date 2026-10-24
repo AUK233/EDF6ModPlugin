@@ -16,6 +16,7 @@ void __fastcall HookFunction_EDFseries(PBYTE hmodDLL) {
 	EDF_HookFunction_AssultSoldier(hmodDLL);
 	EDF_HookFunction_HeavyArmor(hmodDLL);
 
+	EDF_HookFunction_Vehicle(hmodDLL);
 	EDF_HookFunction_Vehicle403_Tank(hmodDLL);
 }
 
