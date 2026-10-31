@@ -10,6 +10,7 @@
 #include "DLSS/0SL_wapper.h"
 
 extern "C" {
+	extern int Config_FullAO;
 	extern int Config_PostProcess;
 	extern int Config_DLSS;
 	extern int Config_OnDX12;
@@ -46,17 +47,6 @@ void HookFunction_D3D11(PBYTE hmodEXE){
 	WriteHookToProcess((void*)(hmodEXE + i_dx11CreateDevice + 15), (void*)&nop3, 3U);
 	dx11CreateDeviceRetAddr = (uintptr_t)(hmodEXE + i_dx11CreateDevice + 18);
 
-	// edf.dll+1131138
-	int i_setCSshader = 0x1131138;
-	BYTE setCSshader[] = {
-		0x48, 0xB8, 0xC7, 0x19, 0x46, 0x96, 0x02, 0x00, 0x00, 0x00,
-		0x48, 0x89, 0xDA, // mov rdx, rbx
-		0x48, 0x89, 0xF9, // mov rcx, rdi
-		0xFF, 0xD0, // call rax
-		0xEB, 0x53  // jmp
-	};
-	MOD::WritePTRData(&setCSshader[2], D3D11_FullAO_Execute);
-	WriteHookToProcess((void*)(hmodEXE + i_setCSshader), setCSshader, 20U);
 
 	if (Config_DLSS || Config_PostProcess) {
 		HookFunction_SetD3DBufferSize(hmodEXE);
@@ -113,7 +103,9 @@ void HookFunction_D3D11(PBYTE hmodEXE){
 	//MessageBoxW(NULL, L"just test", L"debug", MB_OK);
 
 	// It must be executed when game starts, otherwise buffer size will be only half.
-	HookFunction_D3D11_FullAO();
+	if (Config_DLSS || Config_FullAO) {
+		HookFunction_D3D11_FullAO();
+	}
 }
 
 typedef void(__stdcall* ID3D11DeviceContext_OMSetRenderTargets)(ID3D11DeviceContext* pContext, UINT NumViews, ID3D11RenderTargetView** ppRenderTargetViews, ID3D11DepthStencilView* pDepthStencilView);

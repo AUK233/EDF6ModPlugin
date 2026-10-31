@@ -31,12 +31,14 @@ typedef struct XGS_System_Player_t {
 	Pg_DeferredRenderSystem_GBufferData pRTV;
 	Pg_DeferredRenderSystem_GBuffer pGBuffer;
 } *PXGS_System_Player;
+#if 1
 static_assert(offsetof(XGS_System_Player_t, int64_20) == 0x20);
 static_assert(offsetof(XGS_System_Player_t, m_resolution) == 0x34);
 static_assert(offsetof(XGS_System_Player_t, pDrawColorInfo) == 0x100);
 static_assert(offsetof(XGS_System_Player_t, pDSVInfo) == 0x120);
 static_assert(offsetof(XGS_System_Player_t, pRTV) == 0x178);
 static_assert(sizeof(XGS_System_Player_t) == 0x188);
+#endif
 
 // xgs::sysmte::functional in edf.dll+20B2958
 typedef struct XGS_System_t {
@@ -47,8 +49,15 @@ typedef struct XGS_System_t {
 	void* pPlayerInfoWhenLoading;
 	size_t PlayerInfoWhenLoadingSize; // It will be reset when loading is complete.
 	XGS_System_Player_t player[4]; // really?
+	char padAF0[0x1F0];
+	int m_gameTimeFrame; // maybe
+	float m_gameTime; // seconds, no increase when paused
 } *PXGS_System;
+#if 1
 static_assert(offsetof(XGS_System_t, player) == 0x4d0);
+static_assert(offsetof(XGS_System_t, m_gameTimeFrame) == 0xCE0);
+static_assert(offsetof(XGS_System_t, m_gameTime) == 0xCE4);
+#endif
 
 void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL);
 

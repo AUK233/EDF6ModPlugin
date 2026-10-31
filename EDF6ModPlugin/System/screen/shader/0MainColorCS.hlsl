@@ -187,6 +187,7 @@ float CalculateShadow(float4 viewPos) {
 	shadow = lerp(1, shadow, g_shadow_intensity);
 	return max(shadow, 0);
 }
+//===========================================================
 
 float3 NoAOColor(uint2 pixel) {
 	// line 358-361
@@ -376,7 +377,7 @@ void CS_main(uint3 threadID : SV_DispatchThreadID) {
 	float4 viewPos = float4(g_viewXYZ_id[pixel].xyz, 1);
 	
 	// line 9-15
-	if (abs(viewPos.z) >= 65534.0) {
+	if (abs(viewPos.z) >= 65500.0) {
 		g_color_out[pixel] = float4(g_bg_color.xyz, 0.0);
 		return;
 	}
@@ -459,6 +460,7 @@ void CS_main(uint3 threadID : SV_DispatchThreadID) {
 		
 		// line 69-114
 		float shadow = CalculateShadow(viewPos);
+		float shadow_sun = shadow;
 		
 		// line 115: r2.y, -r5.xyzx, r4.xyzx
 		float VdotN = saturate(dot(-normal, viewDir));
@@ -529,7 +531,14 @@ void CS_main(uint3 threadID : SV_DispatchThreadID) {
 		float nonMetallic = 1.0 - metallic;
 		float3 diffuse_accum = diffuseAccum * normalLen * nonMetallic; // r2.xyz
 		float3 specular_accum = specularAccum * normalLen; // r4.xyz
-		
+
+#ifdef _AddVolumetricLight
+		if (shadow_sun <= 0.0){
+			diffuse_accum *= 0.5;
+			specular_accum *= 0.5;
+		}
+#endif
+
 		// line 179-184
 		float4 worldPosH = float4(worldPos, 1.0);
 		float lightDepth = dot(worldPosH, g_light_view_proj[2]) / dot(worldPosH, g_light_view_proj[3]);
@@ -617,7 +626,7 @@ void CS_main(uint3 threadID : SV_DispatchThreadID) {
 			diffuse_accum = pointDiffuse;
 			specular_accum += pointSpecular * specRoughness.y;
 		}
-		
+
 		// line 263-266
 		float3 albedo = g_albedoRGB[pixel];
 		float3 lightAccum = g_light_accumulate[pixel];
@@ -741,8 +750,11 @@ void CS_main(uint3 threadID : SV_DispatchThreadID) {
 		finalColor += envColor * specMetal;
 
 #ifdef _AddMetallic
-		//specular_accum *= specRoughness.x * 0.075;
+#ifdef _AddVolumetricLight
+		specular_accum *= envColor * specRoughness.x * 0.05;
+#else
 		specular_accum *= envColor * specRoughness.x * 0.125;
+#endif
 #endif
 
 		float3 specAccum = g_specular_accumulate[pixel] + specular_accum;
@@ -759,5 +771,6 @@ void CS_main(uint3 threadID : SV_DispatchThreadID) {
 	// line 363-367
 	color = max(color, fogBrightWeight * g_xgl_brightness_fog_color.xyz);
 	color = lerp(color, g_xgl_fog_color.xyz, fogWeight);
+
 	g_color_out[pixel] = float4(color, fadeInv);
 }

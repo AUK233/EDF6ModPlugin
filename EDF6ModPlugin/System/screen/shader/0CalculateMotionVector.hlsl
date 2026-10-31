@@ -46,15 +46,7 @@ cbuffer prev_system : register(b2)
 
 // ===================================================
 // Inherited
-Texture2D<float3> g_albedoRGB : register(t0);
-Texture2D<float3> g_specularRGB : register(t1);
-Texture2D<float3> g_normalXYZ : register(t2);
-Texture2D<float2> g_metallic_roughness : register(t3);
 Texture2D<float4> g_viewXYZ_id : register(t4);
-Texture2D<float3> g_light_accumulate : register(t5);
-Texture2D<float3> g_specular_accumulate : register(t6);
-TextureCubeArray<float4> g_local_cubemap_array : register(t8);
-Texture2D<float2> g_ambient_occlusion : register(t9);
 // in c++
 RWTexture2D<float2> OutputMV : register(u0);
 RWTexture2D<float2> OutputMV_FG : register(u1);

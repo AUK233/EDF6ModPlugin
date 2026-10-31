@@ -1,0 +1,2 @@
+edf.dll+414708 - E8 D3FED700           - call edf.dll+11945E0
+弹壳破碎时 创建破碎弹壳

@@ -57,6 +57,15 @@
     <Filter Include="HeaderFiles\DirectXTK">
       <UniqueIdentifier>{e39998cc-c2b2-4c0d-b642-77453f5dc718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SourceFiles\Base\mod">
+      <UniqueIdentifier>{96757c9e-c47c-436b-88f5-a309b9e4c581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Object\Enemy">
+      <UniqueIdentifier>{2a176db6-9751-4d01-8b16-fbec3eaa2a0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SourceFiles\Object\Enemy\Insect">
+      <UniqueIdentifier>{621d138f-3b8e-40e1-8782-609523a39183}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -353,6 +362,15 @@
     <ClInclude Include="EDF\Vehicle\EDFVehicleClass.h">
       <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
     </ClInclude>
+    <ClInclude Include="Base\mod\mod_GlobalManager.h">
+      <Filter>SourceFiles\Base\mod</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\0BaseEnemy.h">
+      <Filter>SourceFiles\Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy\Insect\GiantAntEgg.h">
+      <Filter>SourceFiles\Object\Enemy\Insect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -448,9 +466,6 @@
     <ClCompile Include="EDF\Class\EDFSoldierAssultSoldier.cpp">
       <Filter>SourceFiles\Object\EDF\Class</Filter>
     </ClCompile>
-    <ClCompile Include="Base\base_baseObject.cpp">
-      <Filter>SourceFiles</Filter>
-    </ClCompile>
     <ClCompile Include="Base\g_sgoData.cpp">
       <Filter>SourceFiles\Base</Filter>
     </ClCompile>
@@ -523,6 +538,18 @@
     <ClCompile Include="EDF\Vehicle\EDFVehicleClass.cpp">
       <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
     </ClCompile>
+    <ClCompile Include="Base\mod\mod_GlobalManager.cpp">
+      <Filter>SourceFiles\Base\mod</Filter>
+    </ClCompile>
+    <ClCompile Include="Base\base_baseObject.cpp">
+      <Filter>SourceFiles\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\0BaseEnemy.cpp">
+      <Filter>SourceFiles\Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy\Insect\GiantAntEgg.cpp">
+      <Filter>SourceFiles\Object\Enemy\Insect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ASMhookGameSystem.asm">
@@ -575,6 +602,9 @@
     </MASM>
     <MASM Include="EDF\Vehicle\EDFVehicle403_TankASM.asm">
       <Filter>SourceFiles\Object\EDF\Vehicle</Filter>
+    </MASM>
+    <MASM Include="Enemy\Insect\GiantAntEggASM.asm">
+      <Filter>SourceFiles\Object\Enemy\Insect</Filter>
     </MASM>
   </ItemGroup>
   <ItemGroup>

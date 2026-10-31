@@ -59,6 +59,9 @@ extern "C" void __fastcall AngelScript_RegisterGlobalFunction(void* asCScriptEng
 	funcPtr.ptr.f.func = (asFUNCTION_t)SetEnvAdditionalLightIntensity;
 	callc(asCScriptEngine, "void SetEnvAdditionalLightIntensity(int, float)", funcPtr, asCALL_CDECL, 0);
 
+	funcPtr.ptr.f.func = (asFUNCTION_t)SetEnvLightningStatus;
+	callc(asCScriptEngine, "void SetEnvLightningStatus(int, float, float, float)", funcPtr, asCALL_CDECL, 0);
+
 	funcPtr.ptr.f.func = (asFUNCTION_t)SetEnvLookupTableBlend;
 	callc(asCScriptEngine, "void SetEnvLookupTableBlend(int, float, float)", funcPtr, asCALL_CDECL, 0);
 

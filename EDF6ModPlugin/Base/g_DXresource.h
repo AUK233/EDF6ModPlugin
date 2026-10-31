@@ -90,7 +90,7 @@ typedef struct g_DeferredRenderSystem_GBufferData_t {
 	void* pDXGI; // PGameDXGIRender
 	void* pad8;
 	void* pLock; // vft is edf.dll+1A3BE28, size 0x18
-	xgl_gs_Texture_t RT[8];
+	xgl_gs_Texture_t RT[8]; // 3 is g_smooth_reflection_specpow
 }*Pg_DeferredRenderSystem_GBufferData;
 #if 1
 static_assert(offsetof(g_DeferredRenderSystem_GBufferData_t, RT[0].pInfo) == 0x28);
@@ -206,6 +206,39 @@ static_assert(sizeof(xgl_additional_light_setting_t) == 0x190);
 #endif
 
 // ===============================================================
+
+typedef struct g_ComputeUtility_ResourceData_t {
+	xgl_gs_Shader_t shader00[2];
+	xgl_gs_ConstantBuffer_t cb40;
+	xgl_gs_Shader_t shader68;
+	xgl_gs_ConstantBuffer_t cb80;
+	xgl_gs_Shader_t shaderB0;
+	xgl_gs_ConstantBuffer_t cbD0;
+	xgl_gs_Shader_t shaderF8;
+	xgl_gs_ConstantBuffer_t cb118;
+	xgl_gs_Shader_t shader140;
+	xgl_gs_ConstantBuffer_t cb160;
+	xgl_gs_Shader_t shader188[2];
+	xgl_gs_ConstantBuffer_t cb1C8;
+	xgl_gs_Shader_t shader1F0;
+	xgl_gs_ConstantBuffer_t cb210;
+	xgl_gs_Shader_t m_MixGroundAndSky;
+	char pad258[0x70];
+}*Pg_ComputeUtility_ResourceData;
+#if 1
+static_assert(offsetof(g_ComputeUtility_ResourceData_t, m_MixGroundAndSky.pShader) == 0x240);
+#endif
+
+typedef struct g_ComputeUtility_Resource_t {
+	void* vf_table; // edf.dll+1AE1660
+	int pad8[2];
+	g_ComputeUtility_ResourceData_t data;
+}*Pg_ComputeUtility_Resource;
+#if 1
+static_assert(sizeof(g_ComputeUtility_Resource_t) == 0x2D8);
+#endif
+
+// ===============================================================
 typedef struct alignas(16) G_XglSystemRenderer_t {
 	void* pUnk000; // Invalid
 	void* pUnk008; // vft: d3d11.dll+1CC6B8 
@@ -213,13 +246,16 @@ typedef struct alignas(16) G_XglSystemRenderer_t {
 	char pad270[0x10];
 	char pad280[0x130];
 	xgl_additional_light_setting_t xgl_additional_light_setting;
-	char pad540[0x158];
+	char pad540[0x58];
+	Pg_ComputeUtility_ResourceData m_csUtility; Pg_ComputeUtility_Resource m_csUtilityFull;
+	char pad5A8[0xF0];
 	xgl_gs_TextureBase_t pTexture6A8;
 	char pad6B8[0x40];
 	float f6F8, f6FC;
 	char pad700[0x50];
 	g_DeferredRenderSystem_GBufferData_t GBuffer;
-	char pad868[0x270];
+	xgl_gs_Texture_t g_shadow_depth;
+	char pad888[0x250];
 	xgl_gs_Shader_t mainColorCS;
 	xgl_gs_Shader_t mainColorCS_UG;
 	char padB18[0x28];
@@ -229,11 +265,13 @@ typedef struct alignas(16) G_XglSystemRenderer_t {
 #if 1
 static_assert(offsetof(G_XglSystemRenderer_t, xgl_system) == 0x10);
 static_assert(offsetof(G_XglSystemRenderer_t, xgl_additional_light_setting.g_shadow_far_fade) == 0x4D0);
+static_assert(offsetof(G_XglSystemRenderer_t, m_csUtility) == 0x598);
 static_assert(offsetof(G_XglSystemRenderer_t, pTexture6A8.pInfo) == 0x6A8);
 static_assert(offsetof(G_XglSystemRenderer_t, GBuffer) == 0x750);
 static_assert(offsetof(G_XglSystemRenderer_t, GBuffer.RT[0].pInfo) == 0x778);
 static_assert(offsetof(G_XglSystemRenderer_t, GBuffer.RT[5].pInfo) == 0x818);
 static_assert(offsetof(G_XglSystemRenderer_t, GBuffer.RT[7].pInfo) == 0x858);
+static_assert(offsetof(G_XglSystemRenderer_t, g_shadow_depth.pInfo) == 0x878);
 static_assert(offsetof(G_XglSystemRenderer_t, mainColorCS) == 0xAD8);
 static_assert(offsetof(G_XglSystemRenderer_t, mainColorCS_UG) == 0xAF8);
 static_assert(offsetof(G_XglSystemRenderer_t, CB_xgl_system) == 0xB40);

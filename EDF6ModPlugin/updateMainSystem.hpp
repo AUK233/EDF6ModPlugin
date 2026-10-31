@@ -13,6 +13,7 @@
 #include "System/0BaseSystem.h"
 #include "Ammo/0BaseAmmo.h"
 #include "EDF/0BaseEDF.h"
+#include "Enemy/0BaseEnemy.h"
 
 extern "C" {
 	uintptr_t LoadDSGONode;
@@ -65,6 +66,7 @@ void hook_updateMainSystem_common(PBYTE hmodDLL) {
 	GameSystem_HookFunction(hmodDLL);
 	AmmoClass_HookFunction(hmodDLL);
 	HookFunction_EDFseries(hmodDLL);
+	HookFunction_EnemySeries(hmodDLL);
 }
 
 extern "C" {

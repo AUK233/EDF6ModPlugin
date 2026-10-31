@@ -7,6 +7,7 @@ extern "C" {
 	uintptr_t _F_DetectionPathCollisionObject_; // edf.dll+11A70B0
 
 	uintptr_t _F_CreateObjectFromObjectFactory_; // edf.dll+1194280
+	uintptr_t _F_CreateObjectFromWcharPath_; // edf.dll+11945E0
 }
 
 void __fastcall XGS_GetGameFunction_Initialize(PBYTE hmodDLL)
@@ -14,6 +15,7 @@ void __fastcall XGS_GetGameFunction_Initialize(PBYTE hmodDLL)
 	_F_DetectionPathCollisionObject_ = (uintptr_t)(hmodDLL + 0x11A70B0);
 
 	_F_CreateObjectFromObjectFactory_ = (uintptr_t)(hmodDLL + 0x1194280);
+	_F_CreateObjectFromWcharPath_ = (uintptr_t)(hmodDLL + 0x11945E0);
 }
 
 void __fastcall Game_DetectionPathCollisionObject(void* pObject, void* pSystem, float* pStartPos, float* pEndPos, float* pHitbox)

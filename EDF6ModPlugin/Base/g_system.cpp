@@ -7,6 +7,8 @@
 #include "g_sgoData.h"
 #include "base_baseObject.h"
 
+#include "mod/mod_GlobalManager.h"
+
 #include "g_system.h"
 
 extern "C" {
@@ -30,6 +32,7 @@ void __fastcall XGS_SystemFunction_Initialize(PBYTE hmodDLL) {
 	XGS_SGOData_Initialize(hmodDLL);
 	XGS_GetGameFunction_Initialize(hmodDLL);
 	XGS_GameObjectBase_Initialize(hmodDLL);
+	MODGlobalManager_Initialize();
 }
 
 PXGS_System __fastcall XGS_GetXGSSystemPointer()
